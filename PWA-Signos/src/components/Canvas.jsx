@@ -6,7 +6,7 @@ import penUnselIcon from '../assets/pen-unselected.svg';
 import eraserUnselIcon from '../assets/eraser-unselected.svg';
 
 class Coordinate {
-    constructor( x, y ) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
     }
@@ -15,44 +15,13 @@ class Coordinate {
 const DRAWING_TOOLS = {
     PEN: 'pen',
     ERASER: 'eraser',
-}
-
-const DrawingToolSelected = () => {
-    // By default the pen tool is selected
-    const [selectedTool, setSelectedTool] = useState(DRAWING_TOOLS.PEN);
-
-    const handleSelect = (tool) => {
-        setSelectedTool(tool);
-    }
-
-    return <div>
-        <DrawingToolsButton isSelected={selectedTool === DRAWING_TOOLS.PEN} handleClick={() => handleSelect(DRAWING_TOOLS.PEN)} imageSel={penIcon} imageUnsel={penUnselIcon} toolName='Lápiz'/>
-        <DrawingToolsButton isSelected={selectedTool === DRAWING_TOOLS.ERASER} handleClick={() => handleSelect(DRAWING_TOOLS.ERASER)} imageSel={eraserIcon} imageUnsel={eraserUnselIcon} toolName='Goma'/>
-        <EraseAllButton handleClick={() => handleSelect(DRAWING_TOOLS.PEN)} image={eraseAllIcon}/>
-    </div>
-}
-
-const DrawingToolsButton = ({isSelected, handleClick, imageSel, imageUnsel, toolName}) => {
-    const className = isSelected ? 'drawing-tool-selected' : 'drawing-tool-unselected';
-    const text = isSelected ? 'Selected' : 'Unselected';
-  
-    const image = isSelected ? imageSel : imageUnsel;
-
-    return <><button className={className} onClick={handleClick}>
-    <img src={image} alt={toolName} />
-      </button></>
-}
-
-const EraseAllButton = ({handleClick, image}) => {
-    return <><button className='drawing-tool-erase-all' onClick={handleClick}>
-    <img src={image} alt='Borrar todo' />
-    </button></>
-}
+};
 
 const Canvas = () => {
     const [isPainting, setIsPainting] = useState(false);
     const [mousePosition, setMousePosition] = useState(undefined);
-    
+    const [selectedTool, setSelectedTool] = useState(DRAWING_TOOLS.PEN);
+
     const canvasRef = useRef(null);
 
     const startPaint = useCallback((event) => {
@@ -88,12 +57,12 @@ const Canvas = () => {
             if (isPainting) {
                 const newMousePosition = getCoordinates(event);
                 if (mousePosition && newMousePosition) {
-                    drawLine(mousePosition, newMousePosition);
+                    drawLine(mousePosition, newMousePosition, selectedTool);
                     setMousePosition(newMousePosition);
                 }
             }
         },
-        [isPainting, mousePosition]
+        [isPainting, mousePosition, selectedTool]
     );
 
     useEffect(() => {
@@ -107,17 +76,16 @@ const Canvas = () => {
         };
     }, [paint]);
 
-
-    const drawLine = (originalMousePosition, newMousePosition) => {
+    const drawLine = (originalMousePosition, newMousePosition, tool) => {
         if (!canvasRef.current) {
             return;
         }
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
         if (context) {
-            context.strokeStyle = 'black';
+            context.strokeStyle = tool === DRAWING_TOOLS.ERASER ? 'white' : 'black';
             context.lineJoin = 'round';
-            context.lineWidth = 3;
+            context.lineWidth = tool === DRAWING_TOOLS.ERASER ? 10 : 3;
 
             context.beginPath();
             context.moveTo(originalMousePosition.x, originalMousePosition.y);
@@ -145,11 +113,59 @@ const Canvas = () => {
         };
     }, [exitPaint]);
 
-    return <>
-        <DrawingToolSelected />
-        <canvas ref={canvasRef} />
-        </>;
+    const handleToolSelect = (tool) => {
+        setSelectedTool(tool);
+    };
+
+    const handleEraseAll = () => {
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        if (context) {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        setSelectedTool(DRAWING_TOOLS.PEN);
+    };
+
+    const DrawingToolsButton = ({ isSelected, handleClick, imageSel, imageUnsel, toolName }) => {
+        const image = isSelected ? imageSel : imageUnsel;
+
+        return (
+            <button className={isSelected ? 'drawing-tool-selected' : 'drawing-tool-unselected'} onClick={handleClick}>
+                <img src={image} alt={toolName} />
+            </button>
+        );
+    };
+
+    const EraseAllButton = ({ handleClick, image }) => {
+        return (
+            <button className="drawing-tool-erase-all" onClick={handleClick}>
+                <img src={image} alt="Borrar todo" />
+            </button>
+        );
+    };
+
+    return (
+        <>
+            <div>
+                <DrawingToolsButton 
+                    isSelected={selectedTool === DRAWING_TOOLS.PEN} 
+                    handleClick={() => handleToolSelect(DRAWING_TOOLS.PEN)} 
+                    imageSel={penIcon} 
+                    imageUnsel={penUnselIcon} 
+                    toolName="Lápiz" 
+                />
+                <DrawingToolsButton 
+                    isSelected={selectedTool === DRAWING_TOOLS.ERASER} 
+                    handleClick={() => handleToolSelect(DRAWING_TOOLS.ERASER)} 
+                    imageSel={eraserIcon} 
+                    imageUnsel={eraserUnselIcon} 
+                    toolName="Goma" 
+                />
+                <EraseAllButton handleClick={handleEraseAll} image={eraseAllIcon} />
+            </div>
+            <canvas ref={canvasRef} width={500} height={500} />
+        </>
+    );
 };
 
 export default Canvas;
-

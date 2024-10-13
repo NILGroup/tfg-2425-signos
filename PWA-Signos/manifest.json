@@ -1,0 +1,11 @@
+{
+    "name": "tfg-2425-signos",
+    "short_name": "tfg-signos",
+    "description": "A Progressive Web App for TFG Signos project.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#000000",
+    "icons": [
+    ]
+}
