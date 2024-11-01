@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
+
+
 const UploadImage = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -9,11 +12,17 @@ const UploadImage = () => {
     }
 
     const handleFileUpload = () => {
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        //Using localhost to send the file to the Service Worker
-        fetch('http://localhost:5173/', { method: 'POST', formData })
-        .then(console.log('File uploaded successfully'))
+        const image = new FormData();
+        image.append('image', selectedFile);
+        // Send selected image to Visse
+        fetch(VISSE_BACKEND_URL + 'recognize', {
+            method: 'POST',
+            body: image,
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
+        // VER COMO MANEJAR ERRORES
+        .catch(error => console.error('Error uploading file:', error)); 
     }
 
     return (

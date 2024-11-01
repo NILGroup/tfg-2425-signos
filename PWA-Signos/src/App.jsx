@@ -10,7 +10,6 @@ function App() {
   return (
     <>
       <h3>PWA de prueba</h3>
-      <div> <Canvas className="canvas"/></div>
       
       <UploadImage className="upload-image"/>
     </>
