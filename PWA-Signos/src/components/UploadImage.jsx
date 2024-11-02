@@ -2,26 +2,63 @@ import React, { useState } from "react";
 
 const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
 
-const responseToSignotation = (response) => {
-    response['explanations'].forEach((elem) => {
-        if (elem['hand']) { // Hand elem is not null
-            elem['hand']['fingers'].forEach((finger) => {
-                switch(finger){
-                    case 0:
-                        
+
+const fingersToSignotation = (finger_params) => {
+    if (finger_params.every(finger => finger === 'c')) //El puño cerrado.
+        return "picam++";
+    else if (finger_params.every(finger => finger === 'f')) //El índice recto, con el pulgar pegado. El resto de dedos estirados.
+        return "pir-O";
+    else if (finger_params.every(finger => finger === 't')) //El índice y el pulgar cruzados, el resto de dedos estirados.
+        return "TE";
+    else if (finger_params.every(finger => finger === 'x')) //Los dedos índice y corazón cruzados.
+        return "CI";
+    else if (finger_params.every(finger => finger === 's')) //La punta del índice tocando la falange del pulgar, el resto de dedos extendidos.
+        return "pi-O";
+    else {
+        let fingers = ""
+        let flex_mode = ""
+        let contact = ""
+        const extended = ['P', 'I', 'C', 'A', 'M']
+        const curved = ['p', 'i', 'c', 'a', 'm']
+        for (let i = 0; i < 5; i++){
+            switch(finger_params[i][0]){
+                case 'E':
+                    fingers += extended[i];
+                    break;
+                case 'r':
+                    fingers += curved[i];
+                    flex_mode = 'r';
+                    break;
+                case 'g':
+                    fingers += curved[i];
+                    flex_mode = 'g';
+                    break;
+                default: //'c'
+                    break;
+            }
+            if (finger_params[i].length > 1) {
+                switch(finger_params[i][1]){
+                    case '+':
+                        contact = '+';
                         break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                    case 4:
+                    case '-':
+                        contact = '-';
                         break;
                 }
-            })
+            }
+        }
+        return fingers + flex_mode + contact;
+    }
+}
+
+const responseToSignotation = (response) => {
+    let elements =[];
+    response['explanations'].forEach((elem) => {
+        if (elem['hand']) { // Hand elem is not null
+            elements.push(fingersToSignotation(elem['hand']['fingers']));
         }
     })
+    return elements;
 }
 
 const UploadImage = () => {
@@ -40,13 +77,11 @@ const UploadImage = () => {
             method: 'POST',
             body: image,
         })
-        .then(response => {
-            response.json()
-        })
+        .then(response => response.json())
         .then(response => {
             console.log(response)
             const signotation = responseToSignotation(response)
-            //console.log(signotation)
+            console.log(signotation)
         })
         // VER COMO MANEJAR ERRORES
         .catch(error => console.error('Error uploading file:', error)); 
