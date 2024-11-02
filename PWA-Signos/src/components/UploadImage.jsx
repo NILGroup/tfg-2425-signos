@@ -2,6 +2,27 @@ import React, { useState } from "react";
 
 const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
 
+const responseToSignotation = (response) => {
+    response['explanations'].forEach((elem) => {
+        if (elem['hand']) { // Hand elem is not null
+            elem['hand']['fingers'].forEach((finger) => {
+                switch(finger){
+                    case 0:
+                        
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                }
+            })
+        }
+    })
+}
 
 const UploadImage = () => {
 
@@ -19,8 +40,14 @@ const UploadImage = () => {
             method: 'POST',
             body: image,
         })
-        .then(response => response.json())
-        .then(response => console.log(response))
+        .then(response => {
+            response.json()
+        })
+        .then(response => {
+            console.log(response)
+            const signotation = responseToSignotation(response)
+            //console.log(signotation)
+        })
         // VER COMO MANEJAR ERRORES
         .catch(error => console.error('Error uploading file:', error)); 
     }
