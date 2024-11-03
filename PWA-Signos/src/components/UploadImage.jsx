@@ -3,6 +3,13 @@ import React, { useState } from "react";
 const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
 
 
+const handToSignotation = (hand_params) => {
+    let handSignotation = fingersToSignotation(hand_params['fingers'])
+    handSignotation += ':' + handOrientation(hand_params['ori'], hand_params['rot'], hand_params['ref'])
+
+    return handSignotation
+}
+
 const fingersToSignotation = (finger_params) => {
     if (finger_params.every(finger => finger === 'c')) //El puño cerrado.
         return "picam++";
@@ -51,11 +58,98 @@ const fingersToSignotation = (finger_params) => {
     }
 }
 
+const handOrientation = (ori, rot, ref) => {
+    let handOrientation = ''
+
+    // Palm orientation
+    if(ori === 'b'){
+        handOrientation += 'F'; // Palm forward
+
+        // Distal axis
+        if(rot === 0 || rot === 1 || rot === 7){ // N, NE, NW
+            handOrientation += 'h';
+        }
+        else if(rot === 2){ // E
+            handOrientation += 'y';
+        }
+        else if (rot === 3 || rot === 4 || rot === 5){ // S, SE, SW
+            handOrientation += 'l';
+        }
+        else if(rot === 6){ // W
+            handOrientation += 'x';
+        }
+    }
+    else if(ori === 'w'){
+        handOrientation += 'B'; // Palm backwards
+
+        // Distal axis
+        if(rot === 0 || rot === 1 || rot === 7){
+            handOrientation += 'h';
+        }
+        else if(rot === 2){
+            handOrientation += 'y';
+        }
+        else if (rot === 3 || rot === 4 || rot === 5){
+            handOrientation += 'l';
+        }
+        else if(rot === 6){
+            handOrientation += 'x';
+        }
+    }
+    else if(ori === 'h'){
+
+    }
+    else if(ori === 'hb'){
+        handOrientation += 'L'; // Palm down
+
+        // Distal axis
+        if(rot === 0 || rot === 1 || rot === 7){
+            handOrientation += 'f';
+        }
+        else if(rot === 2){
+            handOrientation += 'y';
+        }
+        else if (rot === 3 || rot === 4 || rot === 5){
+            handOrientation += 'b';
+        }
+        else if(rot === 6){
+            handOrientation += 'x';
+        }
+    }
+    else if(ori === 'hw'){
+        handOrientation += 'H'; // Palm up
+
+        // Distal axis
+        if(rot === 0 || rot === 1 || rot === 7){
+            handOrientation += 'f';
+        }
+        else if(rot === 2){
+            handOrientation += 'y';
+        }
+        else if (rot === 3 || rot === 4 || rot === 5){
+            handOrientation += 'b';
+        }
+        else if(rot === 6){
+            handOrientation += 'x';
+        }
+    }
+    else if(ori === 'hh'){
+
+    }
+
+
+    
+
+
+
+    return handOrientation
+}
+
 const responseToSignotation = (response) => {
     let elements =[];
     response['explanations'].forEach((elem) => {
         if (elem['hand']) { // Hand elem is not null
-            elements.push(fingersToSignotation(elem['hand']['fingers']));
+            elements.push(handToSignotation(elem['hand']));
         }
     })
     return elements;
