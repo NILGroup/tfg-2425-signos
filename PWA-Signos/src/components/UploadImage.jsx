@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
-
+const SIGNARIO_URL = 'https://griffos.filol.ucm.es/signario'
 
 const handToSignotation = (hand_params) => {
     let handSignotation = fingersToSignotation(hand_params['fingers'])
     handSignotation += ':' + handOrientation(hand_params['ori'], hand_params['rot'], hand_params['ref'])
-
+    
     return handSignotation
 }
 
@@ -97,7 +97,21 @@ const handOrientation = (ori, rot, ref) => {
         }
     }
     else if(ori === 'h'){
+        if(ref === false)
+            handOrientation += 'X'; // Palm left
+        else
+            handOrientation += 'Y'; // Palm right
 
+        // Distal axis
+        if(rot === 0 || rot === 1 || rot === 7){
+            handOrientation += 'h';
+        }
+        else if (rot === 3 || rot === 4 || rot === 5){
+            handOrientation += 'l';
+        }
+        else {
+            // No es posible
+        }
     }
     else if(ori === 'hb'){
         handOrientation += 'L'; // Palm down
@@ -134,13 +148,22 @@ const handOrientation = (ori, rot, ref) => {
         }
     }
     else if(ori === 'hh'){
+        if(ref === false)
+            handOrientation += 'X'; // Palm left
+        else
+            handOrientation += 'Y'; // Palm right
 
+        // Distal axis
+        if(rot === 0 || rot === 1 || rot === 7){
+            handOrientation += 'f';
+        }
+        else if (rot === 3 || rot === 4 || rot === 5){
+            handOrientation += 'b';
+        }
+        else {
+            // No es posible
+        }
     }
-
-
-    
-
-
 
     return handOrientation
 }
@@ -176,6 +199,10 @@ const UploadImage = () => {
             console.log(response)
             const signotation = responseToSignotation(response)
             console.log(signotation)
+            // Redirect to Signario
+            window.location.href = SIGNARIO_URL +
+                                   '?buscador=pregunton&consulta=' + 
+                                   encodeURIComponent(signotation[0]);
         })
         // VER COMO MANEJAR ERRORES
         .catch(error => console.error('Error uploading file:', error)); 
