@@ -209,12 +209,12 @@ const UploadImage = () => {
     }
 
     return (
-        <>
-            <input type='file' accept='image/*' max={1} onChange={handleFileSelect}/>
+        <div className="buttons">
+            <input className= 'select-image-button' type='file' accept='image/*' max={1} onChange={handleFileSelect}/>
             <button className='upload-image-button' onClick={handleFileUpload}>
-                Upload Image
+                Enviar imagen
             </button>
-        </>
+        </div>
         
     );
 }

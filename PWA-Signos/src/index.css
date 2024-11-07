@@ -1,11 +1,11 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', 'Trebuchet MS', sans-serif, Arial;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #039e7c;
+  background-color: #1da4a7;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,60 +17,4 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-}
-
-Canvas {
-  border:#024d3c solid 3px;
-  border-radius: 8px;
-  background-color: #ffffff;
-  margin-top: 10px;
-  place-content: center;
-  width: 80vw;
-  height: 60vh;
-}
-
-button:hover {
-  border-color: #000000;
-}
-
-.drawing-tool-selected{
-  border-radius: 8px;
-  padding: 0.4em 0.6em;
-  margin-right: 2px;
-  margin-left: 2px;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor:pointer;
-  transition: border-color 0.25s;
-  background-color: #646cff;
-  color: white;
-}
-
-.drawing-tool-unselected{
-  border-radius: 8px;
-  padding: 0.4em 0.6em;
-  margin-left: 2px;
-  margin-right: 2px;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  background-color: #ffffff;
-  color: #646cff;
-}
-
-.drawing-tool-erase-all{
-  border-radius: 8px;
-  padding: 0.4em 0.6em;
-  margin-left: 2px;
-  margin-right: 2px;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  background-color: #ff6464;
-  color: white;
 }

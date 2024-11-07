@@ -9,9 +9,9 @@ function App() {
 
   return (
     <>
-      <h3>PWA de prueba</h3>
+      <h1 className="title"> TFG-2425-signos </h1>
       
-      <UploadImage className="upload-image"/>
+      <UploadImage className="image-buttons"/>
     </>
   )
 }
