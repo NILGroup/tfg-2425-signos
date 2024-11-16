@@ -3,59 +3,10 @@ import React, { useState } from "react";
 const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
 const SIGNARIO_URL = 'https://griffos.filol.ucm.es/signario'
 
-const handToSignotation = (hand_params) => {
-    let handSignotation = fingersToSignotation(hand_params['fingers'])
-    handSignotation += ':' + handOrientation(hand_params['ori'], hand_params['rot'], hand_params['ref'])
-    
+const handToSignotation = (hand) => {
+    let handSignotation = hand['SHAPE']
+    handSignotation += ':' + handOrientation(hand['VAR'], hand['ROT'], hand['REF'])
     return handSignotation
-}
-
-const fingersToSignotation = (finger_params) => {
-    if (finger_params.every(finger => finger === 'c')) //El puño cerrado.
-        return "picam++";
-    else if (finger_params.every(finger => finger === 'f')) //El índice recto, con el pulgar pegado. El resto de dedos estirados.
-        return "pir-O";
-    else if (finger_params.every(finger => finger === 't')) //El índice y el pulgar cruzados, el resto de dedos estirados.
-        return "TE";
-    else if (finger_params.every(finger => finger === 'x')) //Los dedos índice y corazón cruzados.
-        return "CI";
-    else if (finger_params.every(finger => finger === 's')) //La punta del índice tocando la falange del pulgar, el resto de dedos extendidos.
-        return "pi-O";
-    else {
-        let fingers = ""
-        let flex_mode = ""
-        let contact = ""
-        const extended = ['P', 'I', 'C', 'A', 'M']
-        const curved = ['p', 'i', 'c', 'a', 'm']
-        for (let i = 0; i < 5; i++){
-            switch(finger_params[i][0]){
-                case 'E':
-                    fingers += extended[i];
-                    break;
-                case 'r':
-                    fingers += curved[i];
-                    flex_mode = 'r';
-                    break;
-                case 'g':
-                    fingers += curved[i];
-                    flex_mode = 'g';
-                    break;
-                default: //'c'
-                    break;
-            }
-            if (finger_params[i].length > 1) {
-                switch(finger_params[i][1]){
-                    case '+':
-                        contact = '+';
-                        break;
-                    case '-':
-                        contact = '-';
-                        break;
-                }
-            }
-        }
-        return fingers + flex_mode + contact;
-    }
 }
 
 const handOrientation = (ori, rot, ref) => {
@@ -66,16 +17,16 @@ const handOrientation = (ori, rot, ref) => {
         handOrientation += 'F'; // Palm forward
 
         // Distal axis
-        if(rot === 0 || rot === 1 || rot === 7){ // N, NE, NW
+        if(rot === 'N' || rot === 'NE' || rot === 'NW'){
             handOrientation += 'h';
         }
-        else if(rot === 2){ // E
+        else if(rot === 'E'){
             handOrientation += 'y';
         }
-        else if (rot === 3 || rot === 4 || rot === 5){ // S, SE, SW
+        else if (rot === 'S' || rot === 'SE' || rot === 'SW'){
             handOrientation += 'l';
         }
-        else if(rot === 6){ // W
+        else if(rot === 'W'){
             handOrientation += 'x';
         }
     }
@@ -83,30 +34,30 @@ const handOrientation = (ori, rot, ref) => {
         handOrientation += 'B'; // Palm backwards
 
         // Distal axis
-        if(rot === 0 || rot === 1 || rot === 7){
+        if(rot === 'N' || rot === 'NE' || rot === 'NW'){
             handOrientation += 'h';
         }
-        else if(rot === 2){
+        else if(rot === 'E'){
             handOrientation += 'y';
         }
-        else if (rot === 3 || rot === 4 || rot === 5){
+        else if (rot === 'S' || rot === 'SE' || rot === 'SW'){
             handOrientation += 'l';
         }
-        else if(rot === 6){
+        else if(rot === 'W'){
             handOrientation += 'x';
         }
     }
     else if(ori === 'h'){
-        if(ref === false)
+        if(ref === 'n')
             handOrientation += 'X'; // Palm left
         else
             handOrientation += 'Y'; // Palm right
 
         // Distal axis
-        if(rot === 0 || rot === 1 || rot === 7){
+        if(rot === 'N' || rot === 'NE' || rot === 'NW'){
             handOrientation += 'h';
         }
-        else if (rot === 3 || rot === 4 || rot === 5){
+        else if (rot === 'S' || rot === 'SE' || rot === 'SW'){
             handOrientation += 'l';
         }
         else {
@@ -117,16 +68,16 @@ const handOrientation = (ori, rot, ref) => {
         handOrientation += 'L'; // Palm down
 
         // Distal axis
-        if(rot === 0 || rot === 1 || rot === 7){
+        if(rot === 'N' || rot === 'NE' || rot === 'NW'){
             handOrientation += 'f';
         }
-        else if(rot === 2){
+        else if(rot === 'E'){
             handOrientation += 'y';
         }
-        else if (rot === 3 || rot === 4 || rot === 5){
+        else if (rot === 'S' || rot === 'SE' || rot === 'SW'){
             handOrientation += 'b';
         }
-        else if(rot === 6){
+        else if(rot === 'W'){
             handOrientation += 'x';
         }
     }
@@ -134,45 +85,125 @@ const handOrientation = (ori, rot, ref) => {
         handOrientation += 'H'; // Palm up
 
         // Distal axis
-        if(rot === 0 || rot === 1 || rot === 7){
+        if(rot === 'N' || rot === 'NE' || rot === 'NW'){
             handOrientation += 'f';
         }
-        else if(rot === 2){
+        else if(rot === 'E'){
             handOrientation += 'y';
         }
-        else if (rot === 3 || rot === 4 || rot === 5){
+        else if (rot === 'S' || rot === 'SE' || rot === 'SW'){
             handOrientation += 'b';
         }
-        else if(rot === 6){
+        else if(rot === 'W'){
             handOrientation += 'x';
         }
     }
     else if(ori === 'hh'){
-        if(ref === false)
+        if(ref === 'n')
             handOrientation += 'X'; // Palm left
         else
             handOrientation += 'Y'; // Palm right
 
         // Distal axis
-        if(rot === 0 || rot === 1 || rot === 7){
+        if(rot === 'N' || rot === 'NE' || rot === 'NW'){
             handOrientation += 'f';
         }
-        else if (rot === 3 || rot === 4 || rot === 5){
+        else if (rot === 'S' || rot === 'SE' || rot === 'SW'){
             handOrientation += 'b';
         }
         else {
             // No es posible
         }
     }
-
     return handOrientation
 }
 
+const headToSignotation = (head) => {
+    const head_shape = {
+        'face': 'Car',
+        'fore': 'Cab',
+        'forer': 'CabY',
+        'forel': 'CabX', //existe en visse ??
+        'chin': 'Bar',
+        'cheeks': 'Mej',
+        'cheekr': 'MejY',
+        'cheekl': 'MejX',   // no están en visse
+        'mouth': 'Boc',
+        'moutho': 'Boc', //hay dif con Boc en el signario??
+        'smile': 'Boc', //hay dif con Boc en el signario??
+        'teeth': 'Boc', //hay dif con Boc en el signario??
+        'tongue': 'Boc',    //hay dif con Boc en el signario??
+        'nose': 'Nar',
+        'ears': 'Ore',
+        'earr': 'OreY',     // no están en visse
+        'earl': 'OreX',      // no están en visse
+        'eyes': 'Ojo',
+        'eyer': 'OjoY',
+        'eyel': 'OjoX',      // no están en visse
+        'hair': '', // no se puede elegir en el signario
+        'back': '', // no se puede elegir en el signario
+        'neck': 'Cue',  // no se puede elegir en el signario
+        'neckr': 'CueY',    // no están en visse
+        'neckl': 'CueX'     // no están en visse
+        //antebrazo, codo, cadera, muñeca, ... se pueden elegir en el signario pero no están en el visse
+    }
+    return head_shape[head['SHAPE']];
+}
+
+const diacToSignotation = (diac) => {
+    const diac_shape = {
+        'touch': '*',
+        'inter': '',
+        'brush': '',
+        'grasp': '',
+        'between': '',
+        'rub': '',
+        'flex_hook': '',
+        'flex_base': '',
+        'flex_alt': '',
+        'ext_hook': '',
+        'ext_base': '',
+        'ext_alt': '',
+        'strike': '',
+        'tense': '',
+        'wiggle': '',
+        'sym': '',
+        'anti': '',
+        'altern': '',
+        'fast': ''
+    }
+}
+
 const responseToSignotation = (response) => {
-    let elements =[];
-    response['explanations'].forEach((elem) => {
-        if (elem['hand']) { // Hand elem is not null
-            elements.push(handToSignotation(elem['hand']));
+    let signotation = '';
+    let head = '';
+    let diac = [];
+    let hand = [];
+    let arro = [];
+    let stem = [];
+    let arc = [];
+    response['graphemes'].forEach((grapheme) => {
+        switch(grapheme['tags']['CLASS']){
+            case 'HEAD':
+                head += headToSignotation(grapheme['tags']);
+                break
+            case 'DIAC':
+                diac += diacToSignotation(grapheme['tags']);
+                break
+            case 'HAND':
+                hand += handToSignotation(grapheme['tags']);
+                break
+            case 'ARRO':
+                arro += arroToSignotation(grapheme['tags']);
+                break
+            case 'STEM':
+                stem += stemToSignotation(grapheme['tags']);
+                break
+            case 'ARC':
+                arc = arcToSignotation(grapheme['tags']);
+                break
+            default:
+                break
         }
     })
     return elements;
@@ -190,7 +221,7 @@ const UploadImage = () => {
         const image = new FormData();
         image.append('image', selectedFile);
         // Send selected image to Visse
-        fetch(VISSE_BACKEND_URL + 'recognize', {
+        fetch(VISSE_BACKEND_URL + 'recognize/tfg-2425-signos', {
             method: 'POST',
             body: image,
         })
