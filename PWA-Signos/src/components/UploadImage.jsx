@@ -122,12 +122,8 @@ const headToSignotation = (head) => {
     const head_shape = {
         'face': 'Car',
         'fore': 'Cab',
-        'forer': 'CabY',
-        'forel': 'CabX', //existe en visse ??
         'chin': 'Bar',
         'cheeks': 'Mej',
-        'cheekr': 'MejY',
-        'cheekl': 'MejX',   // no están en visse
         'mouth': 'Boc',
         'moutho': 'Boc',
         'smile': 'Boc',
@@ -135,17 +131,10 @@ const headToSignotation = (head) => {
         'tongue': 'Boc',
         'nose': 'Nar',
         'ears': 'Ore',
-        'earr': 'OreY',     // no están en visse
-        'earl': 'OreX',      // no están en visse
         'eyes': 'Ojo',
-        'eyer': 'OjoY',
-        'eyel': 'OjoX',      // no están en visse
         'hair': 'Cab',
         'back': 'CabB',
-        'neck': 'Cue',  // no se puede elegir en el signario
-        'neckr': 'CueY',    // no están en visse
-        'neckl': 'CueX'     // no están en visse
-        //antebrazo, codo, cadera, muñeca, ... se pueden elegir en el signario pero no están en el visse
+        'neck': 'Cue'
     }
     return head_shape[head['SHAPE']];
 }
@@ -157,7 +146,7 @@ const diacToSignotation = (diac) => {
         'brush': '*', //( : * : * )
         'grasp': '*',
         'between': '*',
-        'rub': '*', //significa contacto en las tres parets ( * : * : * )
+        'rub': '*', //significa contacto en las tres partes ( * : * : * )
         'flex_hook': '^', //mov interno de la mano - garra dedos
         'flex_base': '7',
         'flex_alt': '7w',
@@ -168,10 +157,9 @@ const diacToSignotation = (diac) => {
         'tense': '!',
         'wiggle': 'w',
         'sym': '=',
-        'anti': '', //no se puede
         'altern': '~',
-        'fast': '' //no se puede en signotación -> no se hace
     }
+    return diac_shape[diac['SHAPE']];
 }
 
 const responseToSignotation = (response) => {
