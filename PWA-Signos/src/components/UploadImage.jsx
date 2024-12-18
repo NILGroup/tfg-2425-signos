@@ -221,7 +221,7 @@ const UploadImage = () => {
         const image = new FormData();
         image.append('image', selectedFile);
         // Send selected image to Visse
-        fetch(VISSE_BACKEND_URL + 'recognize/tfg-2425-signos', {
+        fetch(/*VISSE_BACKEND_URL + 'recognize'*/ 'http://localhost:3999/recognize/raw', {
             method: 'POST',
             body: image,
         })
