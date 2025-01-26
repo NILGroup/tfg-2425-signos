@@ -14,9 +14,9 @@
 
 .buttons {
   display:flex;
+  flex-direction: column;
   align-items: center;
   gap: 20px;
-
 }
 
 .upload-image-button{
@@ -71,4 +71,15 @@
   background-color: #a2e5e6;
   border: none;
   color: #063e3f;
+}
+
+.videos{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allows videos to wrap to the next row */
+  gap: 10px; /* Optional: Adds space between videos */
+}
+
+.selected-video{
+  background-color: black;
 }

@@ -206,6 +206,7 @@ const UploadImage = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
     const [videos, setVideos] = useState(null);
+    const [selectedVideo, setSelectedVideo] = useState(null);
 
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0]);
@@ -252,17 +253,21 @@ const UploadImage = () => {
                 Enviar imagen
             </button>
             
-            {videos !== null && (videos.map((_, index) => {
-                return(
-                    <Video 
-                        key={index}
-                        info={videos[index]}
-                    >                        
-                    </Video>
-                )
-            }))}
-
-            
+            <div className='videos'>
+                {videos !== null && (videos.map((_, index) => {
+                    return(
+                        <Video 
+                            key={index}
+                            index={index}
+                            info={videos[index]}
+                            updateSelected={setSelectedVideo}
+                            selectedVideo={selectedVideo}
+                        >                        
+                        </Video>
+                    )
+                }))}
+            </div>
+                
         </div> 
     );
 }
