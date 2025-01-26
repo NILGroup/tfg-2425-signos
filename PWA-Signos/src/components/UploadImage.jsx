@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import Video from './Video.jsx'
 
 const VISSE_BACKEND_URL = 'https://garciasevilla.com/visse/backend/'
-const SIGNARIO_URL = 'https://griffos.filol.ucm.es/signario'
+const SIGNARIO_URL = 'https://griffos.filol.ucm.es/signario/buscar?'
 
 const handToSignotation = (hand) => {
     let handSignotation = hand['SHAPE']
@@ -162,6 +163,10 @@ const diacToSignotation = (diac) => {
     return diac_shape[diac['SHAPE']];
 }
 
+const arroToSignotation = (arro) => {}
+const stemToSignotation = (stem) => {}
+const arcToSignotation = (arc) => {}
+
 const responseToSignotation = (response) => {
     let signotation = '';
     let head = '';
@@ -194,18 +199,20 @@ const responseToSignotation = (response) => {
                 break
         }
     })
-    return elements;
+    return hand;
 }
 
 const UploadImage = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
+    const [videos, setVideos] = useState(null);
 
     const handleFileSelect = (event) => {
         setSelectedFile(event.target.files[0]);
     }
 
     const handleFileUpload = () => {
+        setVideos(null)
         const image = new FormData();
         image.append('image', selectedFile);
         // Send selected image to Visse
@@ -218,10 +225,21 @@ const UploadImage = () => {
             console.log(response)
             const signotation = responseToSignotation(response)
             console.log(signotation)
-            // Redirect to Signario
-            window.location.href = SIGNARIO_URL +
-                                   '?buscador=pregunton&consulta=' + 
-                                   encodeURIComponent(signotation[0]);
+
+            const url = new URL(SIGNARIO_URL + new URLSearchParams({
+                s: signotation,
+                // l es opcional
+            }))
+
+            fetch(url, {
+                method: 'GET'
+            })
+            .then(videosResponse => videosResponse.json())
+            .then(videosResponse => {
+                console.log(videosResponse)
+                setVideos(videosResponse);
+            })
+
         })
         // VER COMO MANEJAR ERRORES
         .catch(error => console.error('Error uploading file:', error)); 
@@ -229,12 +247,15 @@ const UploadImage = () => {
 
     return (
         <div className="buttons">
-            <input className= 'select-image-button' type='file' accept='image/*' max={1} onChange={handleFileSelect}/>
+            <input className='select-image-button' type='file' accept='image/*' max={1} onChange={handleFileSelect}/>
             <button className='upload-image-button' onClick={handleFileUpload}>
                 Enviar imagen
             </button>
-        </div>
-        
+            
+            {videos && <Video info={videos['signs'][0]} />}
+
+            
+        </div> 
     );
 }
 
