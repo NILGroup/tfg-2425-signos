@@ -3,7 +3,7 @@ import React from "react";
 
 const Video = ({index, info, updateSelected, selectedVideo}) => {
     const isSelected = selectedVideo === index ? true : false
-    const className = isSelected ? 'selected-video' : 'video'
+    const className = isSelected ? 'selected-video-container' : 'video-container'
 
     const handleClick = () => {
         updateSelected(index)
@@ -12,7 +12,7 @@ const Video = ({index, info, updateSelected, selectedVideo}) => {
     if (isSelected){
         return (
             <div onClick={handleClick} className={className}>
-                <video width="320" height="240" autoPlay controls >
+                <video className="video" width="160" height="120" autoPlay controls >
                     <source src={info['video']} type="video/mp4"></source>
                 </video>
                 <h1>{info['gloss']}</h1>
@@ -23,7 +23,7 @@ const Video = ({index, info, updateSelected, selectedVideo}) => {
 
     return (
         <div onClick={handleClick} className={className}>
-            <video width="320" height="240" loop="">
+            <video className="video" width="160" height="120">
                 <source src={info['video']} type="video/mp4"></source>
             </video>
             <h1>{info['gloss']}</h1>
