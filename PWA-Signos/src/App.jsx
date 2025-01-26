@@ -9,8 +9,7 @@ function App() {
 
   return (
     <>
-      <h1 className="title"> TFG-2425-signos </h1>
-      
+      <h1 className="title"> TFG-2425-signos </h1>   
       <UploadImage className="image-buttons"/>
     </>
   )

@@ -237,7 +237,7 @@ const UploadImage = () => {
             .then(videosResponse => videosResponse.json())
             .then(videosResponse => {
                 console.log(videosResponse)
-                setVideos(videosResponse);
+                setVideos(videosResponse['signs']);
             })
 
         })
@@ -252,7 +252,15 @@ const UploadImage = () => {
                 Enviar imagen
             </button>
             
-            {videos && <Video info={videos['signs'][0]} />}
+            {videos !== null && (videos.map((_, index) => {
+                return(
+                    <Video 
+                        key={index}
+                        info={videos[index]}
+                    >                        
+                    </Video>
+                )
+            }))}
 
             
         </div> 
