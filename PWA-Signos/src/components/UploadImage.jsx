@@ -163,7 +163,28 @@ const diacToSignotation = (diac) => {
     return diac_shape[diac['SHAPE']];
 }
 
-const arroToSignotation = (arro) => {}
+const arroToSignotation = (arro) => {
+    let ori = arro['ROT']
+
+    switch(ori){
+        case 'N':
+            return 'H'
+        case 'NE':
+            return 'HY'
+        case 'E':
+            return 'Y'
+        case 'SE':
+            return 'LY'
+        case 'NW':
+            return 'HX'
+        case 'W':
+            return 'X'
+        case 'SW':
+            return 'LX'
+        case 'S':
+            return 'L'
+    }
+}
 const stemToSignotation = (stem) => {}
 const arcToSignotation = (arc) => {}
 
