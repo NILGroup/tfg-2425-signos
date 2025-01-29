@@ -168,15 +168,15 @@ const distanceTo = (x1, y1, x2, y2) => { // Distance between two points
 };
 
 const findMyArro = (x, y, rot1, rot2, graphemes) => {
-    let distNearestArro = 1
+    let minDist = 1
     let rotNearestArro = undefined
   graphemes.forEach((grapheme) => {
     if (grapheme["tags"]["CLASS"] === "ARRO" &&
        (grapheme["tags"]["ROT"] === rot1 || grapheme["tags"]["ROT"] === rot2)) {
         
         let dist = distanceTo(x, y, grapheme['box'][0], grapheme['box'][1])
-        if (dist < distNearestArro){
-            distNearestArro = dist
+        if (dist < minDist){
+            minDist = dist
             rotNearestArro = grapheme["tags"]['ROT']
         }
     }
@@ -216,7 +216,7 @@ const arcToSignotation = (arc, graphemes) => {
                 return arroRot === 'NE' ? '(F,Y)' : '(F,Y)'
             
             return arroRot === 'NE' ? '(H,Y)' : '(H,X)'
-        case "NW": // Seguir aquí
+        case "NW": 
             arroRot = findMyArro(arc['box'][0], arc['box'][1], 'NE', 'SW', graphemes)
             if (shape[0] === 's')
                 return arroRot === 'W' ? '(B,X)' : '(B,Y)'
@@ -225,21 +225,21 @@ const arcToSignotation = (arc, graphemes) => {
         case "W":
             arroRot = findMyArro(arc['box'][0], arc['box'][1], 'N', 'S', graphemes)
             if (shape[0] === 's')
-                return arroRot === 'W' ? '(B,X)' : '(B,Y)'
+                return arroRot === 'W' ? '(Y,B)' : '(Y,F)'
             
-            return arroRot === 'W' ? '(L,X)' : '(L,Y)'
+            return arroRot === 'W' ? '(Y,L)' : '(Y,H)'
         case "SW":
             arroRot = findMyArro(arc['box'][0], arc['box'][1], 'NW', 'SE', graphemes)
             if (shape[0] === 's')
-                return arroRot === 'W' ? '(B,X)' : '(B,Y)'
+                return arroRot === 'W' ? '(F,Y)' : '(F,X)'
             
-            return arroRot === 'W' ? '(L,X)' : '(L,Y)'
+            return arroRot === 'W' ? '(H,Y)' : '(H,X)'
         case "S":
             arroRot = findMyArro(arc['box'][0], arc['box'][1], 'W', 'E', graphemes)
             if (shape[0] === 's')
-                return arroRot === 'W' ? '(B,X)' : '(B,Y)'
+                return arroRot === 'W' ? '(F,Y)' : '(F,X)'
             
-            return arroRot === 'W' ? '(L,X)' : '(L,Y)'
+            return arroRot === 'W' ? '(H,Y)' : '(H,X)'
       }
   }
 };
