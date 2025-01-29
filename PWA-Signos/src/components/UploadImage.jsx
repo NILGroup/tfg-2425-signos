@@ -213,10 +213,10 @@ const arcToSignotation = (arc, graphemes) => {
         case "SE":
             arroRot = findMyArro(arc['box'][0], arc['box'][1], 'NE', 'SW', graphemes)
             if (shape[0] === 's')
-                return arroRot === 'NE' ? '(X,F)' : '(X,B)'
+                return arroRot === 'NE' ? '(F,Y)' : '(F,Y)'
             
-            return arroRot === 'NE' ? '(X,H)' : '(X,L)'
-        case "NW":
+            return arroRot === 'NE' ? '(H,Y)' : '(H,X)'
+        case "NW": // Seguir aquí
             arroRot = findMyArro(arc['box'][0], arc['box'][1], 'NE', 'SW', graphemes)
             if (shape[0] === 's')
                 return arroRot === 'W' ? '(B,X)' : '(B,Y)'
