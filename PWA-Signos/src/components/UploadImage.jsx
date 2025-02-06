@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Video from "./Video.jsx";
 
-const VISSE_BACKEND_URL = "https://garciasevilla.com/visse/backend/";
+const VISSE_BACKEND_URL =
+  "https://holstein.fdi.ucm.es/visse/backend/recognize/raw";
 const SIGNARIO_URL = "https://griffos.filol.ucm.es/signario/buscar?";
 
 const handToSignotation = (hand) => {
@@ -163,89 +164,122 @@ const arroToSignotation = (arro) => {
 };
 const stemToSignotation = (stem) => {};
 
-const distanceTo = (x1, y1, x2, y2) => { // Distance between two points
-    return Math.sqrt(Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2))
+const distanceTo = (x1, y1, x2, y2) => {
+  // Distance between two points
+  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 };
 
 const findMyArro = (x, y, rotations, graphemes) => {
-    let minDist = 1
-    let rotNearestArro = undefined
+  let minDist = 1;
+  let rotNearestArro = undefined;
   graphemes.forEach((grapheme) => {
-    if (grapheme["tags"]["CLASS"] === "ARRO" &&
-       rotations.includes(grapheme["tags"]["ROT"])) {
-        
-        let dist = distanceTo(x, y, grapheme['box'][0], grapheme['box'][1])
-        if (dist < minDist){
-            minDist = dist
-            rotNearestArro = grapheme["tags"]['ROT']
-        }
+    if (
+      grapheme["tags"]["CLASS"] === "ARRO" &&
+      rotations.includes(grapheme["tags"]["ROT"])
+    ) {
+      let dist = distanceTo(x, y, grapheme["box"][0], grapheme["box"][1]);
+      if (dist < minDist) {
+        minDist = dist;
+        rotNearestArro = grapheme["tags"]["ROT"];
+      }
     }
   });
 
-  return rotNearestArro
+  return rotNearestArro;
 };
 
 const arcToSignotation = (arc, graphemes) => {
-  const shape = arc['tags']["SHAPE"];
-  const rot = arc['tags']["ROT"];
-  let arroRot = undefined
+  const shape = arc["tags"]["SHAPE"];
+  const rot = arc["tags"]["ROT"];
+  let arroRot = undefined;
 
-  if (shape[1] === 'f') { // El movimiento es un circulo completo
+  if (shape[1] === "f") {
+    // El movimiento es un circulo completo
     switch (rot) {
-        case "N":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['SE', 'E', 'W', 'SW'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'W' || arroRot === 'SW') ? '(B,X)' : '(B,Y)'
-            
-            return (arroRot === 'W' || arroRot === 'SW') ? '(L,X)' : '(L,Y)'
-        case "NE":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['W', 'NW', 'S', 'SE'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'NW' || arroRot === 'W') ? '(B,X)' : '(B,Y)'
-            
-            return (arroRot === 'NW' || arroRot === 'W') ? '(L,X)' : '(L,Y)'
-        case "E":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['N', 'NW', 'S', 'SW'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'N' || arroRot === 'NW') ? '(X,F)' : '(X,B)'
-            
-            return (arroRot === 'N' || arroRot === 'NW') ? '(X,H)' : '(X,L)'
-        case "SE":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['N', 'NE', 'SW', 'W'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'NE' || arroRot === 'N') ? '(F,Y)' : '(F,Y)'
-            
-            return (arroRot === 'NE' || arroRot === 'N')? '(H,Y)' : '(H,X)'
-        case "NW": 
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['E', 'NE', 'S', 'SW'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'S' || arroRot === 'SW') ? '(B,X)' : '(B,Y)'
-            
-            return (arroRot === 'S' || arroRot === 'SW') ? '(L,X)' : '(L,Y)'
-        case "W":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['N', 'NE', 'S', 'SE'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'S' || arroRot === 'SE') ? '(Y,B)' : '(Y,F)'
-            
-            return (arroRot === 'S' || arroRot === 'SE') ? '(Y,L)' : '(Y,H)'
-        case "SW":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['N', 'NW', 'E','SE'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'E' || arroRot === 'SE') ? '(F,Y)' : '(F,X)'
-            
-            return (arroRot === 'E' || arroRot === 'SE') ? '(H,Y)' : '(H,X)'
-        case "S":
-            arroRot = findMyArro(arc['box'][0], arc['box'][1], ['W', 'NW', 'E', 'NE'], graphemes)
-            if (shape[0] === 's')
-                return (arroRot === 'E' || arroRot === 'NE') ? '(F,Y)' : '(F,X)'
-            
-            return (arroRot === 'E' || arroRot === 'NE') ? '(H,Y)' : '(H,X)'
-        default:
-          break
-      }
+      case "N":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["SE", "E", "W", "SW"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "W" ? "(B,X)" : "(B,Y)";
+
+        return arroRot === "W" ? "(L,X)" : "(L,Y)";
+      case "NE":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["W", "NW", "S", "SE"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "NW" ? "(B,X)" : "(B,Y)";
+
+        return arroRot === "NW" ? "(L,X)" : "(L,Y)";
+      case "E":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["N", "NW", "S", "SW"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "N" ? "(X,F)" : "(X,B)";
+
+        return arroRot === "N" ? "(X,H)" : "(X,L)";
+      case "SE":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["N", "NE", "SW", "W"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "NE" ? "(F,Y)" : "(F,Y)";
+
+        return arroRot === "NE" ? "(H,Y)" : "(H,X)";
+      case "NW":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["NE", "SW"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "W" ? "(B,X)" : "(B,Y)";
+
+        return arroRot === "W" ? "(L,X)" : "(L,Y)";
+      case "W":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["N", "S"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "W" ? "(Y,B)" : "(Y,F)";
+
+        return arroRot === "W" ? "(Y,L)" : "(Y,H)";
+      case "SW":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["NW", "SE"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "W" ? "(F,Y)" : "(F,X)";
+
+        return arroRot === "W" ? "(H,Y)" : "(H,X)";
+      case "S":
+        arroRot = findMyArro(
+          arc["box"][0],
+          arc["box"][1],
+          ["W", "E"],
+          graphemes
+        );
+        if (shape[0] === "s") return arroRot === "W" ? "(F,Y)" : "(F,X)";
+
+        return arroRot === "W" ? "(H,Y)" : "(H,X)";
+      default:
+        break;
+    }
   }
-
-
 };
 
 const responseToSignotation = (response) => {
@@ -297,17 +331,18 @@ const UploadImage = () => {
     const image = new FormData();
     image.append("image", selectedFile);
     // Send selected image to Visse
-    fetch(
-      /*VISSE_BACKEND_URL + 'recognize'*/ "http://localhost:3999/recognize/raw",
-      {
-        method: "POST",
-        body: image,
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        const signotation = responseToSignotation(response);
+    const uploadImage = async () => {
+      try {
+        const response = await fetch(
+          /*VISSE_BACKEND_URL*/ "http://localhost:3999/recognize/raw",
+          {
+            method: "POST",
+            body: image,
+          }
+        );
+        const responseData = await response.json();
+        console.log(responseData);
+        const signotation = await responseToSignotation(responseData);
         console.log(signotation);
 
         const url = new URL(
@@ -318,17 +353,17 @@ const UploadImage = () => {
             })
         );
 
-        fetch(url, {
+        const videosResponse = await fetch(url, {
           method: "GET",
-        })
-          .then((videosResponse) => videosResponse.json())
-          .then((videosResponse) => {
-            console.log(videosResponse);
-            setVideos(videosResponse["signs"]);
-          });
-      })
-      // VER COMO MANEJAR ERRORES
-      .catch((error) => console.error("Error uploading file:", error));
+        });
+        const videosData = await videosResponse.json();
+        console.log(videosData);
+        await setVideos(videosData["signs"]);
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
+    };
+    uploadImage();
   };
 
   return (
