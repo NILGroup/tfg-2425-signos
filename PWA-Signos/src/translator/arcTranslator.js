@@ -1,3 +1,4 @@
+import findMyArro from './arroTranslator.js'
 
 const arcToSignotation = (arc, graphemes) => {
   const shape = arc["tags"]["SHAPE"];

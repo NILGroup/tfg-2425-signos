@@ -22,7 +22,6 @@ export const findMyArro = (x, y, rotations, graphemes) => {
 export const findClosest = (x, y, graphemes, rot) => {
   let minDist = 1;
 
-
   graphemes.forEach((grapheme) => {
     if (grapheme["tags"]["CLASS"] === "ARRO" && grapheme["tags"]["ROT"] === rot) {
       let dist = distanceTo(x, y, grapheme["box"][0], grapheme["box"][1]);
