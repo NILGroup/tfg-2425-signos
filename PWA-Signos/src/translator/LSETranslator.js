@@ -1,43 +1,72 @@
-import handToSignotation from './handTranslator';
-import headToSignotation from './headTranslator';
-import diacToSignotation from './diacTranslator';
-import arroToSignotation from './arroTranslator';
-import stemToSignotation from './stemTranslator';
-import arcToSignotation from './arcTranslator';
+import handToSignotation from "./handTranslator";
+import headToSignotation from "./headTranslator";
+import diacToSignotation from "./diacTranslator";
+import stemToSignotation from "./stemTranslator";
+import arcToSignotation from "./arcTranslator";
 
-  const responseToSignotation = (response) => {
-    let signotation = "";
-    let head = "";
-    let diac = [];
-    let hand = [];
-    let arro = [];
-    let stem = [];
-    let arc = [];
-    response["graphemes"].forEach((grapheme) => {
-      switch (grapheme["tags"]["CLASS"]) {
-        case "HEAD":
-          head += headToSignotation(grapheme["tags"]);
-          break;
-        case "DIAC":
-          diac += diacToSignotation(grapheme["tags"]);
-          break;
-        case "HAND":
-          hand += handToSignotation(grapheme["tags"]);
-          break;
-        case "ARRO":
-          arro += arroToSignotation(grapheme["tags"]);
-          break;
-        case "STEM":
-          stem += stemToSignotation(grapheme, response["graphemes"]);
-          break;
-        case "ARC":
-          arc = arcToSignotation(grapheme, response["graphemes"]); // Revisar si se le puede pasar otra cosa
-          break;
-        default:
-          break;
-      }
-    });
-    return hand;
-  };
+const graphemes = { HEAD: [], HAND: [], DIAC: [], ARRO: [], STEM: [], ARC: [] };
+
+const classifyGraphemes = (response) => {
+  response.forEach((grapheme) => {
+    switch (grapheme["tags"]["CLASS"]) {
+      case "HEAD":
+        graphemes["HEAD"].push(grapheme);
+        break;
+      case "DIAC":
+        grapheme["paired"] = false;
+        graphemes["DIAC"].push(grapheme);
+        break;
+      case "HAND":
+        graphemes["HAND"].push(grapheme);
+        break;
+      case "ARRO":
+        grapheme["paired"] = false;
+        graphemes["ARRO"].push(grapheme);
+        break;
+      case "STEM":
+        graphemes["STEM"].push(grapheme);
+        break;
+      case "ARC":
+        graphemes["ARC"].push(grapheme);
+        break;
+      default:
+        break;
+    }
+  });
+};
+
+const responseToSignotation = (response) => {
+  let signotation = "";
+  let head = "";
+  let diac = [];
+  let hand = [];
+  let arro = [];
+  let stem = [];
+  let arc = [];
+
+  classifyGraphemes(response["graphemes"]);
+
+  graphemes["HEAD"].forEach((grapheme) => {
+    head += headToSignotation(grapheme['tags']);
+  });
+
+  graphemes["DIAC"].forEach((grapheme) => {
+    diac += diacToSignotation(grapheme['tags']);
+  });
+
+  graphemes["HAND"].forEach((grapheme) => {
+    hand += handToSignotation(grapheme['tags']);
+  });
+
+  graphemes["STEM"].forEach((grapheme) => {
+    stem += stemToSignotation(grapheme, grapheme["ARRO"]);
+  });
+
+  graphemes["ARC"].forEach((grapheme) => {
+    arc += arcToSignotation(grapheme['tags'], grapheme["ARRO"]);
+  });
+
+  return hand;
+};
 
 export default responseToSignotation;

@@ -1,30 +1,81 @@
-import findClosest from "./arroTranslator";
+import { findClosest } from "./arroTranslator";
 
-const stemToSignotation = (stem, graphemes) => {
+const stemToSignotation = (stem, arros) => {
     const rot = stem['tags']['ROT'];
     const shape = stem['tags']['SHAPE'];
     const [cx, cy, h, w] = stem['box'];
+    let arro1, arro2, dir, rep;
 
     switch (rot){
         case 'N': // Vertical
-            findClosest(cx, cy + h/2, graphemes, 'N');
-            findClosest(cx, cy - h/2, graphemes, 'S');
+            arro1 = findClosest(cx, cy - h/2, arros); // Find arrow North
+            arro2 = findClosest(cx, cy + h/2, arros); // Find arrow South
+
+            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+                return undefined;
+            // Caso de que haya flecha a ambos lados PENDIENTE
+            if(arro1 != undefined && arro2 === undefined){
+                dir = shape === 's' ? 'F' : 'H';
+                rep = arro1[1];
+            }
+            else if(arro2 != undefined && arro1 === undefined){
+                dir = shape === 's' ? 'B' : 'L';
+                rep = arro2[1];
+            }
             break;
         case 'NE':
-            findClosest(cx + w/2, cy + h/2, graphemes, 'NE');
-            findClosest(cx - w/2, cy - h/2, graphemes, 'SW');
+            arro1 = findClosest(cx + w/2, cy - h/2, arros);  // Find arrow North East
+            arro2 = findClosest(cx - w/2, cy + h/2, arros);  // Find arrow South West
+
+            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+                return undefined;
+            // Caso de que haya flecha a ambos lados PENDIENTE
+            if(arro1 != undefined && arro2 === undefined){
+                dir = shape === 's' ? 'F' : 'H';
+                rep = arro1[1];
+            }
+            else if(arro2 != undefined && arro1 === undefined){
+                dir = shape === 's' ? 'B' : 'L';
+                rep = arro2[1];
+            }
             break;
         case 'E': // Horizontal
-            findClosest(cx + w/2, cy, graphemes, 'E');
-            findClosest(cx - w/2, cy, graphemes, 'W');
+            arro1 = findClosest(cx + w/2, cy, arros);  // Find arrow East
+            arro2 = findClosest(cx - w/2, cy, arros);  // Find arrow West
+
+            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+                return undefined;
+            // Caso de que haya flecha a ambos lados PENDIENTE
+            if(arro1 != undefined && arro2 === undefined){
+                dir = 'Y';
+                rep = arro1[1];
+            }
+            else if(arro2 != undefined && arro1 === undefined){
+                dir = 'X';
+                rep = arro2[1];
+            }
             break;
         case 'SE':
-            findClosest(cx - w/2, cy + h/2, graphemes, 'NW');
-            findClosest(cx + w/2, cy - h/2, graphemes, 'SE');
+            arro1 = findClosest(cx - w/2, cy - h/2, arros);  // Find arrow North West
+            arro2 = findClosest(cx + w/2, cy + h/2, arros);  // Find arrow South East
+
+            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+                return undefined;
+            // Caso de que haya flecha a ambos lados PENDIENTE
+            if(arro1 != undefined && arro2 === undefined){
+                dir = 'Y';
+                rep = arro1[1];
+            }
+            else if(arro2 != undefined && arro1 === undefined){
+                dir = 'X';
+                rep = arro2[1];
+            }
             break;
         default:
             break;
     }
+
+    return ['->' + dir, rep]
 };
 
 export default stemToSignotation;
