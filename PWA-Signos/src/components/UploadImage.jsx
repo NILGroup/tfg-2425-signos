@@ -22,7 +22,7 @@ const UploadImage = () => {
     const uploadImage = async () => {
       try {
         const response = await fetch(
-          /*VISSE_BACKEND_URL*/ "http://localhost:3999/recognize/raw",
+          VISSE_BACKEND_URL /*"http://localhost:3999/recognize/raw"*/,
           {
             method: "POST",
             body: image,

@@ -41,11 +41,12 @@ const responseToSignotation = (response) => {
   let diac = [];
   let hand = [];
   let arro = [];
-  let stem = [];
+  let stem = undefined;
   let arc = [];
 
   classifyGraphemes(response["graphemes"]);
 
+  console.log(graphemes);
   graphemes["HEAD"].forEach((grapheme) => {
     head += headToSignotation(grapheme['tags']);
   });
@@ -59,14 +60,16 @@ const responseToSignotation = (response) => {
   });
 
   graphemes["STEM"].forEach((grapheme) => {
-    stem += stemToSignotation(grapheme, grapheme["ARRO"]);
+    stem = stemToSignotation(grapheme, graphemes["ARRO"]);
+    console.log(stem[0]);
+    console.log(stem[1]);
   });
 
   graphemes["ARC"].forEach((grapheme) => {
-    arc += arcToSignotation(grapheme['tags'], grapheme["ARRO"]);
+    arc += arcToSignotation(grapheme['tags'], graphemes["ARRO"]);
   });
 
-  return hand;
+  return stem[0];
 };
 
 export default responseToSignotation;
