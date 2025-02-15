@@ -96,7 +96,7 @@ import { findClosest } from "./arroTranslator.js";
 
 const incompleteArcs = (arc, arros) => {
   const rot = arc["tags"]["ROT"];
-  const shape = arc["tags"]["SHAPE"];
+  const shape = arc["tags"]["SHAPE"][0];
   const [cx, cy, h, w] = arc["box"];
   let arro1, arro2, dir, coda, rep;
 
@@ -106,14 +106,14 @@ const incompleteArcs = (arc, arros) => {
       arro2 = findClosest(cx + w / 2, cy + h / 2, arros); // Find East arrow
 
       dir = shape === "s" ? "F" : "H";
-      if (arro1 === undefined && arro2 === undefined) // Preguntar
-        return '(' + dir + ')';
+      if (arro1 === undefined && arro2 === undefined)
+        return "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        coda = 'X';
+        coda = "X";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        coda = 'Y';
+        coda = "Y";
         rep = arro2[1];
       }
       break;
@@ -121,47 +121,47 @@ const incompleteArcs = (arc, arros) => {
       arro1 = findClosest(cx - w / 2, cy - h / 2, arros); // Find North arrow
       arro2 = findClosest(cx + w / 2, cy + h / 2, arros); // Find East arrow
 
+      dir = shape === "s" ? "FY" : "HY";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = shape === "s" ? "FY" : "HY";
+        coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = shape === "s" ? "BX" : "LX";
+        coda = "Y";           // Y o B/L ?
         rep = arro2[1];
       }
       break;
-    case "E": // Horizontal
+    case "E":
       arro1 = findClosest(cx - w / 2, cy - h / 2, arros); // Find North arrow
       arro2 = findClosest(cx - w / 2, cy + h / 2, arros); // Find South arrow
 
+      dir = "Y";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return  "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = "Y";
+        coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = "X";
+        coda = shape === "s" ? "B" : "L";
         rep = arro2[1];
       }
       break;
     case "SE":
-      arro1 = findClosest(cx + w / 2, cy - h / 2, arros); // Find East arrow
-      arro2 = findClosest(cx - w / 2, cy + h / 2, arros); // Find South arrow
+      arro1 = findClosest(cx - w / 2, cy + h / 2, arros); // Find South arrow
+      arro2 = findClosest(cx + w / 2, cy - h / 2, arros); // Find East arrow
 
+      dir = shape === "s" ? "BY" : "LY";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return  "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = shape === "s" ? "FX" : "HX";
+        coda = shape === "s" ? "B" : "L";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = shape === "s" ? "BY" : "LY";
+        coda = "Y";
         rep = arro2[1];
       }
       break;
@@ -169,15 +169,15 @@ const incompleteArcs = (arc, arros) => {
       arro1 = findClosest(cx + w/2, cy - h/2, arros); // Find East arrow
       arro2 = findClosest(cx - w/2, cy - h/2, arros); // Find West arrow
 
+      dir = shape === "s" ? "B" : "L";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return  "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = shape === "s" ? "FX" : "HX";
+        coda = "Y";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = shape === "s" ? "BY" : "LY";
+        coda = "X";
         rep = arro2[1];
       }
       break;
@@ -185,15 +185,15 @@ const incompleteArcs = (arc, arros) => {
       arro1 = findClosest(cx + w/2, cy + h/2, arros); // Find South arrow
       arro2 = findClosest(cx - w/2, cy - h/2, arros); // Find West arrow
 
+      dir = shape === "s" ? "BX" : "LX";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return  "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = shape === "s" ? "FX" : "HX";
+        coda = shape === "s" ? "B" : "L";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = shape === "s" ? "BY" : "LY";
+        coda = "X";
         rep = arro2[1];
       }
       break;
@@ -201,15 +201,15 @@ const incompleteArcs = (arc, arros) => {
       arro1 = findClosest(cx + w/2, cy - h/2, arros); // Find North arrow
       arro2 = findClosest(cx + w/2, cy + h/2, arros); // Find South arrow
 
+      dir = "X";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return  "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = shape === "s" ? "FX" : "HX";
+        coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = shape === "s" ? "BY" : "LY";
+        coda = shape === "s" ? "B" : "L";
         rep = arro2[1];
       }
       break;
@@ -217,37 +217,34 @@ const incompleteArcs = (arc, arros) => {
       arro1 = findClosest(cx + w/2, cy - h/2, arros); // Find North arrow
       arro2 = findClosest(cx - w/2, cy + h/2, arros); // Find West arrow
 
+      dir = shape === "s" ? "FX" : "HX";
       if (arro1 === undefined && arro2 === undefined)
-        // Shoulders, waists, forearms or complex movements are ignored
-        return undefined;
+        return  "(" + dir + ")";
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
-        dir = shape === "s" ? "FX" : "HX";
+        coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
-        dir = shape === "s" ? "BY" : "LY";
+        coda = "X";
         rep = arro2[1];
       }
       break;
-
     default:
       break;
   }
-
-
-  return `(${dir}):${coda}`;
+  return "(" + dir + "):" + coda;
 };
 
 const fullArcs = (arc, arros) => {};
 
 const arcToSignotation = (arc, arros) => {
   const shape = arc["tags"]["SHAPE"];
-
-  if (shape[1] === "q" || shape[1] == "h") {
+  
+  if (shape[1] == "q" || shape[1] == "h") {
     // Traduction for quarter and half arcs is the same
-    incompleteArcs();
+    return incompleteArcs(arc, arros);
   } else {
-    fullArcs();
+    return fullArcs();
   }
 };
 

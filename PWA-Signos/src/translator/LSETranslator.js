@@ -63,10 +63,10 @@ const responseToSignotation = (response) => {
   });
 
   graphemes["ARC"].forEach((grapheme) => {
-    arc += arcToSignotation(grapheme['tags'], graphemes["ARRO"]);
+    arc.push(arcToSignotation(grapheme, graphemes["ARRO"]));
   });
-  console.log(stem);
-  return stem;
+  console.log(arc);
+  return arc;
 };
 
 export default responseToSignotation;
