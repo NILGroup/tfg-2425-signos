@@ -31,11 +31,11 @@ const stemToSignotation = (stem, arros) => {
                 return undefined;
             // Caso de que haya flecha a ambos lados PENDIENTE
             if(arro1 != undefined && arro2 === undefined){
-                dir = shape === 's' ? 'F' : 'H';
+                dir = shape === 's' ? 'FY' : 'HY';
                 rep = arro1[1];
             }
             else if(arro2 != undefined && arro1 === undefined){
-                dir = shape === 's' ? 'B' : 'L';
+                dir = shape === 's' ? 'BX' : 'LX';
                 rep = arro2[1];
             }
             break;
@@ -63,11 +63,11 @@ const stemToSignotation = (stem, arros) => {
                 return undefined;
             // Caso de que haya flecha a ambos lados PENDIENTE
             if(arro1 != undefined && arro2 === undefined){
-                dir = 'Y';
+                dir = shape === 's' ? 'FX' : 'HX';
                 rep = arro1[1];
             }
             else if(arro2 != undefined && arro1 === undefined){
-                dir = 'X';
+                dir = shape === 's' ? 'BY' : 'LY';
                 rep = arro2[1];
             }
             break;
@@ -75,7 +75,7 @@ const stemToSignotation = (stem, arros) => {
             break;
     }
 
-    return ['->' + dir, rep]
+    return dir === undefined ? undefined : ['->:' + dir, rep];
 };
 
 export default stemToSignotation;

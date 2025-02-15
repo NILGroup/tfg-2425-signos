@@ -31,7 +31,6 @@ const UploadImage = () => {
         const responseData = await response.json();
         console.log(responseData);
         const signotation = await responseToSignotation(responseData);
-        console.log(signotation);
 
         const url = new URL(
           SIGNARIO_URL +

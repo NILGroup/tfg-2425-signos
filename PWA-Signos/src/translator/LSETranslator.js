@@ -4,9 +4,7 @@ import diacToSignotation from "./diacTranslator";
 import stemToSignotation from "./stemTranslator";
 import arcToSignotation from "./arcTranslator";
 
-const graphemes = { HEAD: [], HAND: [], DIAC: [], ARRO: [], STEM: [], ARC: [] };
-
-const classifyGraphemes = (response) => {
+const classifyGraphemes = (response, graphemes) => {
   response.forEach((grapheme) => {
     switch (grapheme["tags"]["CLASS"]) {
       case "HEAD":
@@ -41,10 +39,11 @@ const responseToSignotation = (response) => {
   let diac = [];
   let hand = [];
   let arro = [];
-  let stem = undefined;
+  let stem = [];
   let arc = [];
 
-  classifyGraphemes(response["graphemes"]);
+  let graphemes = { HEAD: [], HAND: [], DIAC: [], ARRO: [], STEM: [], ARC: [] };
+  classifyGraphemes(response["graphemes"], graphemes);
 
   console.log(graphemes);
   graphemes["HEAD"].forEach((grapheme) => {
@@ -60,16 +59,14 @@ const responseToSignotation = (response) => {
   });
 
   graphemes["STEM"].forEach((grapheme) => {
-    stem = stemToSignotation(grapheme, graphemes["ARRO"]);
-    console.log(stem[0]);
-    console.log(stem[1]);
+    stem.push(stemToSignotation(grapheme, graphemes["ARRO"]));
   });
 
   graphemes["ARC"].forEach((grapheme) => {
     arc += arcToSignotation(grapheme['tags'], graphemes["ARRO"]);
   });
-
-  return stem[0];
+  console.log(stem);
+  return stem;
 };
 
 export default responseToSignotation;
