@@ -147,7 +147,8 @@ const fullArcs = (arc, arros) => {
   const rot = arc["tags"]["ROT"];
   const shape = arc["tags"]["SHAPE"][0];
   const [cx, cy, h, w] = arc["box"];
-  let arro1, arro2, dir;
+  let arro;
+  let ini = "", dir = "";
   let rep = false;
   let arroRot = undefined;
 
@@ -156,50 +157,50 @@ const fullArcs = (arc, arros) => {
     case "N":
     case "NE":
     case "NW":
-      arroRot = findMyArro(
-        arc["box"][0],
-        arc["box"][1],
-        ["SE", "E", "W", "SW"],
-        graphemes
-      );
-      if (shape[0] === "s") return arroRot === "W" ? "(B,X)" : "(B,Y)";
-
-      return arroRot === "W" ? "(L,X)" : "(L,Y)";
+      arro = findClosest(cx, cy + h / 4, arros);
+      if (arro===undefined) break;
+      if (arro[0]["ROT"] === "NW" || arro[0]["ROT"] === "W" || arro[0]["ROT"] === "SW")   // Arrow pointing to the left
+        dir = "X";
+      else if (arro[0]["ROT"] === "NE" || arro[0]["ROT"] === "E" || arro[0]["ROT"] === "SE")  // Arrow pointing to the right
+        dir = "Y";
+      ini = (shape === "s") ? "B" : "L";
+      break;
     case "E":
-      arroRot = findMyArro(
-        arc["box"][0],
-        arc["box"][1],
-        ["N", "NW", "S", "SW"],
-        graphemes
-      );
-      if (shape[0] === "s") return arroRot === "N" ? "(X,F)" : "(X,B)";
-
-      return arroRot === "N" ? "(X,H)" : "(X,L)";
+      if (arro===undefined) break;
+      arro = findClosest(cx - w / 4, cy, arros);
+      if (arro[0]["ROT"] === "NE" || arro[0]["ROT"] === "N" || arro[0]["ROT"] === "NW")   // Arrow pointing to the north
+        dir = (shape === "s") ? "F" : "H";
+      else if (arro[0]["ROT"] === "SE" || arro[0]["ROT"] === "S" || arro[0]["ROT"] === "SW")  // Arrow pointing to the south
+        dir = (shape === "s") ? "B" : "L";  
+      ini = "X";
+      break;
     case "S":
     case "SE":
     case "SW":
-      arroRot = findMyArro(
-        arc["box"][0],
-        arc["box"][1],
-        ["W", "E"],
-        graphemes
-      );
-      if (shape[0] === "s") return arroRot === "W" ? "(F,Y)" : "(F,X)";
-
-      return arroRot === "W" ? "(H,Y)" : "(H,X)";
+      arro = findClosest(cx, cy - h / 4, arros);
+      if (arro===undefined) break;
+      if (arro[0]["ROT"] === "NW" || arro[0]["ROT"] === "W" || arro[0]["ROT"] === "SW")   // Arrow pointing to the left
+        dir = "X";
+      else if (arro[0]["ROT"] === "NE" || arro[0]["ROT"] === "E" || arro[0]["ROT"] === "SE")  // Arrow pointing to the right
+        dir = "Y";
+      ini = (shape === "s") ? "F" : "H";
+      break;
     case "W":
-      arroRot = findMyArro(
-        arc["box"][0],
-        arc["box"][1],
-        ["N", "S"],
-        graphemes
-      );
-      if (shape[0] === "s") return arroRot === "W" ? "(Y,B)" : "(Y,F)";
-
-      return arroRot === "W" ? "(Y,L)" : "(Y,H)";
+      arro = findClosest(cx + w / 4, cy, arros);
+      if (arro===undefined) break;
+      if (arro[0]["ROT"] === "NE" || arro[0]["ROT"] === "N" || arro[0]["ROT"] === "NW")   // Arrow pointing to the north
+        dir = (shape === "s") ? "F" : "H";
+      else if (arro[0]["ROT"] === "SE" || arro[0]["ROT"] === "S" || arro[0]["ROT"] === "SW")  // Arrow pointing to the south
+        dir = (shape === "s") ? "B" : "L";  
+      ini = "Y";
+      break;
     default:
       break;
   }
+
+  if (arro != undefined) rep = arro[1]; // Double arrow
+
+  return ["(" + ini + "," + dir + ")", rep] ;
 };
 
 const arcToSignotation = (arc, arros) => {

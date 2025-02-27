@@ -20,16 +20,22 @@ import distanceTo from "./distance";
 //   return rotNearestArro;
 // };
 
-const findClosestArroToCircular = (x, y, rot, arrows) => {
+const findClosestArro = (x, y, arrows, margin) => {
   let minDist = Number.MAX_SAFE_INTEGER;
   let closestArro = undefined;
   let closestArroIdx = -1;
 
   arrows.forEach((arro, index) => {
-    // Podria comprobarse si la rotacion coincide
     if (!arro["paired"]) {
       let dist = distanceTo(x, y, arro["box"][0], arro["box"][1]);
-      if (dist < minDist && dist < Math.max(arro["box"][2], arro["box"][3])) {
+      if (dist < minDist)
+      // Stems and half arcs
+      if (margin===undefined && dist < Math.max(arro["box"][2], arro["box"][3])) {
+        minDist = dist;
+        closestArro = arro;
+        closestArroIdx = index;
+      }
+      else if (dist < margin) { // Circular arrows
         minDist = dist;
         closestArro = arro;
         closestArroIdx = index;
@@ -44,52 +50,9 @@ const findClosestArroToCircular = (x, y, rot, arrows) => {
   return closestArro;
 };
 
-export const findClosestToCircular = (x, y, rot, arrows) => {
+export const findClosest = (x, y, arrows, margin=undefined) => {
   // Find the closest arrow
-  const closestArro = findClosestArro(x, y, rot, arrows);
-
-  if (closestArro === undefined) return undefined;
-
-  // In case of double arrow
-  const doubleArro = findClosestArroToCircular(
-    closestArro["box"][0],
-    closestArro["box"][1],
-    arrows
-  );
-
-  return doubleArro === undefined ||
-    closestArro["tags"]["SHAPE"] != doubleArro["tags"]["SHAPE"]
-    ? [closestArro["tags"]["SHAPE"], false]
-    : [closestArro["tags"]["SHAPE"], true];
-};
-
-const findClosestArro = (x, y, arrows) => {
-  let minDist = Number.MAX_SAFE_INTEGER;
-  let closestArro = undefined;
-  let closestArroIdx = -1;
-
-  arrows.forEach((arro, index) => {
-    // Podria comprobarse si la rotacion coincide
-    if (!arro["paired"]) {
-      let dist = distanceTo(x, y, arro["box"][0], arro["box"][1]);
-      if (dist < minDist && dist < Math.max(arro["box"][2], arro["box"][3])) {
-        minDist = dist;
-        closestArro = arro;
-        closestArroIdx = index;
-      }
-    }
-  });
-
-  if (closestArro === undefined) return undefined;
-
-  arrows[closestArroIdx]["paired"] = true;
-
-  return closestArro;
-};
-
-export const findClosest = (x, y, arrows) => {
-  // Find the closest arrow
-  const closestArro = findClosestArro(x, y, arrows);
+  const closestArro = findClosestArro(x, y, arrows, margin);
 
   if (closestArro === undefined) return undefined;
 
@@ -97,13 +60,14 @@ export const findClosest = (x, y, arrows) => {
   const doubleArro = findClosestArro(
     closestArro["box"][0],
     closestArro["box"][1],
-    arrows
+    arrows,
+    margin
   );
 
   return doubleArro === undefined ||
     closestArro["tags"]["SHAPE"] != doubleArro["tags"]["SHAPE"]
-    ? [closestArro["tags"]["SHAPE"], false]
-    : [closestArro["tags"]["SHAPE"], true];
+    ? [closestArro["tags"], false]
+    : [closestArro["tags"], true];
 };
 
 export const arroToSignotation = (arro) => {
