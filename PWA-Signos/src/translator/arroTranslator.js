@@ -1,22 +1,66 @@
 import distanceTo from "./distance";
 
-export const findMyArro = (x, y, rotations, graphemes) => {
-  let minDist = 1;
-  let rotNearestArro = undefined;
-  graphemes.forEach((grapheme) => {
-    if (
-      grapheme["tags"]["CLASS"] === "ARRO" &&
-      rotations.includes(grapheme["tags"]["ROT"])
-    ) {
-      let dist = distanceTo(x, y, grapheme["box"][0], grapheme["box"][1]);
-      if (dist < minDist) {
+// Antiguo
+// export const findMyArro = (x, y, rotations, graphemes) => {
+//   let minDist = 1;
+//   let rotNearestArro = undefined;
+//   graphemes.forEach((grapheme) => {
+//     if (
+//       grapheme["tags"]["CLASS"] === "ARRO" &&
+//       rotations.includes(grapheme["tags"]["ROT"])
+//     ) {
+//       let dist = distanceTo(x, y, grapheme["box"][0], grapheme["box"][1]);
+//       if (dist < minDist) {
+//         minDist = dist;
+//         rotNearestArro = grapheme["tags"]["ROT"];
+//       }
+//     }
+//   });
+
+//   return rotNearestArro;
+// };
+
+const findClosestArroToCircular = (x, y, rot, arrows) => {
+  let minDist = Number.MAX_SAFE_INTEGER;
+  let closestArro = undefined;
+  let closestArroIdx = -1;
+
+  arrows.forEach((arro, index) => {
+    // Podria comprobarse si la rotacion coincide
+    if (!arro["paired"]) {
+      let dist = distanceTo(x, y, arro["box"][0], arro["box"][1]);
+      if (dist < minDist && dist < Math.max(arro["box"][2], arro["box"][3])) {
         minDist = dist;
-        rotNearestArro = grapheme["tags"]["ROT"];
+        closestArro = arro;
+        closestArroIdx = index;
       }
     }
   });
 
-  return rotNearestArro;
+  if (closestArro === undefined) return undefined;
+
+  arrows[closestArroIdx]["paired"] = true;
+
+  return closestArro;
+};
+
+export const findClosestToCircular = (x, y, rot, arrows) => {
+  // Find the closest arrow
+  const closestArro = findClosestArro(x, y, rot, arrows);
+
+  if (closestArro === undefined) return undefined;
+
+  // In case of double arrow
+  const doubleArro = findClosestArroToCircular(
+    closestArro["box"][0],
+    closestArro["box"][1],
+    arrows
+  );
+
+  return doubleArro === undefined ||
+    closestArro["tags"]["SHAPE"] != doubleArro["tags"]["SHAPE"]
+    ? [closestArro["tags"]["SHAPE"], false]
+    : [closestArro["tags"]["SHAPE"], true];
 };
 
 const findClosestArro = (x, y, arrows) => {
