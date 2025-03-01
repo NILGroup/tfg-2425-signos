@@ -3,8 +3,12 @@ const headToSignotation = (head) => {
     const head_shape = {
       face: "Car",
       fore: "Cab",
+      forer: "CabY",
+      forel: "CabX",
       chin: "Bar",
       cheeks: "Mej",
+      cheekr: "MejY",
+      cheekl: "MejX",
       mouth: "Boc",
       moutho: "Boc",
       smile: "Boc",
@@ -12,12 +16,16 @@ const headToSignotation = (head) => {
       tongue: "Boc",
       nose: "Nar",
       ears: "Ore",
+      earr: "OreY",
+      earl: "OreX",
       eyes: "Ojo",
+      eyer: "OjoY",
+      eyel: "OjoX",
       hair: "Cab",
       back: "CabB",
       neck: "Cue",
     };
-
+    
     head["SIGNOTATION"] =  head_shape[head["SHAPE"]];
   };
 

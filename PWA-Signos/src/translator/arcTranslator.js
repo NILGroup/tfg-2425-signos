@@ -150,7 +150,7 @@ const fullArcs = (arc, arros) => {
   let arro;
   let ini = "", dir = "";
   let rep = false;
-  
+
   // El movimiento es un circulo completo
   switch (rot) {
     case "N":
@@ -213,8 +213,8 @@ const arcToSignotation = (arc, arros) => {
     // Traduction for full arcs
     signotation = fullArcs(arc, arros);
   }
-  arc["SIGNOTATION"] = signotation[0];
-  arc["REP"] = signotation[1];
+  arc["tags"]["SIGNOTATION"] = signotation[0];
+  arc["tags"]["REP"] = signotation[1];
 };
 
 export default arcToSignotation;
