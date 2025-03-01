@@ -19,8 +19,10 @@ const diacToSignotation = (diac) => {
       sym: "=",
       altern: "~",
     };
-    return diac_shape[diac["SHAPE"]];
-  };
+
+    diac["SIGNOTATION"] = diac_shape[diac["SHAPE"]];
+    //return diac_shape[diac["SHAPE"]];
+};
 
 export default diacToSignotation;
   

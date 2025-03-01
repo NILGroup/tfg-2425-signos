@@ -11,7 +11,8 @@ const classifyGraphemes = (response, graphemes) => {
         graphemes["HEAD"].push(grapheme);
         break;
       case "DIAC":
-        grapheme["paired"] = false;
+        grapheme["minDist"] = Number.MAX_SAFE_INTEGER;
+        grapheme[""] = undefined;
         graphemes["DIAC"].push(grapheme);
         break;
       case "HAND":
@@ -33,6 +34,7 @@ const classifyGraphemes = (response, graphemes) => {
   });
 };
 
+
 const responseToSignotation = (response) => {
   let signotation = "";
   let head = "";
@@ -51,7 +53,8 @@ const responseToSignotation = (response) => {
   });
 
   graphemes["DIAC"].forEach((grapheme) => {
-    diac += diacToSignotation(grapheme['tags']);
+    diacToSignotation(grapheme['tags']);
+    console.log(grapheme);
   });
 
   graphemes["HAND"].forEach((grapheme) => {
@@ -65,8 +68,8 @@ const responseToSignotation = (response) => {
   graphemes["ARC"].forEach((grapheme) => {
     arc.push(arcToSignotation(grapheme, graphemes["ARRO"]));
   });
-  console.log(arc);
-  return arc;
+  
+  return ;
 };
 
 export default responseToSignotation;

@@ -210,7 +210,8 @@ const arcToSignotation = (arc, arros) => {
     // Traduction for quarter and half arcs is the same
     return incompleteArcs(arc, arros);
   } else {
-    return fullArcs();
+    // Traduction for full arcs
+    return fullArcs(arc, arros);
   }
 };
 
