@@ -10,9 +10,12 @@ const UploadImage = () => {
   const [videos, setVideos] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [text, setText] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0]);
+    const file = event.target.files[0];
+    setSelectedFile(file);
+    setSelectedImage(URL.createObjectURL(file));
   };
 
   const handleFileUpload = () => {
@@ -67,7 +70,9 @@ const UploadImage = () => {
         Enviar imagen
       </button>
 
-      <h1>Signotación: {text}</h1>
+      {selectedImage && <img src={selectedImage} alt="Sinoescritura"/>}
+      {text && <h1>Signotación: {text}</h1>}
+
       <div className="videos">
         
         {videos !== null &&
