@@ -9,6 +9,7 @@ const UploadImage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [videos, setVideos] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [text, setText] = useState(null);
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -31,7 +32,7 @@ const UploadImage = () => {
         const responseData = await response.json();
         console.log(responseData);
         const signotation = await responseToSignotation(responseData);
-
+        await setText(signotation);
         const url = new URL(
           SIGNARIO_URL +
             new URLSearchParams({
@@ -66,7 +67,9 @@ const UploadImage = () => {
         Enviar imagen
       </button>
 
+      <h1>Signotación: {text}</h1>
       <div className="videos">
+        
         {videos !== null &&
           videos.map((_, index) => {
             return (
