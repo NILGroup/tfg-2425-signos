@@ -14,7 +14,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "F" : "H";
       if (arro1 === undefined && arro2 === undefined)
-        return "(" + dir + ")";
+        return ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = "X";
@@ -30,7 +30,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "FY" : "HY";
       if (arro1 === undefined && arro2 === undefined)
-        return "(" + dir + ")";
+        return ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
@@ -46,7 +46,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = "Y";
       if (arro1 === undefined && arro2 === undefined)
-        return  "(" + dir + ")";
+        return  ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
@@ -62,7 +62,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "BY" : "LY";
       if (arro1 === undefined && arro2 === undefined)
-        return  "(" + dir + ")";
+        return  ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "B" : "L";
@@ -78,7 +78,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "B" : "L";
       if (arro1 === undefined && arro2 === undefined)
-        return  "(" + dir + ")";
+        return  ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = "Y";
@@ -94,7 +94,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "BX" : "LX";
       if (arro1 === undefined && arro2 === undefined)
-        return  "(" + dir + ")";
+        return  ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "B" : "L";
@@ -110,7 +110,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = "X";
       if (arro1 === undefined && arro2 === undefined)
-        return  "(" + dir + ")";
+        return  ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
@@ -126,7 +126,7 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "FX" : "HX";
       if (arro1 === undefined && arro2 === undefined)
-        return  "(" + dir + ")";
+        return  ["(" + dir + ")", rep];
       // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
@@ -150,8 +150,7 @@ const fullArcs = (arc, arros) => {
   let arro;
   let ini = "", dir = "";
   let rep = false;
-  let arroRot = undefined;
-
+  
   // El movimiento es un circulo completo
   switch (rot) {
     case "N":
@@ -205,14 +204,17 @@ const fullArcs = (arc, arros) => {
 
 const arcToSignotation = (arc, arros) => {
   const shape = arc["tags"]["SHAPE"];
-  
+  let signotation = undefined;
+
   if (shape[1] == "q" || shape[1] == "h") {
     // Traduction for quarter and half arcs is the same
-    return incompleteArcs(arc, arros);
+    signotation = incompleteArcs(arc, arros);
   } else {
     // Traduction for full arcs
-    return fullArcs(arc, arros);
+    signotation = fullArcs(arc, arros);
   }
+  arc["SIGNOTATION"] = signotation[0];
+  arc["REP"] = signotation[1];
 };
 
 export default arcToSignotation;

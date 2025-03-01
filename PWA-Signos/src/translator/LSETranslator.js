@@ -34,42 +34,52 @@ const classifyGraphemes = (response, graphemes) => {
   });
 };
 
+const groupSignotation = (graphemes) => {
+  let signotation = "";
+
+
+  switch(graphemes["HAND"].length){
+    case 1: // There is only 1 hand
+      signotation += graphemes["HAND"]["SIGNOTATION"];
+      break;
+    case 2: // There are 2 hands
+    
+      break;
+    default: // No hands
+      break;
+  }
+
+  return signotation;
+}
+
 
 const responseToSignotation = (response) => {
-  let signotation = "";
-  let head = "";
-  let diac = [];
-  let hand = [];
-  let arro = [];
-  let stem = [];
-  let arc = [];
 
   let graphemes = { HEAD: [], HAND: [], DIAC: [], ARRO: [], STEM: [], ARC: [] };
   classifyGraphemes(response["graphemes"], graphemes);
 
   console.log(graphemes);
   graphemes["HEAD"].forEach((grapheme) => {
-    head += headToSignotation(grapheme['tags']);
+    headToSignotation(grapheme['tags']);
   });
 
   graphemes["DIAC"].forEach((grapheme) => {
     diacToSignotation(grapheme['tags']);
-    console.log(grapheme);
   });
 
   graphemes["HAND"].forEach((grapheme) => {
-    hand += handToSignotation(grapheme['tags']);
+    handToSignotation(grapheme['tags']);
   });
 
   graphemes["STEM"].forEach((grapheme) => {
-    stem.push(stemToSignotation(grapheme, graphemes["ARRO"]));
+    stemToSignotation(grapheme, graphemes["ARRO"]);
   });
 
   graphemes["ARC"].forEach((grapheme) => {
-    arc.push(arcToSignotation(grapheme, graphemes["ARRO"]));
+    arcToSignotation(grapheme, graphemes["ARRO"]);
   });
-  
-  return ;
+
+  return groupSignotation(graphemes);
 };
 
 export default responseToSignotation;

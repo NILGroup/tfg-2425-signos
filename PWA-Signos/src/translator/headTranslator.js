@@ -17,7 +17,8 @@ const headToSignotation = (head) => {
       back: "CabB",
       neck: "Cue",
     };
-    return head_shape[head["SHAPE"]];
+
+    head["SIGNOTATION"] =  head_shape[head["SHAPE"]];
   };
 
 export default headToSignotation;
