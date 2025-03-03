@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 
-
 const registerServiceWorker = async () => {
   if ("serviceWorker" in navigator) {
     try {
@@ -20,6 +19,7 @@ const registerServiceWorker = async () => {
     } catch (error) {
       console.error(`Falló el registro con el ${error}`);
     }
+    
   }
 };
 
