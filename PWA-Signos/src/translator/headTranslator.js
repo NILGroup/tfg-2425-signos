@@ -1,7 +1,7 @@
 
 const headToSignotation = (head) => {
     const head_shape = {
-      face: "Car",
+      face: "Cab",
       fore: "Cab",
       forer: "CabY",
       forel: "CabX",
