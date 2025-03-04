@@ -21,7 +21,6 @@ const diacToSignotation = (diac) => {
     };
 
     diac["SIGNOTATION"] = diac_shape[diac["SHAPE"]];
-    //return diac_shape[diac["SHAPE"]];
 };
 
 export default diacToSignotation;

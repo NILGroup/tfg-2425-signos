@@ -11,7 +11,6 @@ const classifyGraphemes = (response, graphemes) => {
                 graphemes["HEAD"].push(grapheme);
                 break;
             case "DIAC":
-                grapheme["minDist"] = Number.MAX_SAFE_INTEGER;
                 grapheme[""] = undefined;
                 graphemes["DIAC"].push(grapheme);
                 break;
@@ -36,6 +35,7 @@ const classifyGraphemes = (response, graphemes) => {
 
 const groupSignotation = (graphemes) => {
     let signotation = "";
+    let numAppearances = 0;
 
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
@@ -45,14 +45,31 @@ const groupSignotation = (graphemes) => {
                     ? ""
                     : ":" + graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
 			graphemes["DIAC"].forEach((diac) => {
-				signotation += ":" + diac["tags"]["SIGNOTATION"];
+                if (numAppearances == 0 && diac["tags"]["SIGNOTATION"] === '*'){
+                    numAppearances++;
+                    signotation += ":" + diac["tags"]["SIGNOTATION"];
+                }
+                else if (numAppearances > 0 && diac["tags"]["SIGNOTATION"] === '*')
+                    numAppearances++;
+                else // All diacs that are not asterisks
+                    signotation += ":" + diac["tags"]["SIGNOTATION"];
+                
+                
 			});
 			graphemes["STEM"].forEach((stem) => {
 				signotation += ":" + stem["tags"]["SIGNOTATION"];
+                if (stem["tags"]["REP"])
+                    numAppearances = 2;
+                    
 			});
 			graphemes["ARC"].forEach((arc) => {
 				signotation += ":" + arc["tags"]["SIGNOTATION"];
+                if (arc["tags"]["REP"])
+                    numAppearances = 2;
 			});
+
+            if (numAppearances > 1)
+                signotation += ":R"; 
             break;
         case 2: // There are 2 hands
             break;
