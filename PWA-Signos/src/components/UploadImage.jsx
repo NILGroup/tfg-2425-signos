@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Video from "./Video.jsx";
-import responseToSignotation from '../translator/LSETranslator.js';
+import responseToSignotation from '../translator/LSETranslator.js'
+
+const VISSE_BACKEND_URL = "https://holstein.fdi.ucm.es/visse/backend/recognize/raw";
+const SIGNARIO_URL = "https://griffos.filol.ucm.es/signario/buscar?";
 
 const UploadImage = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -23,7 +26,7 @@ const UploadImage = () => {
     const uploadImage = async () => {
       try {
         const response = await fetch(
-          import.meta.env.VITE_VISSE_BACKEND_URL,
+          VISSE_BACKEND_URL /*"http://localhost:3999/recognize/raw"*/,
           {
             method: "POST",
             body: image,
@@ -34,7 +37,7 @@ const UploadImage = () => {
         const signotation = await responseToSignotation(responseData);
         await setText(signotation);
         const url = new URL(
-          import.meta.env.VITE_SIGNARIO_URL +
+          SIGNARIO_URL +
             new URLSearchParams({
               s: signotation,
               // l es opcional
