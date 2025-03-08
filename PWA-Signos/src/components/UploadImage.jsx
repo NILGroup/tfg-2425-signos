@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Video from "./Video.jsx";
 import responseToSignotation from '../translator/LSETranslator.js'
+import uploadIcon from '../assets/upload-image.svg';
+import checkIcon from '../assets/check.svg';
 
 const VISSE_BACKEND_URL = "https://holstein.fdi.ucm.es/visse/backend/recognize/raw";
 const SIGNARIO_URL = "https://griffos.filol.ucm.es/signario/buscar?";
@@ -11,6 +13,7 @@ const UploadImage = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [text, setText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const input = useRef(null);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
@@ -58,25 +61,35 @@ const UploadImage = () => {
   };
 
   return (
+
     <div className="buttons">
-      <input
-        className="select-image-button"
-        type="file"
-        accept="image/*"
-        max={1}
-        onChange={handleFileSelect}
-      />
 
-      <button className="bg-teal-500 hover:bg-teal-900 text-white font-bold py-2 px-4 rounded-full inline-flex items-center" onClick={handleFileUpload}>
-        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
-        <span>Enviar imagen</span>
-      </button>
-      {/* <button className="upload-image-button" >
-        Enviar imagen
-      </button> */}
+      {text && <div clasName="flex flex-col"> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-3xl mb-4"> SIGNOTACIÓN </h1> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {text}</h1> 
+              </div>}
 
-      {selectedImage && <img src={selectedImage} alt="Sinoescritura"/>}
-      {text && <h1>Signotación: {text}</h1>}
+      {selectedImage && <img src={selectedImage} alt="Signoescritura"/>}
+
+      <div className="flex gap-10">
+        <input
+          className="hidden"
+          type="file"
+          accept="image/*"
+          max={1}
+          ref={input}
+          onChange={handleFileSelect}
+        />
+
+        <button onClick={() => input.current.click()} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20">
+          <img src={uploadIcon} alt="Upload Icon" className="scale-150 p-2 pt-2.25 group-hover:brightness-0 group-hover:invert"/>
+        </button>
+
+        <button onClick={handleFileUpload} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20">
+          <img src={checkIcon} alt="Send image" className="scale-180 p-2.75 pt-3.25 group-hover:brightness-0 group-hover:invert"/>
+        </button>
+      
+      </div>
 
       <div className="videos">
         

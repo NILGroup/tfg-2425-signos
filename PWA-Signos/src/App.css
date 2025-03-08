@@ -1,6 +1,7 @@
 #root {
   font-family: 'Segoe UI', 'Trebuchet MS', sans-serif, Arial;
-  max-width: 1280px;
+  height: 100%;
+  width: 100%;
   margin: auto;
   text-align: center;
 }
@@ -8,69 +9,16 @@
 .title {
   font-size: 2em;
   text-align: center;
-  color: white;
+  color: #4682A9;
   font-weight: bold;
 }
+
 
 .buttons {
   display:flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-}
-
-.upload-image-button{
-  pointer-events: auto;
-  cursor: pointer;
-  background-color: #063e3f;
-  color: white;
-  border: none;
-  border-radius: 3rem;
-  text-align: center;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  font-weight: bold;
-}
-
-.upload-image-button:hover {
-  background-color: white;
-  border: none;
-  color: #063e3f;
-}
-
-.upload-image-button:active {
-  background-color: #a2e5e6;
-  border: none;
-  color: #063e3f;
-}
-
-.select-image-button::file-selector-button {
-  pointer-events: auto;
-  cursor: pointer;
-  background-color: #063e3f;
-  color: white;
-  border: none;
-  border-radius: 3rem;
-  text-align: center;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 3%;
-  padding-bottom: 3%;
-  font-weight: bold;
-}
-
-.select-image-button::file-selector-button:hover {
-  background-color: white;
-  border: none;
-  color: #063e3f;
-}
-
-.select-image-button::file-selector-button:active {
-  background-color: #a2e5e6;
-  border: none;
-  color: #063e3f;
 }
 
 .videos{
