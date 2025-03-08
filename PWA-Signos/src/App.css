@@ -22,18 +22,8 @@
 }
 
 .videos{
-  width: 500px;
-  height: 500px;
   display: block;
   overflow-y: scroll;
-}
-
-.video-container h1 {
-  font-size: 25px;
-}
-
-.video-container h2 {
-  font-size: 15px;
 }
 
 .selected-video-container{
