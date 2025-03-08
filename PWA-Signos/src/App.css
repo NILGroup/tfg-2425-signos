@@ -6,38 +6,9 @@
   text-align: center;
 }
 
-.title {
-  font-size: 2em;
-  text-align: center;
-  color: #4682A9;
-  font-weight: bold;
-}
-
-
 .buttons {
   display:flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-}
-
-.videos{
-  display: block;
-  overflow-y: scroll;
-}
-
-.selected-video-container{
-  background-color: black;
-}
-
-.selected-video-container h1{
-  font-size: 25px;
-}
-
-.selected-video-container h2{
-  font-size: 15px;
-}
-
-.video{
-  margin-top: 5px;
 }

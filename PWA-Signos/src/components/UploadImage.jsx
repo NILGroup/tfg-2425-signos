@@ -99,7 +99,7 @@ const UploadImage = () => {
           </div>
         </div>
         {videos && (
-          <div className="videos border-4 rounded-xl border-[#4682A9] border-solid w-250 h-127">
+          <div className="flex flex-col gap-5 overflow-scroll border-4 rounded-xl border-[#4682A9] border-solid w-250 h-127">
             {videos.map((_, index) => {
               return ( 
                 <Video 
