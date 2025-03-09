@@ -14,6 +14,10 @@ const UploadImage = () => {
   const [text, setText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
+
+  const [loading, setLoading] = useState(null);
+
+
   const input = useRef(null);
 
   const handleFileSelect = (event) => {
@@ -59,7 +63,10 @@ const UploadImage = () => {
         console.error("Error uploading file:", error);
       }
     };
+
+    setLoading(true);
     uploadImage();
+    setLoading(false);
   };
 
   return (
@@ -98,10 +105,16 @@ const UploadImage = () => {
           
           </div>
         </div>
+        {loading && <h1>Loading...</h1>}
         {videos && (
-          <div className="flex flex-col overflow-y-scroll border-4 rounded-xl border-[#4682A9] border-solid w-250 h-127">
-            {videos.map((_, index) => {
-              return ( 
+          <div className="border-4 border-[#4682A9] rounded-xl w-250 h-127 overflow-hidden">
+            <div className="flex flex-col overflow-y-scroll h-full 
+                    [&::-webkit-scrollbar]:w-1.5
+                    [&::-webkit-scrollbar-track]:rounded-full
+                    [&::-webkit-scrollbar-track]:bg-neutral-700
+                    [&::-webkit-scrollbar-thumb]:rounded-full
+                    [&::-webkit-scrollbar-thumb]:bg-neutral-500">
+              {videos.map((_, index) => (
                 <Video 
                   key={index}
                   index={index}
@@ -110,9 +123,10 @@ const UploadImage = () => {
                   updateSelected={setSelectedVideo}
                   selectedVideo={selectedVideo}
                 />
-              );
-            })}
+              ))}
+            </div>
           </div>
+        
         )}
       </div>
     </div>
