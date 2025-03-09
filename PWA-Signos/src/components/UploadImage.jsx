@@ -99,12 +99,13 @@ const UploadImage = () => {
           </div>
         </div>
         {videos && (
-          <div className="flex flex-col gap-5 overflow-scroll border-4 rounded-xl border-[#4682A9] border-solid w-250 h-127">
+          <div className="flex flex-col overflow-y-scroll border-4 rounded-xl border-[#4682A9] border-solid w-250 h-127">
             {videos.map((_, index) => {
               return ( 
                 <Video 
                   key={index}
                   index={index}
+                  lastIndex={videos.length - 1}
                   info={videos[index]}
                   updateSelected={setSelectedVideo}
                   selectedVideo={selectedVideo}
