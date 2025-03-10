@@ -112,8 +112,8 @@ const UploadImage = () => {
         </div>
 
         {loading && (
-          <h1 className="flex text-3xl text-[#4682A9] font-bold p-40 gap-5">
-            <svg className="w-6 h-6 animate-spin" viewBox="0 0 50 50">
+          <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
+            <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
               <circle
                 className="stroke-current"
                 cx="25"
