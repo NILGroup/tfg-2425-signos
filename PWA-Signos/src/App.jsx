@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Canvas from './components/Canvas.jsx'
 import UploadImage from './components/UploadImage.jsx'
 import './App.css'
-
+import SwitchMode from './components/SwitchMode.jsx'
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <h1 className="text-4xl text-center text-[#4682A9] font-bold"> TFG-2425-signos </h1>
         <hr className="mx-4 mt-3 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
       </div>
-
+      <SwitchMode className="theme-switcher"/>
       <UploadImage className="image-buttons"/>
     </>
   )

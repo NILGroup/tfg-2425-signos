@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import Video from "./Video.jsx";
+import SwitchMode from "./SwitchMode.jsx";
 import responseToSignotation from '../translator/LSETranslator.js'
 import uploadIcon from '../assets/upload-image.svg';
 import checkIcon from '../assets/check.svg';
@@ -14,9 +15,7 @@ const UploadImage = () => {
   const [signotationText, setSignotationText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
-
   const [loading, setLoading] = useState(null);
-
   const input = useRef(null);
 
   const handleFileSelect = (event) => {
@@ -74,9 +73,14 @@ const UploadImage = () => {
 
   return (
 
-    <div className="buttons">
+    <div className="flex flex-col items-center gap-20">
 
-      { signotationText && !loading && <div className="flex flex-col gap-4 mt-10"> 
+      
+
+      {!selectedFile && <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver como se signa y su traducción a Signotación</h1>
+                        <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puede dibujar el signo en Signoescritura que quiera traducir.</h2> </div>}
+
+      {signotationText && !loading && <div className="flex flex-col gap-4 mt-10"> 
               <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
               <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotationText}</h1> 
               </div> }
@@ -99,13 +103,13 @@ const UploadImage = () => {
             />
             
             {/*Botón de Elegir imagen*/}
-            <button onClick={() => input.current.click()} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20">
+            <button onClick={() => input.current.click()} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
               <img src={uploadIcon} alt="Upload Icon" className="scale-150 p-2 pt-2.25 group-hover:brightness-0 group-hover:invert"/>
             </button>
             
             {/*Botón de Tick*/}
-            <button onClick={handleFileUpload} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20">
-              <img src={checkIcon} alt="Send image" className="scale-180 p-2.75 pt-3.25 group-hover:brightness-0 group-hover:invert"/>
+            <button onClick={handleFileUpload} disabled={!selectedFile} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${selectedFile ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+              <img src={checkIcon} alt="Send image" className={`scale-180 p-2.75 pt-3.25 ${selectedFile ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
             </button>
           
           </div>
