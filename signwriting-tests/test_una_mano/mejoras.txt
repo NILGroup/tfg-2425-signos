@@ -1,0 +1,2 @@
+- Repetición de diacs (ej. 84.png, 94.png)
+- Comprobar si reconoce el arco en la 101.png
