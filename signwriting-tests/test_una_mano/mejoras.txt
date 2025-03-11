@@ -1,2 +1,3 @@
 - Repetición de diacs (ej. 84.png, 94.png)
 - Comprobar si reconoce el arco en la 101.png
+- Arreglar bug escoger foto, volver a escoger otra y cancelar
