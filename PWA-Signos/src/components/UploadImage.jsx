@@ -1,9 +1,8 @@
 import { useState, useRef } from "react";
 import Video from "./Video.jsx";
-import SwitchMode from "./SwitchMode.jsx";
 import responseToSignotation from '../translator/LSETranslator.js'
 import uploadIcon from '../assets/upload-image.svg';
-import checkIcon from '../assets/check.svg';
+import checkIcon from '../assets/check.svg'
 
 const VISSE_BACKEND_URL = "https://holstein.fdi.ucm.es/visse/backend/recognize/raw";
 const SIGNARIO_URL = "https://griffos.filol.ucm.es/signario/buscar?";
@@ -104,12 +103,12 @@ const UploadImage = () => {
             
             {/*Botón de Elegir imagen*/}
             <button onClick={() => input.current.click()} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
-              <img src={uploadIcon} alt="Upload Icon" className="scale-150 p-2 pt-2.25 group-hover:brightness-0 group-hover:invert"/>
+              <img src={uploadIcon} alt="Upload Icon" className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
             
             {/*Botón de Tick*/}
             <button onClick={handleFileUpload} disabled={!selectedFile} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${selectedFile ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
-              <img src={checkIcon} alt="Send image" className={`scale-180 p-2.75 pt-3.25 ${selectedFile ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+              <img src={checkIcon} alt="Send image" className={`${selectedFile ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
             </button>
           
           </div>
