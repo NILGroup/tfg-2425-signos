@@ -11,12 +11,12 @@ const Video = ({ index, lastIndex, info, updateSelected, selectedVideo }) => {
                         video.current.currentTime=0;};
 
     return (
-        <div onClick={() => updateSelected(index)}
+        <div onClick={() => updateSelected(index)} onMouseEnter={play} onMouseLeave={stop}
         className={`flex flex-row
                     ${index !== lastIndex ? "border-solid border-b-4 border-[#4682A9]" : ""}`}>
             
-            <video className='h-[200px] w-[350px] p-2' loop
-                                                     ref={video} onMouseOver={play} onMouseOut={stop}>   
+            <video className='h-[200px] w-[350px] m-2' loop
+                                                     ref={video} >   
                 <source src={info.video} type="video/mp4" />
             </video>
             <div className='flex flex-col justify-center w-full'>
