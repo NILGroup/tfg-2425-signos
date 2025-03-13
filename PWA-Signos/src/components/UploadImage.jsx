@@ -74,8 +74,6 @@ const UploadImage = () => {
 
     <div className="flex flex-col items-center gap-20">
 
-      
-
       {!selectedFile && <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver como se signa y su traducción a Signotación</h1>
                         <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puede dibujar el signo en Signoescritura que quiera traducir.</h2> </div>}
 
@@ -154,7 +152,7 @@ const UploadImage = () => {
             </div>
           </div>
         )}
-
+        
       </div>
     </div>
   );

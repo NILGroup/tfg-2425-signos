@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import UploadImage from './UploadImage.jsx'
 
 const SwitchMode = () => {
   const [isChecked, setIsChecked] = useState(false)
-
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked)
   }
@@ -77,10 +77,32 @@ const SwitchMode = () => {
               </g>
           </svg>
           </span>
+          
         </div>
+        
       </label>
+      {mode(isChecked)}
     </>
   )
+}
+
+const mode = (isChecked) => {
+  if (isChecked) {
+    return (
+      <>
+      <div id='toolbar'>
+        <button id='clear' className='clear-button bg-[#FFFFFF] w-20 h-20'>Borrar</button>
+      </div>
+      <canvas className="w-350 h-200 m-50 bg-[#FFFFFF]" id="canvas"/>
+      </>
+    )
+  } else {
+    return  (
+    <>
+    <UploadImage className="image-buttons"/>
+    </>
+    )
+  }
 }
 
 export default SwitchMode
