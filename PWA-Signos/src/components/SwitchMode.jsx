@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UploadImage from './UploadImage.jsx'
+import Canvas from './Canvas.jsx'
+
 
 const SwitchMode = () => {
   const [isChecked, setIsChecked] = useState(false)
@@ -88,20 +90,10 @@ const SwitchMode = () => {
 
 const mode = (isChecked) => {
   if (isChecked) {
-    return (
-      <>
-      <div id='toolbar'>
-        <button id='clear' className='clear-button bg-[#FFFFFF] w-20 h-20'>Borrar</button>
-      </div>
-      <canvas className="w-350 h-200 m-50 bg-[#FFFFFF]" id="canvas"/>
-      </>
-    )
+    return <Canvas />;
   } else {
-    return  (
-    <>
-    <UploadImage className="image-buttons"/>
-    </>
-    )
+    return <UploadImage className="image-buttons"/>;
+    
   }
 }
 

@@ -1,14 +1,8 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import SwitchMode from './components/SwitchMode.jsx'
-import Canvas from './components/Canvas.js'
 
 function App() {
-
-  //useEffect(() => {
-  //  Canvas(); // Llamamos la función para inicializar el canvas
-  //}, []);
-
   return (
     <>
      <div className='mt-2 mb-4'>
