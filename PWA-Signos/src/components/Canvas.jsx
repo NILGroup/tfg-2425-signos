@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import clearIcon from '../assets/delete.svg'
+import clearIcon from '../assets/delete.svg';
+import checkIcon from '../assets/check.svg';
 
 const Canvas = () => {
     const canvasRef = useRef(null);
@@ -50,6 +51,10 @@ const Canvas = () => {
             if (e.target.id === "clear") {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
+            else if (e.target.id === "check") {
+                let dataURL = canvas.toDataURL();
+                // handleFileUpload -> subir imagen a VisSE
+            }
         };
 
         return () => {
@@ -63,9 +68,12 @@ const Canvas = () => {
     return (
         <div className="justify-center items-center flex flex-col">
             <canvas ref={canvasRef} className="h-140 bg-[#FFFFFF] my-10 " id="canvas" />
-            <div ref={toolbarRef} id="toolbar">
-                <button id="clear" className="clear-button border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
-                    <img src={clearIcon} alt="Clear Icon" className="clear-button hover:brightness-0 hover:invert"/>
+            <div ref={toolbarRef} id="toolbar" className="flex flex-row gap-10">
+                <button id="clear" className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+                    <img src={clearIcon} id="clear" alt="Clear Icon" className="hover:brightness-0 hover:invert"/>
+                </button>
+                <button id="check" className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+                    <img src={checkIcon} id="check" alt="Clear Icon" className="hover:brightness-0 hover:invert"/>
                 </button>
             </div>
         </div>
