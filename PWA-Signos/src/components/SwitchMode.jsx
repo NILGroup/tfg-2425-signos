@@ -10,7 +10,7 @@ const SwitchMode = () => {
   }
 
   return (
-    <>
+    <div className='flex flex-row mx-2 justify-center'>
       <label className='themeSwitcherThree relative inline-flex cursor-pointer select-none items-center'>
         <input
           type='checkbox'
@@ -18,10 +18,10 @@ const SwitchMode = () => {
           onChange={handleCheckboxChange}
           className='sr-only'
         />
-        <div className='shadow-card flex h-[46px] w-[82px] items-center justify-center rounded-md bg-white'>
+        <div className='shadow-card flex flex-col h-[82px] w-[46px] items-center justify-center rounded-md bg-white'>
           {/* Primer SVG */}
           <span
-            className={`flex h-9 w-9 items-center justify-center rounded ${isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
+            className={`flex h-9 w-9 rounded ${isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
           >
 
           <svg width="36px"
@@ -30,7 +30,7 @@ const SwitchMode = () => {
              fill="none"
               xmlns="http://www.w3.org/2000/svg"
               stroke="#4682A9"
-              className={`${!isChecked ? 'hidden' : ''}`} // Ocultar cuando está checked
+              //className={`${!isChecked ? 'hidden' : ''}`} // Ocultar cuando está checked
               >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -49,7 +49,7 @@ const SwitchMode = () => {
 
           {/* Segundo SVG */}
           <span
-            className={`flex h-9 w-9 items-center justify-center rounded ${!isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
+            className={`flex h-9 w-9 rounded ${!isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
           >
             <svg
               width="36px"
@@ -57,7 +57,7 @@ const SwitchMode = () => {
               viewBox="0 -0.5 25 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className={`${isChecked ? 'hidden' : ''}`} // Ocultar cuando está checked
+              //className={`${isChecked ? 'hidden' : ''}`} // Ocultar cuando está checked
             >
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -82,7 +82,7 @@ const SwitchMode = () => {
         
       </label>
       {mode(isChecked)}
-    </>
+    </div>
   )
 }
 
