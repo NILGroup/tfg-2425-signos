@@ -11,7 +11,7 @@ const SwitchMode = () => {
 
   return (
     <div className='flex flex-row mx-2 justify-center'>
-      <label className='themeSwitcherThree relative inline-flex cursor-pointer select-none items-center'>
+      <label className='absolute left-4 top-1/2 cursor-pointer items-center'>
         <input
           type='checkbox'
           checked={isChecked}
@@ -78,10 +78,11 @@ const SwitchMode = () => {
               </g>
             </svg>
           </span>
-        </div>
-        
+        </div>  
       </label>
+ 
       {mode(isChecked)}
+      
     </div>
   )
 }
