@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import SelectImage from './SelectImage.jsx'
+import UploadImage from './UploadImage.jsx'
 import Canvas from './Canvas.jsx'
 
 
@@ -88,9 +88,9 @@ const SwitchMode = () => {
 
 const mode = (isChecked) => {
   if (isChecked) {
-    return <SelectImage className="image-buttons"/>;
+    return <UploadImage className="image-buttons"/>;
   } else {
-    return <Canvas/>;
+    return <Canvas />;
   }
 }
 

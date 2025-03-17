@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import clearIcon from '../assets/delete.svg';
-import UploadImage from "./UploadImage";
+import checkIcon from '../assets/check.svg';
 
 const Canvas = () => {
     const canvasRef = useRef(null);
     const toolbarRef = useRef(null);
-    const [file, setFile] = useState(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -53,7 +52,8 @@ const Canvas = () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
             else if (e.target.id === "check") {
-                setFile(canvas.toDataURL());
+                let dataURL = canvas.toDataURL();
+                // handleFileUpload -> subir imagen a VisSE
             }
         };
 
@@ -72,7 +72,9 @@ const Canvas = () => {
                 <button id="clear" className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
                     <img src={clearIcon} id="clear" alt="Clear Icon" className="hover:brightness-0 hover:invert"/>
                 </button>
-                <UploadImage id="check" file={file}/>
+                <button id="check" className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+                    <img src={checkIcon} id="check" alt="Clear Icon" className="hover:brightness-0 hover:invert"/>
+                </button>
             </div>
         </div>
     );
