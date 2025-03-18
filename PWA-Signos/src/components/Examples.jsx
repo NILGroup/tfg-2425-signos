@@ -1,10 +1,17 @@
 import { useState } from 'react'
-import alumnoSign from '../examples/64.png'
-import narizSign from '../examples/201.png'
+import backIcon from '../assets/back.svg'
+import profesorSign from '../examples/profesor.png'
+import alicanteSign from '../examples/alicante.png'
+import narizSign from '../examples/nariz.png'
+import hartoSign from '../examples/harto.png'
+
+const handleBack = () => {
+    return; // FALTA POR HACER
+};
 
 const Example = ({index, url, wordSign}) => {
-    return (<div className="flex flex-col gap-1"> 
-        <img className="h-75 w-200 border-4 rounded-xl border-[#4682A9] border-solid" src={url} alt="Wordsign"/> 
+    return (<div className="flex flex-col justify-center items-center gap-5 m-5"> 
+        <img className="h-75 w-110 border-4 rounded-xl border-[#4682A9] border-solid" src={url} alt="Wordsign"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {wordSign} </p> 
     </div>);
 };
@@ -12,12 +19,18 @@ const Example = ({index, url, wordSign}) => {
 const Examples = () => {
     const [selectedExample, setSelectedExample] = useState(null);
 
-    const examples = [[alumnoSign, "Alumno"], [narizSign, "Nariz"]];
+    const examples = [[profesorSign, "Profesor"], [alicanteSign, "Alicante"], [narizSign, "Nariz"],
+                        [hartoSign, "Harto"]];
 
     return (
         <div>
-            <h1 className="text-[#4682A9] font-bold text-3xl">Ejemplos</h1>
-            <div className="grid grid-cols-4 m-5 gap-4 ">
+            <div className="flex flex-row items-center">
+                <button onClick={handleBack} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-18 h-18 cursor-pointer ml-25">
+                    <img src={backIcon} alt="Go back Icon" className="group-hover:brightness-0 group-hover:invert h-13 w-14"/>
+                </button>
+                <h1 className="text-center text-[#4682A9] font-bold text-3xl">Ejemplos</h1>
+            </div>
+            <div className="grid grid-cols-3">
                 {examples.map((_, index) => (
                     <Example 
                     key={index}
