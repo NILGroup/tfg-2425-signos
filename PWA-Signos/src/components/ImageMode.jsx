@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import Videos from "./Videos.jsx";
 import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
+import QuestionIcon from '../assets/question.svg'
+import stemToSignotation from "../translator/stemTranslator.js";
 
 const ImageMode = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -10,10 +12,11 @@ const ImageMode = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+  const [moreInfoVisible, setMoreInfoVisible] = useState(null);
 
   return (
-
-    <div className="flex flex-col items-center gap-20">
+    <div>
+    <div className={`flex flex-col items-center gap-20 ${moreInfoVisible ? "blur-sm" : ""}`}>
       <ExplText selectedFile={selectedFile}/>
 
       <SignotationText signotationText={signotationText} isLoading={isLoading}/>
@@ -27,6 +30,8 @@ const ImageMode = () => {
             <SelectImageButton setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
             
             <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} setIsLoading={setIsLoading} setVideos={setVideos}/>
+
+            <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/>
           
           </div>
         </div>
@@ -36,6 +41,9 @@ const ImageMode = () => {
         <Videos videos={videos} isLoading={isLoading}/> 
         
       </div>
+    </div>
+
+    {moreInfoVisible && <MoreInfoCard/>}
     </div>
   );
 };
@@ -98,7 +106,31 @@ const SelectImageButton = ({setSelectedFile, setSignotationText, setVideos, setS
               <img src={uploadIcon} alt="Upload Icon" className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
-    )
+    );
+}
+
+const MoreInfoCard = () => {
+  return (
+    <div className="h-100 w-100 bg-blue-50 rounded-lg">
+      <h1>Traduciendo la signoescritura</h1>
+    </div>
+  )
+}
+
+const MoreInfoButton = ({setMoreInfoVisible}) => {
+
+  const handleMoreInfoClick = () => {
+    setMoreInfoVisible(true);
+  }
+
+  return (
+    <>
+    {/*More infgo buttton*/}
+    <button onClick={handleMoreInfoClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+        <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
+     </button>
+    </>  
+  );
 }
 
 const Loading = ({isLoading}) => {
