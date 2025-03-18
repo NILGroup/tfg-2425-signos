@@ -73,12 +73,14 @@ const SelectImageButton = ({setSelectedFile, setSignotationText, setVideos, setS
 
     const handleFileSelect = (event) => {
         const file = event.target.files[0];
-        setSelectedFile(file);
-        setSignotationText(null);
-        setVideos(null);
-        setSelectedImage(URL.createObjectURL(file));
-        setSelectedImageName(file.name);
-      };
+        if(file){
+          setSelectedFile(file);
+          setSignotationText(null);
+          setVideos(null);
+          setSelectedImage(URL.createObjectURL(file));
+          setSelectedImageName(file.name);
+        }  
+    };
 
     return (
         <>
