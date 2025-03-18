@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import SwitchMode from './components/SwitchMode.jsx'
+import Examples from './components/Examples.jsx'
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
         <h1 className="text-4xl text-center text-[#4682A9] font-bold"> Traduciendo la SignoEscritura </h1>
         <hr className="mx-4 mt-3 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
       </div>
-      <SwitchMode className="theme-switcher"/>
+      {/* <SwitchMode className="theme-switcher"/> */}
+      <Examples />
     </>
   )
 }
