@@ -2,7 +2,7 @@ import React from "react";
 import { useRef } from "react";
 
 const Videos = ({videos, isLoading}) => {
-    {videos && !isLoading && (
+    return (<>{videos && !isLoading && (
         <div className="border-4 border-[#4682A9] rounded-xl w-250 h-127 overflow-hidden">
           <div className="flex flex-col overflow-y-scroll h-full 
                   [&::-webkit-scrollbar]:w-1.5
@@ -21,6 +21,7 @@ const Videos = ({videos, isLoading}) => {
           </div>
         </div>
       )}
+      </>)
 }
 
 const Video = ({ index, lastIndex, info}) => {
@@ -31,7 +32,7 @@ const Video = ({ index, lastIndex, info}) => {
                         video.current.currentTime=0;};
 
     return (
-        <div onClick={() => updateSelected(index)} onMouseEnter={play} onMouseLeave={stop}
+        <div onMouseEnter={play} onMouseLeave={stop}
         className={`flex flex-row
                     ${index !== lastIndex ? "border-solid border-b-4 border-[#4682A9]" : ""}`}>
             
