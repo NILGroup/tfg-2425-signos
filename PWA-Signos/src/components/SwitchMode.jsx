@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import ImageMode from './ImageMode.jsx'
 import Canvas from './Canvas.jsx'
 

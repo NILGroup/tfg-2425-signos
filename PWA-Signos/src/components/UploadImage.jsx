@@ -1,4 +1,3 @@
-import { useState, useRef } from "react";
 import responseToSignotation from '../translator/LSETranslator.js'
 import checkIcon from '../assets/check.svg';
 
