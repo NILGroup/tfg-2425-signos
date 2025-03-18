@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import Video from "./Video.jsx";
+import Videos from "./Videos.jsx";
 import responseToSignotation from '../translator/LSETranslator.js'
 import uploadIcon from '../assets/upload-image.svg';
 import checkIcon from '../assets/check.svg'
@@ -14,7 +14,7 @@ const UploadImage = () => {
   const [signotationText, setSignotationText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
   const input = useRef(null);
 
   const handleFileSelect = (event) => {
@@ -28,7 +28,7 @@ const UploadImage = () => {
 
   const uploadImage = async (image) => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       const response = await fetch(
         VISSE_BACKEND_URL /*"http://localhost:3999/recognize/raw"*/,
         {
@@ -58,7 +58,7 @@ const UploadImage = () => {
       console.error("Error uploading file:", error);
     }
     finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -73,14 +73,9 @@ const UploadImage = () => {
   return (
 
     <div className="flex flex-col items-center gap-20">
+      <ExplText selectedFile={selectedFile}/>
 
-      {!selectedFile && <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
-                        <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
-
-      {signotationText && !loading && <div className="flex flex-col gap-4 mt-10"> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotationText}</h1> 
-              </div> }
+      <SignotationText signotationText={signotationText} isLoading={isLoading}/>
     
       <div className="flex flex-row gap-30 mt-20">
         <div className="flex flex-col gap-4">
@@ -112,50 +107,55 @@ const UploadImage = () => {
           </div>
         </div>
 
-        {loading && (
-          <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
-            <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
-              <circle
-                className="stroke-current"
-                cx="25"
-                cy="25"
-                r="20"
-                fill="none"
-                strokeWidth="5"
-                strokeLinecap="round"
-                strokeDasharray="80, 200"
-                strokeDashoffset="0"
-              ></circle>
-            </svg>
-            Cargando vídeos...
-          </h1>
-        )}
+        <Loading isLoading={isLoading}/>
 
-        {videos && !loading && (
-          <div className="border-4 border-[#4682A9] rounded-xl w-250 h-127 overflow-hidden">
-            <div className="flex flex-col overflow-y-scroll h-full 
-                    [&::-webkit-scrollbar]:w-1.5
-                    [&::-webkit-scrollbar-track]:rounded-full
-                    [&::-webkit-scrollbar-track]:bg-neutral-700
-                    [&::-webkit-scrollbar-thumb]:rounded-full
-                    [&::-webkit-scrollbar-thumb]:bg-neutral-500">
-              {videos.map((_, index) => (
-                <Video 
-                  key={index}
-                  index={index}
-                  lastIndex={videos.length - 1}
-                  info={videos[index]}
-                  updateSelected={setSelectedVideo}
-                  selectedVideo={selectedVideo}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        <Videos videos={videos} isLoading={isLoading}/> 
         
       </div>
     </div>
   );
 };
+
+const ExplText = ({selectedFile}) => {
+  return (
+  <>
+    {!selectedFile && 
+    <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
+    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
+  </>
+  )
+}
+
+const SignotationText = ({signotationText, isLoading}) => {
+  return (
+    <>
+    {signotationText && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotationText}</h1> 
+              </div> }
+    </>
+  )
+}
+
+const Loading = ({isLoading}) => {
+  {isLoading && (
+    <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
+      <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
+        <circle
+          className="stroke-current"
+          cx="25"
+          cy="25"
+          r="20"
+          fill="none"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeDasharray="80, 200"
+          strokeDashoffset="0"
+        ></circle>
+      </svg>
+      Cargando vídeos...
+    </h1>
+  )}
+}
 
 export default UploadImage;
