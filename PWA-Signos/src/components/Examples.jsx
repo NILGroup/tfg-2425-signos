@@ -4,6 +4,8 @@ import profesorSign from '../examples/profesor.png'
 import alicanteSign from '../examples/alicante.png'
 import narizSign from '../examples/nariz.png'
 import hartoSign from '../examples/harto.png'
+import duracionSign from '../examples/duracion.png'
+import SwitchMode from './SwitchMode'
 
 const handleBack = () => {
     return; // FALTA POR HACER
@@ -20,7 +22,7 @@ const Examples = () => {
     const [selectedExample, setSelectedExample] = useState(null);
 
     const examples = [[profesorSign, "Profesor"], [alicanteSign, "Alicante"], [narizSign, "Nariz"],
-                        [hartoSign, "Harto"]];
+                        [hartoSign, "Harto"], [duracionSign, "Duración"]];
 
     return (
         <div>
@@ -28,7 +30,7 @@ const Examples = () => {
                 <button onClick={handleBack} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-18 h-18 cursor-pointer ml-25">
                     <img src={backIcon} alt="Go back Icon" className="group-hover:brightness-0 group-hover:invert h-13 w-14"/>
                 </button>
-                <h1 className="text-center text-[#4682A9] font-bold text-3xl">Ejemplos</h1>
+                <h1 className="text-center text-[#4682A9] font-bold text-3xl ml-180">Ejemplos</h1>
             </div>
             <div className="grid grid-cols-3">
                 {examples.map((_, index) => (
