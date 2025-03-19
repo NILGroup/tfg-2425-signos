@@ -16,7 +16,7 @@ const SwitchMode = ({isChecked, changeMode}) => {
         <div className='shadow-card flex flex-col h-[82px] w-[46px] items-center justify-center rounded-md bg-white'>
           {/* Primer SVG */}
           <span
-            className={`flex h-9 w-9 rounded ${isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
+            className={`flex h-9 w-9 rounded ${!isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
           >
 
           <svg width="36px"
@@ -44,7 +44,7 @@ const SwitchMode = ({isChecked, changeMode}) => {
 
           {/* Segundo SVG */}
           <span
-            className={`flex h-9 w-9 rounded ${!isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
+            className={`flex h-9 w-9 rounded ${isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
           >
             <svg
               width="36px"

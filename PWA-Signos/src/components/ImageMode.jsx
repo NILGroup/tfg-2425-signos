@@ -14,40 +14,40 @@ const ImageMode = () => {
   const [moreInfoVisible, setMoreInfoVisible] = useState(null);
 
   return (
-    <div>
-    <div className={`flex flex-col items-center gap-20 ${moreInfoVisible ? "blur-sm" : ""}`}>
-      <ExplText selectedFile={selectedFile}/>
+    <div className="h-screen w-screen">
+      <div className={`flex flex-col items-center ${moreInfoVisible ? "blur-sm" : ""}`}>
+        <ExplText  selectedFile={selectedFile}/>
 
-      <SignotationText signotationText={signotationText} isLoading={isLoading}/>
-    
-      <div className="flex flex-row gap-30 mt-20">
-        <div className="flex flex-col gap-4">
-          <Image selectedImage={selectedImage} selectedImageName={selectedImageName}/>
+        <SignotationText signotationText={signotationText} isLoading={isLoading}/>
+      
+        <div className="bottom-12 flex flex-row gap-30 mt-20">
+          <div className="flex flex-col gap-4">
+            <Image selectedImage={selectedImage} selectedImageName={selectedImageName}/>
 
-          <div className="flex justify-center gap-10">
+            <div className="flex justify-center gap-10">
+              
+              <SelectImageButton setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
+              
+              <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} setIsLoading={setIsLoading} setVideos={setVideos}/>
+
+              <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/>
             
-            <SelectImageButton setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
-            
-            <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} setIsLoading={setIsLoading} setVideos={setVideos}/>
-
-            <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/>
-          
+            </div>
           </div>
+
+          <Loading isLoading={isLoading}/>
+
+          <Videos videos={videos} isLoading={isLoading}/> 
+          
         </div>
-
-        <Loading isLoading={isLoading}/>
-
-        <Videos videos={videos} isLoading={isLoading}/> 
-        
       </div>
-    </div>
     
-    {moreInfoVisible && (
-  <div className="absolute flex justify-center items-center">
-    <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
-    <MoreInfoCard />
-  </div>
-)}
+      {moreInfoVisible && (
+      <div className="absolute flex justify-center items-center">
+        <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
+        <MoreInfoCard />
+      </div>
+      )}
 
     </div>
   );
