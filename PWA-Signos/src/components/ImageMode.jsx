@@ -14,7 +14,7 @@ const ImageMode = () => {
   const [moreInfoVisible, setMoreInfoVisible] = useState(null);
 
   return (
-    <div className="h-screen w-screen">
+    <>
       <div className={`flex flex-col items-center ${moreInfoVisible ? "blur-sm" : ""}`}>
         <ExplText  selectedFile={selectedFile}/>
 
@@ -49,7 +49,7 @@ const ImageMode = () => {
       </div>
       )}
 
-    </div>
+    </>
   );
 };
 

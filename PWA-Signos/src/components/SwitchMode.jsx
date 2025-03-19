@@ -6,27 +6,18 @@ const SwitchMode = ({isChecked, changeMode}) => {
 
   return (
     <>
-      <label className='absolute left-5 top-1/2 cursor-pointer items-center'>
-        <input
-          type='checkbox'
-          checked={isChecked}
-          onChange={handleModeChange}
-          className='sr-only'
-        />
-        <div className='shadow-card flex flex-col h-[82px] w-[46px] items-center justify-center rounded-md bg-white'>
-          {/* Primer SVG */}
-          <span
-            className={`flex h-9 w-9 rounded ${!isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
-          >
-
-          <svg width="36px"
+      <section className="pb-10 pt-20 lg:pb-20 lg:pt-[120px] dark:bg-dark">
+      <div >
+        <div className="flex justify-center">
+          <div className="border-4 rounded-xl border-[#4682A9] border-solid inline-flex items-center overflow-hidden">
+            <button className={`group border-[#4682A9] border-r-4 border-stroke px-4 py-3 text-base font-medium text-dark last-of-type:border-r-0 hover:cursor-pointer ${isChecked ? "bg-[#4682A9]" : ""}`}>
+            <svg width="36px"
            height="36px"
             viewBox="-0.5 -0.5 25 25"
              fill="none"
               xmlns="http://www.w3.org/2000/svg"
               stroke="#4682A9"
-              //className={`${!isChecked ? 'hidden' : ''}`} // Ocultar cuando está checked
-              >
+              className={`${isChecked ? "group-hover:brightness-0 group-hover:invert" : ""}`}>
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
           <g id="SVGRepo_iconCarrier">
@@ -40,19 +31,14 @@ const SwitchMode = ({isChecked, changeMode}) => {
               </path> 
               </g>
           </svg>
-          </span>
-
-          {/* Segundo SVG */}
-          <span
-            className={`flex h-9 w-9 rounded ${isChecked ? 'bg-[#A5BFCC] text-white' : 'text-body-color'}`}
-          >
+            </button>
+            <button className={`border-[#4682A9] border-r-4 border-stroke px-4 py-3 text-base font-medium text-dark last-of-type:border-r-0 hover:cursor-pointer ${!isChecked ? "bg-[#4682A9]" : ""}`}>
             <svg
               width="36px"
               height="36px"
               viewBox="0 -0.5 25 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              //className={`${isChecked ? 'hidden' : ''}`} // Ocultar cuando está checked
             >
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
@@ -72,9 +58,11 @@ const SwitchMode = ({isChecked, changeMode}) => {
                 ></path>
               </g>
             </svg>
-          </span>
-        </div>  
-      </label>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
     </>
   )
 }

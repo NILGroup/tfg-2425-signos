@@ -11,9 +11,9 @@ function App() {
 
   return (
     <>
-     <div className='mt-2 mb-4'>
-        <h1 className="text-4xl text-center text-[#4682A9] font-bold"> Traduciendo la SignoEscritura </h1>
-        <hr className="mx-4 mt-3 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
+     <div className='mt-4 mb-4'>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-center text-[#4682A9] font-bold"> Traduciendo la SignoEscritura </h1>
+        <hr className="mx-2 mt-2.5  lg:mx-4 lg:mt-4 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
       </div>
       <SwitchMode isChecked={isCanvasVisible} changeMode={setIsCanvasVisible}/>
       {mode(isCanvasVisible)}
