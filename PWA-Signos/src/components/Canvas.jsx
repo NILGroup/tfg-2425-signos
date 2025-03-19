@@ -66,7 +66,7 @@ const Canvas = () => {
     }, []);
 
     return (
-        <div className="justify-center items-center flex flex-col">
+        <div className="justify-center items-center flex flex-col ml-8">
             <canvas ref={canvasRef} className="h-140 bg-[#FFFFFF] my-10 " id="canvas" />
             <div ref={toolbarRef} id="toolbar" className="flex flex-row gap-10">
                 <button id="clear" className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">

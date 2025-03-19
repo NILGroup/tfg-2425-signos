@@ -2,8 +2,7 @@ import { useState, useRef } from "react";
 import Videos from "./Videos.jsx";
 import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
-import QuestionIcon from '../assets/question.svg'
-import stemToSignotation from "../translator/stemTranslator.js";
+import QuestionIcon from '../assets/question.svg';
 
 const ImageMode = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -42,8 +41,14 @@ const ImageMode = () => {
         
       </div>
     </div>
+    
+    {moreInfoVisible && (
+  <div className="absolute flex justify-center items-center">
+    <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
+    <MoreInfoCard />
+  </div>
+)}
 
-    {moreInfoVisible && <MoreInfoCard/>}
     </div>
   );
 };
@@ -131,6 +136,20 @@ const MoreInfoButton = ({setMoreInfoVisible}) => {
      </button>
     </>  
   );
+}
+
+const BackButton = ({setMoreInfoVisible}) => {
+  const handleBackButtonClick = () => {
+    setMoreInfoVisible(false);
+  }
+
+  return (
+    <>
+    {/*More infgo buttton*/}
+    <button onClick={handleBackButtonClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+        <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
+     </button>
+    </> );
 }
 
 const Loading = ({isLoading}) => {

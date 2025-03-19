@@ -1,21 +1,16 @@
-import { useState } from 'react'
-import ImageMode from './ImageMode.jsx'
-import Canvas from './Canvas.jsx'
+const SwitchMode = ({isChecked, changeMode}) => {
 
-
-const SwitchMode = () => {
-  const [isChecked, setIsChecked] = useState(true)
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked)
+  const handleModeChange = () => {
+    changeMode(!isChecked)
   }
 
   return (
-    <div className='flex flex-row mx-2 justify-center'>
-      <label className='absolute left-4 top-1/2 cursor-pointer items-center'>
+    <>
+      <label className='absolute left-5 top-1/2 cursor-pointer items-center'>
         <input
           type='checkbox'
           checked={isChecked}
-          onChange={handleCheckboxChange}
+          onChange={handleModeChange}
           className='sr-only'
         />
         <div className='shadow-card flex flex-col h-[82px] w-[46px] items-center justify-center rounded-md bg-white'>
@@ -80,19 +75,8 @@ const SwitchMode = () => {
           </span>
         </div>  
       </label>
- 
-      {mode(isChecked)}
-      
-    </div>
+    </>
   )
 }
 
-const mode = (isChecked) => {
-  if (isChecked) {
-    return <ImageMode/>;
-  } else {
-    return <Canvas />;
-  }
-}
-
-export default SwitchMode
+export default SwitchMode;
