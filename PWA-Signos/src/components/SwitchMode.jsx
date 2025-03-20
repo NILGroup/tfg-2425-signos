@@ -6,9 +6,10 @@ const SwitchMode = ({isChecked, changeMode}) => {
 
   return (
     <div className="absolute left-5 top-1/2 flex flex-col items-center justify-center">
-            <button onClick={handleModeChange} className={`border-4 rounded-t-xl border-[#4682A9] border-solid px-4 py-3 hover:cursor-pointer ${!isChecked ? "bg-[#4682A9]" : "border-b-4 "}`}>
-            <svg width="36px"
-           height="36px"
+            <button onClick={handleModeChange} className={`border-4 rounded-t-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${!isChecked ? "bg-[#4682A9]" : "border-b-4 "}`}>
+            <svg className="h-[26px] w-[26px] md:h-[32px] md:w-[32px] lg:h-[36px] lg:w-[36px]"
+          //   width="36px"
+          //  height="36px"
             viewBox="-0.5 -0.5 25 25"
              fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -27,10 +28,8 @@ const SwitchMode = ({isChecked, changeMode}) => {
               </g>
           </svg>
             </button>
-            <button onClick={handleModeChange} className={`border-4 rounded-b-xl border-[#4682A9] border-solid px-4 py-3 hover:cursor-pointer ${isChecked ? "bg-[#4682A9]" : "border-t-4"}`}>
-            <svg
-              width="36px"
-              height="36px"
+            <button onClick={handleModeChange} className={`border-4 rounded-b-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${isChecked ? "bg-[#4682A9]" : "border-t-4"}`}>
+            <svg className="h-[26px] w-[26px] md:h-[32px] md:w-[32px] lg:h-[36px] lg:w-[36px]"
               viewBox="0 -0.5 25 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
