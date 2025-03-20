@@ -15,7 +15,7 @@ const ImageMode = ({moreInfoVisible, setMoreInfoVisible}) => {
   return (
     <>
       {/* Main Content */}
-      <div className={`relative flex flex-col items-center ml-15 mr-2 lg:ml-25 lg:mr-10 transition duration-300 ${moreInfoVisible ? "blur-sm" : ""}`}>
+      <div className={`relative flex flex-col h-full items-center ml-15 mr-2 lg:ml-25 lg:mr-10 transition duration-300 ${moreInfoVisible ? "blur-sm" : ""}`}>
         <ExplText selectedFile={selectedFile} />
   
         <SignotationText signotationText={signotationText} isLoading={isLoading} />

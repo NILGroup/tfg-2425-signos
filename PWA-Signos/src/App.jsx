@@ -26,7 +26,7 @@ const mode = (isCanvasVisible, moreInfoVisible, setMoreInfoVisible) => {
   if (isCanvasVisible)
     return <Canvas/>;
   
-    return <ImageMode moreInfoVisible={moreInfoVisible} setMoreInfoVisible={setMoreInfoVisible}/>;
+  return <ImageMode moreInfoVisible={moreInfoVisible} setMoreInfoVisible={setMoreInfoVisible}/>;
   
 }
 
