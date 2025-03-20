@@ -9,8 +9,8 @@ const SwitchMode = ({isChecked, changeMode}) => {
       <section className="pb-10 pt-20 lg:pb-20 lg:pt-[120px] dark:bg-dark">
       <div >
         <div className="flex justify-center">
-          <div className="border-4 rounded-xl border-[#4682A9] border-solid inline-flex items-center overflow-hidden">
-            <button onClick={handleModeChange} className={`border-[#4682A9] border-stroke px-4 py-3 hover:cursor-pointer ${!isChecked ? "bg-[#4682A9]" : "border-r-4 "}`}>
+          <div className="inline-flex items-center overflow-hidden">
+            <button onClick={handleModeChange} className={`border-4 rounded-l-xl border-[#4682A9] border-solid px-4 py-3 hover:cursor-pointer ${!isChecked ? "bg-[#4682A9]" : "border-r-4 "}`}>
             <svg width="36px"
            height="36px"
             viewBox="-0.5 -0.5 25 25"
@@ -31,7 +31,7 @@ const SwitchMode = ({isChecked, changeMode}) => {
               </g>
           </svg>
             </button>
-            <button onClick={handleModeChange} className={`border-[#4682A9] border-stroke px-4 py-3 hover:cursor-pointer ${isChecked ? "bg-[#4682A9]" : "border-l-4"}`}>
+            <button onClick={handleModeChange} className={`border-4 rounded-r-xl border-[#4682A9] border-solid px-4 py-3 hover:cursor-pointer ${isChecked ? "bg-[#4682A9]" : "border-l-4"}`}>
             <svg
               width="36px"
               height="36px"
