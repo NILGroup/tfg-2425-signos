@@ -4,51 +4,59 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = () => {
+const ImageMode = ({moreInfoVisible, setMoreInfoVisible}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [videos, setVideos] = useState(null);
   const [signotationText, setSignotationText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const [moreInfoVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
-      <div className={`flex flex-col items-center ${moreInfoVisible ? "blur-sm" : ""}`}>
-        <ExplText  selectedFile={selectedFile}/>
-
-        <SignotationText signotationText={signotationText} isLoading={isLoading}/>
-      
+      {/* Main Content */}
+      <div className={`relative flex flex-col items-center ml-15 mr-2 lg:ml-25 lg:mr-10 transition duration-300 ${moreInfoVisible ? "blur-sm" : ""}`}>
+        <ExplText selectedFile={selectedFile} />
+  
+        <SignotationText signotationText={signotationText} isLoading={isLoading} />
+  
         <div className="bottom-12 flex flex-row gap-30 mt-20">
           <div className="flex flex-col gap-4">
-            <Image selectedImage={selectedImage} selectedImageName={selectedImageName}/>
-
+            <Image selectedImage={selectedImage} selectedImageName={selectedImageName} />
+  
             <div className="flex justify-center gap-10">
-              
-              <SelectImageButton setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
-              
-              <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} setIsLoading={setIsLoading} setVideos={setVideos}/>
-
-              <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/>
-            
+              <SelectImageButton
+                setSelectedFile={setSelectedFile}
+                setSignotationText={setSignotationText}
+                setVideos={setVideos}
+                setSelectedImage={setSelectedImage}
+                setSelectedImageName={setSelectedImageName}
+              />
+  
+              <UploadImage
+                selectedFile={selectedFile}
+                setSignotationText={setSignotationText}
+                setIsLoading={setIsLoading}
+                setVideos={setVideos}
+              />
+  
+              <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible} />
             </div>
           </div>
-
-          <Loading isLoading={isLoading}/>
-
-          <Videos videos={videos} isLoading={isLoading}/> 
-          
+  
+          <Loading isLoading={isLoading} />
+  
+          <Videos videos={videos} isLoading={isLoading} />
         </div>
       </div>
-    
+  
+      {/* Overlay for More Info */}
       {moreInfoVisible && (
-      <div className="absolute flex justify-center items-center">
-        <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
-        <MoreInfoCard />
-      </div>
+        <div className="fixed inset-0 flex justify-center items-center z-50">
+          <BackButton setMoreInfoVisible={setMoreInfoVisible} />
+          <MoreInfoCard />
+        </div>
       )}
-
     </>
   );
 };
@@ -57,7 +65,7 @@ const ExplText = ({selectedFile}) => {
   return (
   <>
     {!selectedFile && 
-    <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
+    <div className="flex flex-col gap-10 mt-15 lg:mt-50 w-full"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
     <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
   </>
   )

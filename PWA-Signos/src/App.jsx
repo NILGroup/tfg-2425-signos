@@ -7,7 +7,8 @@ import Canvas from './components/Canvas.jsx'
 
 function App() {
   // Change mode between Upload images and Canvas
-  const [isCanvasVisible, setIsCanvasVisible] = useState(false)
+  const [isCanvasVisible, setIsCanvasVisible] = useState(false);
+  const [moreInfoVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
@@ -15,17 +16,17 @@ function App() {
         <h1 className="text-2xl sm:text-3xl lg:text-4xl text-center text-[#4682A9] font-bold"> Traduciendo la SignoEscritura </h1>
         <hr className="mx-2 mt-2.5  lg:mx-4 lg:mt-4 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
       </div>
-      <SwitchMode isChecked={isCanvasVisible} changeMode={setIsCanvasVisible}/>
-      {mode(isCanvasVisible)}
+      <SwitchMode moreInfoVisible={moreInfoVisible} isChecked={isCanvasVisible} changeMode={setIsCanvasVisible}/>
+      {mode(isCanvasVisible, moreInfoVisible, setMoreInfoVisible)}
     </>
   )
 }
 
-const mode = (isCanvasVisible) => {
+const mode = (isCanvasVisible, moreInfoVisible, setMoreInfoVisible) => {
   if (isCanvasVisible)
-    return <Canvas />;
+    return <Canvas/>;
   
-    return <ImageMode/>;
+    return <ImageMode moreInfoVisible={moreInfoVisible} setMoreInfoVisible={setMoreInfoVisible}/>;
   
 }
 
