@@ -33,9 +33,9 @@ const classifyGraphemes = (response, graphemes) => {
     });
 };
 
-const groupSignotation = (graphemes) => {
+const groupSignotation = (graphemes, diacsInfo) => {
     let signotation = "";
-    let numAppearances = 0;
+    let rep = false;
 
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
@@ -44,18 +44,13 @@ const groupSignotation = (graphemes) => {
                 (graphemes["HEAD"].length == 0 || graphemes["HEAD"][0]["tags"]["SIGNOTATION"] === undefined)
                     ? ""
                     : ":" + graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
-			graphemes["DIAC"].forEach((diac) => {
-                if (numAppearances == 0 && diac["tags"]["SIGNOTATION"] === '*'){
-                    numAppearances++;
-                    signotation += ":" + diac["tags"]["SIGNOTATION"];
+
+            for(diac in diacsInfo){
+                if(diacsInfo[diac]["numApps"] > 1){
+                    rep = true;
                 }
-                else if (numAppearances > 0 && diac["tags"]["SIGNOTATION"] === '*')
-                    numAppearances++;
-                else // All diacs that are not asterisks
-                    signotation += ":" + diac["tags"]["SIGNOTATION"];
-                
-                
-			});
+                signotation += ":" + diacsInfo[diac]["signotation"];
+            }
 			graphemes["STEM"].forEach((stem) => {
 				signotation += ":" + stem["tags"]["SIGNOTATION"];
                 if (stem["tags"]["REP"])
@@ -68,7 +63,7 @@ const groupSignotation = (graphemes) => {
                     numAppearances = 2;
 			});
 
-            if (numAppearances > 1)
+            if (rep)
                 signotation += ":R"; 
             break;
         case 2: // There are 2 hands
@@ -89,6 +84,9 @@ const responseToSignotation = (response) => {
         STEM: [],
         ARC: [],
     };
+
+    const diacsInfo = {};
+
     classifyGraphemes(response["graphemes"], graphemes);
 
     console.log(graphemes);
@@ -96,7 +94,7 @@ const responseToSignotation = (response) => {
         headToSignotation(grapheme["tags"]);
     });
 
-    graphemes["DIAC"].forEach((grapheme) => {
+    graphemes["DIAC"].forEach((grapheme, diacsInfo) => {
         diacToSignotation(grapheme["tags"]);
     });
 
@@ -112,7 +110,7 @@ const responseToSignotation = (response) => {
         arcToSignotation(grapheme, graphemes["ARRO"]);
     });
 
-	let r = groupSignotation(graphemes);
+	let r = groupSignotation(graphemes, diacsInfo);
 	console.log(r);
     return r;
 };

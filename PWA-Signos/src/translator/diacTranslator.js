@@ -1,5 +1,5 @@
 
-const diacToSignotation = (diac) => {
+const diacToSignotation = (diac, diacsInfo) => {
     const diac_shape = {
       touch: "*",
       inter: "*",
@@ -20,7 +20,12 @@ const diacToSignotation = (diac) => {
       altern: "~",
     };
 
-    diac["SIGNOTATION"] = diac_shape[diac["SHAPE"]];
+    if(!(diac["SHAPE"] in diacsInfo)){
+      diacsInfo[diac["SHAPE"]] = {"numApps": 1, "signotation": diac_shape[diac["SHAPE"]]};
+
+    }
+    else
+      diacsInfo[diac["SHAPE"]]++;
 };
 
 export default diacToSignotation;
