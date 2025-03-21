@@ -15,13 +15,16 @@ const incompleteArcs = (arc, arros) => {
       dir = shape === "s" ? "F" : "H";
       if (arro1 === undefined && arro2 === undefined)
         return ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = "X";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "Y";
         rep = arro2[1];
+      }
+      else{
+        coda = "X";
+        rep = true;
       }
       break;
     case "NE":
@@ -31,13 +34,16 @@ const incompleteArcs = (arc, arros) => {
       dir = shape === "s" ? "FY" : "HY";
       if (arro1 === undefined && arro2 === undefined)
         return ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "Y";           // Y o B/L ?
         rep = arro2[1];
+      }
+      else { // Arrow on both sides
+        coda = shape === "s" ? "F" : "H";
+        rep = true;
       }
       break;
     case "E":
@@ -47,13 +53,17 @@ const incompleteArcs = (arc, arros) => {
       dir = "Y";
       if (arro1 === undefined && arro2 === undefined)
         return  ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
+      
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = shape === "s" ? "B" : "L";
         rep = arro2[1];
+      }
+      else {
+        coda = shape === "s" ? "F" : "H";
+        rep = true;
       }
       break;
     case "SE":
@@ -63,13 +73,17 @@ const incompleteArcs = (arc, arros) => {
       dir = shape === "s" ? "BY" : "LY";
       if (arro1 === undefined && arro2 === undefined)
         return  ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
+      
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "B" : "L";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "Y";
         rep = arro2[1];
+      }
+      else{
+        coda = shape === "s" ? "B" : "L";
+        rep = true;
       }
       break;
     case "S":
@@ -79,13 +93,17 @@ const incompleteArcs = (arc, arros) => {
       dir = shape === "s" ? "B" : "L";
       if (arro1 === undefined && arro2 === undefined)
         return  ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
+      
       if (arro1 != undefined && arro2 === undefined) {
         coda = "Y";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "X";
         rep = arro2[1];
+      }
+      else{
+        coda = "Y";
+        rep = true;
       }
       break;
     case "SW":
@@ -95,13 +113,17 @@ const incompleteArcs = (arc, arros) => {
       dir = shape === "s" ? "BX" : "LX";
       if (arro1 === undefined && arro2 === undefined)
         return  ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
+      
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "B" : "L";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "X";
         rep = arro2[1];
+      }
+      else{
+        coda = shape === "s" ? "B" : "L";
+        rep = true;
       }
       break;
     case "W":
@@ -111,13 +133,17 @@ const incompleteArcs = (arc, arros) => {
       dir = "X";
       if (arro1 === undefined && arro2 === undefined)
         return  ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
+      
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = shape === "s" ? "B" : "L";
         rep = arro2[1];
+      }
+      else{
+        coda = shape === "s" ? "F" : "H";
+        rep = true;
       }
       break;
     case "NW":
@@ -127,13 +153,17 @@ const incompleteArcs = (arc, arros) => {
       dir = shape === "s" ? "FX" : "HX";
       if (arro1 === undefined && arro2 === undefined)
         return  ["(" + dir + ")", rep];
-      // Caso de que haya flecha a ambos lados PENDIENTE
+      
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
         rep = arro1[1];
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "X";
         rep = arro2[1];
+      }
+      else{
+        coda = shape === "s" ? "F" : "H";
+        rep = true;
       }
       break;
     default:
@@ -151,7 +181,7 @@ const fullArcs = (arc, arros) => {
   let ini = "", dir = "";
   let rep = false;
 
-  // El movimiento es un circulo completo
+  // Movement is a full arc
   switch (rot) {
     case "N":
     case "NE":
