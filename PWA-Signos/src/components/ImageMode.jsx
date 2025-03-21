@@ -4,18 +4,18 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = () => {
+const ImageMode = ({isLoading, helpVisible, dispatch}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [videos, setVideos] = useState(null);
   const [signotationText, setSignotationText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const [moreInfoVisible, setMoreInfoVisible] = useState(null);
+  const [helpVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
-      <div className={`flex flex-col items-center ${moreInfoVisible ? "blur-sm" : ""}`}>
+      <div className={`flex flex-col items-center ${helpVisible ? "blur-sm" : ""}`}>
         <ExplText  selectedFile={selectedFile}/>
 
         <SignotationText signotationText={signotationText} isLoading={isLoading}/>
@@ -42,7 +42,7 @@ const ImageMode = () => {
         </div>
       </div>
     
-      {moreInfoVisible && (
+      {helpVisible && (
       <div className="absolute flex justify-center items-center">
         <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
         <MoreInfoCard />
