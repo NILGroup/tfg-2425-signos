@@ -1,3 +1,7 @@
+
+
+
+
 const SwitchMode = ({ screen, dispatch }) => {
     const handleModeChange = () => {
         if (screen === "canvas_screen") 

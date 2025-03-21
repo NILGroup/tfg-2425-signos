@@ -4,12 +4,10 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = ({isLoading, helpVisible, dispatch}) => {
+const ImageMode = ({isLoading, helpVisible, image, dispatch}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [videos, setVideos] = useState(null);
   const [signotationText, setSignotationText] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedImageName, setSelectedImageName] = useState(null);
   //const [helpVisible, setMoreInfoVisible] = useState(null);
 
   return (
@@ -21,13 +19,13 @@ const ImageMode = ({isLoading, helpVisible, dispatch}) => {
       
         <div className="bottom-12 flex flex-row gap-30 mt-20">
           <div className="flex flex-col gap-4">
-            <Image selectedImage={selectedImage} selectedImageName={selectedImageName}/>
+            <Image selectedImage={URL.createObjectURL(image)} selectedImageName={image.name}/>
 
             <div className="flex justify-center gap-10">
               
-              <SelectImageButton setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
+              <SelectImageButton dispatch={dispatch} setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
               
-              <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} dispatch={dispatch} setVideos={setVideos}/>
+              <UploadImage dispatch={dispatch} selectedFile={selectedFile} setSignotationText={setSignotationText} dispatch={dispatch} setVideos={setVideos}/>
 
               {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
             
@@ -73,24 +71,20 @@ const SignotationText = ({signotationText, isLoading}) => {
   )
 }
 
-const Image = ({selectedImage, selectedImageName}) => {
-    return (<>{selectedImage && <div className="flex flex-col gap-1"> 
-        <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={selectedImage} alt="Signoescritura"/> 
-        <p className="text-[#4682A9] font-bold text-lg"> {selectedImageName} </p> 
+const Image = ({image, imageName}) => {
+    return (<>{image && <div className="flex flex-col gap-1"> 
+        <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }
 
-const SelectImageButton = ({setSelectedFile, setSignotationText, setVideos, setSelectedImage, setSelectedImageName}) => {
+const SelectImageButton = ({dispatch}) => {
     const input = useRef(null);
 
     const handleFileSelect = (event) => {
         const file = event.target.files[0];
         if(file){
-          setSelectedFile(file);
-          setSignotationText(null);
-          setVideos(null);
-          setSelectedImage(URL.createObjectURL(file));
-          setSelectedImageName(file.name);
+          dispatch({type: 'select_image', image: file});
         }  
     };
 

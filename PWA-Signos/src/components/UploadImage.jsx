@@ -4,7 +4,7 @@ import checkIcon from '../assets/check.svg';
 const VISSE_BACKEND_URL = "https://holstein.fdi.ucm.es/visse/backend/recognize/raw";
 const SIGNARIO_URL = "https://griffos.filol.ucm.es/signario/buscar?";
 
-const UploadImage = ({selectedFile, setSignotationText, setIsLoading, setVideos}) => {
+const UploadImage = ({dispatch}) => {
 
   const uploadImage = async (image) => {
     try {

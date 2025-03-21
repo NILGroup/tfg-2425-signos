@@ -8,7 +8,10 @@ const INITIAL_STATE = {
   screen: 'image_screen',
   isLoading: false,
   helpVisible: false,
-  switcherVisible: true
+  switcherVisible: true,
+  image: null,
+  signotation: null,
+  videos: null,
 }
 
 const reducer = (state, action) => {
@@ -18,13 +21,13 @@ const reducer = (state, action) => {
     case 'image_mode':
       return { ...state, screen: 'image_screen' }
     case 'select_image':
-      return { ...state, isCanvasVisible: action.payload }
+      return { ...state,  image: action.image}
     case 'upload_image':
-      return { ...state, isCanvasVisible: action.payload }
+      return { ...state}
     case 'signario_response':
-      return { ...state, isCanvasVisible: action.payload }
+      return { ...state }
     case 'error_response':
-      return { ...state, isCanvasVisible: action.payload }
+      return { ...state }
     case 'show_examples':
       return { ...state, screen: 'examples_screen', switcherVisible: false }
     case 'hide_examples':
@@ -45,6 +48,7 @@ const reducer = (state, action) => {
 function App() {
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+
   // // Change mode between Upload images and Canvas
   // const [isCanvasVisible, setIsCanvasVisible] = useState(false)
 
