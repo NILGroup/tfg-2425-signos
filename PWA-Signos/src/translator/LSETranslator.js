@@ -60,7 +60,7 @@ const groupSignotation = (graphemes, diacsInfo) => {
 			graphemes["ARC"].forEach((arc) => {
 				signotation += ":" + arc["tags"]["SIGNOTATION"];
                 if (arc["tags"]["REP"])
-                    numAppearances = 2;
+                    rep = true;
 			});
 
             if (rep)
