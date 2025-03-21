@@ -45,7 +45,7 @@ const groupSignotation = (graphemes, diacsInfo) => {
                     ? ""
                     : ":" + graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
 
-            for(diac in diacsInfo){
+            for(let diac in diacsInfo){
                 if(diacsInfo[diac]["numApps"] > 1){
                     rep = true;
                 }
@@ -94,8 +94,8 @@ const responseToSignotation = (response) => {
         headToSignotation(grapheme["tags"]);
     });
 
-    graphemes["DIAC"].forEach((grapheme, diacsInfo) => {
-        diacToSignotation(grapheme["tags"]);
+    graphemes["DIAC"].forEach((grapheme) => {
+        diacToSignotation(grapheme["tags"], diacsInfo);
     });
 
     graphemes["HAND"].forEach((grapheme) => {

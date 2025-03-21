@@ -23,9 +23,9 @@ const diacToSignotation = (diac, diacsInfo) => {
     if(!(diac["SHAPE"] in diacsInfo)){
       diacsInfo[diac["SHAPE"]] = {"numApps": 1, "signotation": diac_shape[diac["SHAPE"]]};
 
+    } else {
+      diacsInfo[diac["SHAPE"]].numApps++;
     }
-    else
-      diacsInfo[diac["SHAPE"]]++;
 };
 
 export default diacToSignotation;
