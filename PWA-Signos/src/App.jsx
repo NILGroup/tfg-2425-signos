@@ -1,4 +1,4 @@
-import { useState, useReducer } from 'react'
+import { useReducer } from 'react'
 import './App.css'
 import SwitchMode from './components/SwitchMode.jsx'
 import ImageMode from './components/ImageMode.jsx'
@@ -62,7 +62,7 @@ function App() {
   return (
     <>
       <Header />
-      {state.switcherVisible && <SwitchMode isChecked={isCanvasVisible} changeMode={setIsCanvasVisible}/>}
+      {state.switcherVisible && <SwitchMode dispatch={dispatch} screen={state.screen}/>}
       {screen}
     </>
   )

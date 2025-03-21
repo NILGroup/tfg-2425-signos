@@ -10,8 +10,7 @@ const ImageMode = ({isLoading, helpVisible, dispatch}) => {
   const [signotationText, setSignotationText] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedImageName, setSelectedImageName] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
-  const [helpVisible, setMoreInfoVisible] = useState(null);
+  //const [helpVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
@@ -28,26 +27,26 @@ const ImageMode = ({isLoading, helpVisible, dispatch}) => {
               
               <SelectImageButton setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
               
-              <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} setIsLoading={setIsLoading} setVideos={setVideos}/>
+              <UploadImage selectedFile={selectedFile} setSignotationText={setSignotationText} dispatch={dispatch} setVideos={setVideos}/>
 
-              <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/>
+              {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
             
             </div>
           </div>
 
-          <Loading isLoading={isLoading}/>
+          {isLoading && <Loading/>}
 
           <Videos videos={videos} isLoading={isLoading}/> 
           
         </div>
       </div>
     
-      {helpVisible && (
+      {/* {helpVisible && (
       <div className="absolute flex justify-center items-center">
         <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
         <MoreInfoCard />
       </div>
-      )}
+      )} */}
 
     </>
   );
@@ -152,9 +151,8 @@ const BackButton = ({setMoreInfoVisible}) => {
     </> );
 }
 
-const Loading = ({isLoading}) => {
+const Loading = () => {
   return (<>
-  {isLoading && (
     <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
       <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
         <circle
@@ -171,7 +169,6 @@ const Loading = ({isLoading}) => {
       </svg>
       Cargando vídeos...
     </h1>
-  )}
   </>)
 }
 
