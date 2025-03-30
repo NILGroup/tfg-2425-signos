@@ -4,7 +4,7 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = ({isLoading, helpVisible, image, signotation, videos, dispatch}) => {
+const ImageMode = ({isLoading, helpVisible, image, imageName, signotation, videos, dispatch}) => {
   //const [selectedFile, setSelectedFile] = useState(null);
   //const [videos, setVideos] = useState(null);
   //const [signotationText, setSignotationText] = useState(null);
@@ -13,13 +13,13 @@ const ImageMode = ({isLoading, helpVisible, image, signotation, videos, dispatch
   return (
     <>
       <div className={`flex flex-col items-center ${helpVisible ? "blur-sm" : ""}`}>
-        <ExplText  selectedFile={image}/>
+        <ExplText  fileSelected={image}/>
 
         <SignotationText signotation={signotation} isLoading={isLoading}/>
       
         <div className="bottom-12 flex flex-row gap-30 mt-20">
           <div className="flex flex-col gap-4">
-            <Image selectedImage={image} selectedImageName={image.name}/>
+            <Image image={image} imageName={imageName}/>
 
             <div className="flex justify-center gap-10">
               
@@ -50,10 +50,10 @@ const ImageMode = ({isLoading, helpVisible, image, signotation, videos, dispatch
   );
 };
 
-const ExplText = ({selectedFile}) => {
+const ExplText = ({fileSelected}) => {
   return (
   <>
-    {!selectedFile && 
+    {!fileSelected && 
     <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
     <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
   </>

@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   helpVisible: false,
   switcherVisible: true,
   image: null,
+  imageName: null,
   signotation: null,
   videos: null,
 }
@@ -21,9 +22,11 @@ const reducer = (state, action) => {
     case 'image_mode':
       return { ...state, screen: 'image_screen' }
     case 'select_image':
-      if(state.image) 
+      if(state.image) {
         URL.revokeObjectURL(state.image);
-      return { ...state,  image: URL.createObjectURL(action.image)}
+        state.imageName = null;
+      }
+      return { ...state,  image: URL.createObjectURL(action.image), imageName: action.image.name}
     case 'upload_image':
       return { ...state, videos: null}
     case 'set_signotation':
