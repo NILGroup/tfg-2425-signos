@@ -4,28 +4,28 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = ({isLoading, helpVisible, image, dispatch}) => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [videos, setVideos] = useState(null);
-  const [signotationText, setSignotationText] = useState(null);
+const ImageMode = ({isLoading, helpVisible, image, signotation, videos, dispatch}) => {
+  //const [selectedFile, setSelectedFile] = useState(null);
+  //const [videos, setVideos] = useState(null);
+  //const [signotationText, setSignotationText] = useState(null);
   //const [helpVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
       <div className={`flex flex-col items-center ${helpVisible ? "blur-sm" : ""}`}>
-        <ExplText  selectedFile={selectedFile}/>
+        <ExplText  selectedFile={image}/>
 
-        <SignotationText signotationText={signotationText} isLoading={isLoading}/>
+        <SignotationText signotation={signotation} isLoading={isLoading}/>
       
         <div className="bottom-12 flex flex-row gap-30 mt-20">
           <div className="flex flex-col gap-4">
-            <Image selectedImage={URL.createObjectURL(image)} selectedImageName={image.name}/>
+            <Image selectedImage={image} selectedImageName={image.name}/>
 
             <div className="flex justify-center gap-10">
               
-              <SelectImageButton dispatch={dispatch} setSelectedFile={setSelectedFile} setSignotationText={setSignotationText} setVideos={setVideos} setSelectedImage={setSelectedImage} setSelectedImageName={setSelectedImageName}/>
+              <SelectImageButton dispatch={dispatch}/>
               
-              <UploadImage dispatch={dispatch} selectedFile={selectedFile} setSignotationText={setSignotationText} dispatch={dispatch} setVideos={setVideos}/>
+              <UploadImage dispatch={dispatch} image={image}/>
 
               {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
             
@@ -60,12 +60,12 @@ const ExplText = ({selectedFile}) => {
   )
 }
 
-const SignotationText = ({signotationText, isLoading}) => {
+const SignotationText = ({signotation, isLoading}) => {
   return (
     <>
-    {signotationText && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
+    {signotation && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
               <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotationText}</h1> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotation}</h1> 
               </div> }
     </>
   )

@@ -4,11 +4,11 @@ import checkIcon from '../assets/check.svg';
 const VISSE_BACKEND_URL = "https://holstein.fdi.ucm.es/visse/backend/recognize/raw";
 const SIGNARIO_URL = "https://griffos.filol.ucm.es/signario/buscar?";
 
-const UploadImage = ({dispatch}) => {
+const UploadImage = ({image, dispatch}) => {
 
   const uploadImage = async (image) => {
     try {
-      setIsLoading(true);
+      dispatch({ type: "set_loading" } )
       const response = await fetch(
         VISSE_BACKEND_URL /*"http://localhost:3999/recognize/raw"*/,
         {
@@ -19,7 +19,7 @@ const UploadImage = ({dispatch}) => {
       const responseData = await response.json();
       console.log(responseData);
       const signotation = await responseToSignotation(responseData);
-      await setSignotationText(signotation);
+      dispatch({ type: "set_signotation", signotation: signotation });
       const url = new URL(
         SIGNARIO_URL +
           new URLSearchParams({
@@ -33,28 +33,28 @@ const UploadImage = ({dispatch}) => {
       });
       const videosData = await videosResponse.json();
       console.log(videosData);
-      setVideos(videosData["signs"]);
+      dispatch({ type: "signario_response", videos: videosData["signs"] });
     } catch (error) {
-      console.error("Error uploading file:", error);
+      dispatch({ type: "error_response", error: error });
+      console.error("Error uploading image:", error);
     }
     finally {
-      setIsLoading(false);
+      dispatch({ type: "set_loaded" } )
     }
   };
 
   const handleFileUpload = () => {
-    setVideos(null);
-    const image = new FormData();
-    image.append("image", selectedFile);
+    const upload = new FormData();
+    upload.append("image", image);
     // Send selected image to VisSE
-    uploadImage(image);
+    uploadImage(upload);
   };
 
   return (
     <>   
       {/*Check button*/}
-      <button onClick={handleFileUpload} disabled={!selectedFile} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${selectedFile ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
-        <img src={checkIcon} alt="Send image" className={`${selectedFile ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+      <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+        <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
       </button>
     </>
   );

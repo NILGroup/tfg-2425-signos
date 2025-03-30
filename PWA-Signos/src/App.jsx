@@ -21,9 +21,13 @@ const reducer = (state, action) => {
     case 'image_mode':
       return { ...state, screen: 'image_screen' }
     case 'select_image':
-      return { ...state,  image: action.image}
+      if(state.image) 
+        URL.revokeObjectURL(state.image);
+      return { ...state,  image: URL.createObjectURL(action.image)}
     case 'upload_image':
-      return { ...state}
+      return { ...state, videos: null}
+    case 'set_signotation':
+      return { ...state, signotation: action.signotation }
     case 'signario_response':
       return { ...state }
     case 'error_response':
