@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   isLoading: false,
   helpVisible: false,
   switcherVisible: true,
+  file: null,
   image: null,
   imageName: null,
   signotation: null,
@@ -25,8 +26,9 @@ const reducer = (state, action) => {
       if(state.image) {
         URL.revokeObjectURL(state.image);
         state.imageName = null;
+        state.file = null;
       }
-      return { ...state,  image: URL.createObjectURL(action.image), imageName: action.image.name}
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name}
     case 'upload_image':
       return { ...state, videos: null}
     case 'set_signotation':

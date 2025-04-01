@@ -4,7 +4,7 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = ({isLoading, helpVisible, image, imageName, signotation, videos, dispatch}) => {
+const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, dispatch}) => {
   //const [selectedFile, setSelectedFile] = useState(null);
   //const [videos, setVideos] = useState(null);
   //const [signotationText, setSignotationText] = useState(null);
@@ -25,7 +25,7 @@ const ImageMode = ({isLoading, helpVisible, image, imageName, signotation, video
               
               <SelectImageButton dispatch={dispatch}/>
               
-              <UploadImage dispatch={dispatch} image={image}/>
+              <UploadImage dispatch={dispatch} image={file}/>
 
               {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
             
