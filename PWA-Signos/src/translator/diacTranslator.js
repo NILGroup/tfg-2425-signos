@@ -20,11 +20,13 @@ const diacToSignotation = (diac, diacsInfo) => {
       altern: "~",
     };
 
-    if(!(diac["SHAPE"] in diacsInfo)){
-      diacsInfo[diac["SHAPE"]] = {"numApps": 1, "signotation": diac_shape[diac["SHAPE"]]};
+    if(diac["SHAPE"] in diac_shape){
+      if(!(diac_shape[diac["SHAPE"]] in diacsInfo)){
+        diacsInfo[diac_shape[diac["SHAPE"]]] = {"numApps": 1, "signotation": diac_shape[diac["SHAPE"]]};
 
-    } else {
-      diacsInfo[diac["SHAPE"]].numApps++;
+      } else {
+        diacsInfo[diac_shape[diac["SHAPE"]]].numApps++;
+      }
     }
 };
 
