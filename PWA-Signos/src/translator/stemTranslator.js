@@ -5,7 +5,7 @@ const stemToSignotation = (stem, arros) => {
     const shape = stem['tags']['SHAPE'];
     const [cx, cy, h, w] = stem['box'];
     let arro1, arro2, dir;
-    let rep = false;
+    let extra = undefined;
 
     switch (rot){
         case 'N': // Vertical
@@ -16,15 +16,15 @@ const stemToSignotation = (stem, arros) => {
                 break;
             if(arro1 != undefined && arro2 === undefined){ // Arrow north
                 dir = shape === 's' ? 'F' : 'H';
-                rep = arro1[1];
+                extra = arro1[1] ? 'R' : undefined;
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south
                 dir = shape === 's' ? 'B' : 'L';
-                rep = arro2[1];
+                extra = arro2[1] ? 'R' : undefined;
             }
             else{ // Arrow on both sides
-                dir = shape === 's' ? 'F' : 'H';
-                rep = true;
+                dir = '';
+                extra = 'N';
             }
             break;
         case 'NE':
@@ -35,15 +35,15 @@ const stemToSignotation = (stem, arros) => {
                 break;
             if(arro1 != undefined && arro2 === undefined){ // Arrow north east
                 dir = shape === 's' ? 'FY' : 'HY';
-                rep = arro1[1];
+                extra = arro1[1] ? 'R' : undefined;
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south west
                 dir = shape === 's' ? 'BX' : 'LX';
-                rep = arro2[1];
+                extra = arro2[1] ? 'R' : undefined;
             }
             else{ // Arrow on both sides
-                dir = shape === 's' ? 'FY' : 'HY';
-                rep = true;
+                dir = "";
+                extra = 'N';
             }
             break;
         case 'E': // Horizontal
@@ -54,15 +54,15 @@ const stemToSignotation = (stem, arros) => {
                 break;
             if(arro1 != undefined && arro2 === undefined){ // Arrow east
                 dir = 'Y';
-                rep = arro1[1];
+                extra = arro1[1] ? 'R' : undefined;
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow west
                 dir = 'X';
-                rep = arro2[1];
+                extra = arro2[1] ? 'R' : undefined;
             }
             else{ // Arrow on both sides
-                dir = 'Y';
-                rep = true;
+                dir = "";
+                extra = 'N';
             }
             break;
         case 'SE':
@@ -73,15 +73,15 @@ const stemToSignotation = (stem, arros) => {
                 break;
             if(arro1 != undefined && arro2 === undefined){ // Arrow north west
                 dir = shape === 's' ? 'FX' : 'HX';
-                rep = arro1[1];
+                extra = arro1[1] ? 'R' : undefined;
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south east
                 dir = shape === 's' ? 'BY' : 'LY';
-                rep = arro2[1];
+                extra = arro2[1] ? 'R' : undefined;
             }
             else{
-                dir = shape === 's' ? 'FX' : 'HX';
-                rep = true;
+                dir = "";
+                extra = 'N';
             }
             break;
         default:
@@ -89,7 +89,7 @@ const stemToSignotation = (stem, arros) => {
     }
 
     stem["tags"]["SIGNOTATION"] = dir === undefined ? "" : '->:' + dir;
-    stem["tags"]["REP"] = rep;
+    stem["tags"]["EXTRA"] = extra;
 };
 
 export default stemToSignotation;

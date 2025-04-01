@@ -5,7 +5,7 @@ const incompleteArcs = (arc, arros) => {
   const shape = arc["tags"]["SHAPE"][0];
   const [cx, cy, h, w] = arc["box"];
   let arro1, arro2, dir, coda;
-  let rep = false;
+  let extra = undefined;
 
   switch (rot) {
     case "N": // Middle point of the ARC segment
@@ -14,17 +14,17 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "F" : "H";
       if (arro1 === undefined && arro2 === undefined)
-        return ["(" + dir + ")", rep];
+        return ["(" + dir + ")", extra];
       if (arro1 != undefined && arro2 === undefined) {
         coda = "X";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "Y";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else{
-        coda = "X";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "NE":
@@ -33,17 +33,17 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "FY" : "HY";
       if (arro1 === undefined && arro2 === undefined)
-        return ["(" + dir + ")", rep];
+        return ["(" + dir + ")", extra];
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "Y";           // Y o B/L ?
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else { // Arrow on both sides
-        coda = shape === "s" ? "F" : "H";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "E":
@@ -52,18 +52,18 @@ const incompleteArcs = (arc, arros) => {
 
       dir = "Y";
       if (arro1 === undefined && arro2 === undefined)
-        return  ["(" + dir + ")", rep];
+        return  ["(" + dir + ")", extra];
       
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = shape === "s" ? "B" : "L";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else {
-        coda = shape === "s" ? "F" : "H";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "SE":
@@ -72,18 +72,18 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "BY" : "LY";
       if (arro1 === undefined && arro2 === undefined)
-        return  ["(" + dir + ")", rep];
+        return  ["(" + dir + ")", extra];
       
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "B" : "L";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "Y";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else{
-        coda = shape === "s" ? "B" : "L";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "S":
@@ -92,18 +92,18 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "B" : "L";
       if (arro1 === undefined && arro2 === undefined)
-        return  ["(" + dir + ")", rep];
+        return  ["(" + dir + ")", extra];
       
       if (arro1 != undefined && arro2 === undefined) {
         coda = "Y";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "X";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else{
-        coda = "Y";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "SW":
@@ -112,18 +112,18 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "BX" : "LX";
       if (arro1 === undefined && arro2 === undefined)
-        return  ["(" + dir + ")", rep];
+        return  ["(" + dir + ")", extra];
       
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "B" : "L";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "X";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else{
-        coda = shape === "s" ? "B" : "L";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "W":
@@ -132,18 +132,18 @@ const incompleteArcs = (arc, arros) => {
 
       dir = "X";
       if (arro1 === undefined && arro2 === undefined)
-        return  ["(" + dir + ")", rep];
+        return  ["(" + dir + ")", extra];
       
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = shape === "s" ? "B" : "L";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else{
-        coda = shape === "s" ? "F" : "H";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     case "NW":
@@ -152,25 +152,25 @@ const incompleteArcs = (arc, arros) => {
 
       dir = shape === "s" ? "FX" : "HX";
       if (arro1 === undefined && arro2 === undefined)
-        return  ["(" + dir + ")", rep];
+        return  ["(" + dir + ")", extra];
       
       if (arro1 != undefined && arro2 === undefined) {
         coda = shape === "s" ? "F" : "H";
-        rep = arro1[1];
+        extra = arro1[1] ? "R" : undefined;
       } else if (arro2 != undefined && arro1 === undefined) {
         coda = "X";
-        rep = arro2[1];
+        extra = arro2[1] ? "R" : undefined;
       }
       else{
-        coda = shape === "s" ? "F" : "H";
-        rep = true;
+        coda = "";
+        extra = "N";
       }
       break;
     default:
       break;
   }
   
-  return ["(" + dir + "):" + coda, rep] ;
+  return ["(" + dir + "):" + coda, extra] ;
 };
 
 const fullArcs = (arc, arros) => {
@@ -179,7 +179,7 @@ const fullArcs = (arc, arros) => {
   const [cx, cy, h, w] = arc["box"];
   let arro;
   let ini = "", dir = "";
-  let rep = false;
+  let extra = false;
 
   // Movement is a full arc
   switch (rot) {
@@ -227,9 +227,9 @@ const fullArcs = (arc, arros) => {
       break;
   }
 
-  if (arro != undefined) rep = arro[1]; // Double arrow
+  if (arro != undefined) extra = arro[1] ? "R" : undefined; // Double arrow
 
-  return ["(" + ini + "," + dir + ")", rep] ;
+  return ["(" + ini + "," + dir + ")", extra] ;
 };
 
 const arcToSignotation = (arc, arros) => {
@@ -244,7 +244,7 @@ const arcToSignotation = (arc, arros) => {
     signotation = fullArcs(arc, arros);
   }
   arc["tags"]["SIGNOTATION"] = signotation[0];
-  arc["tags"]["REP"] = signotation[1];
+  arc["tags"]["extra"] = signotation[1];
 };
 
 export default arcToSignotation;

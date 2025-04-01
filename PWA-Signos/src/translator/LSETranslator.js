@@ -35,7 +35,7 @@ const classifyGraphemes = (response, graphemes) => {
 
 const groupSignotation = (graphemes, diacsInfo) => {
     let signotation = "";
-    let rep = false;
+    let rep = undefined;
 
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
@@ -47,24 +47,25 @@ const groupSignotation = (graphemes, diacsInfo) => {
 
             for(let diac in diacsInfo){
                 if(diacsInfo[diac]["numApps"] > 1){
-                    rep = true;
+                    rep = ':R';
                 }
                 signotation += ":" + diacsInfo[diac]["signotation"];
             }
 			graphemes["STEM"].forEach((stem) => {
 				signotation += ":" + stem["tags"]["SIGNOTATION"];
-                if (stem["tags"]["REP"])
-                    numAppearances = 2;
+                if (stem["tags"]["EXTRA"] !== undefined)
+                    rep = stem["tags"]["EXTRA"] === "R" ? "R" : "N";
                     
 			});
 			graphemes["ARC"].forEach((arc) => {
 				signotation += ":" + arc["tags"]["SIGNOTATION"];
-                if (arc["tags"]["REP"])
-                    rep = true;
+                if (arc["tags"]["EXTRA"] !== undefined)
+                    rep = arc["tags"]["EXTRA"] === "R" ? "R" : "N";
 			});
 
-            if (rep)
-                signotation += ":R"; 
+            if (rep !== undefined) {
+                signotation += rep; 
+            }
             break;
         case 2: // There are 2 hands
             break;
