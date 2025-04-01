@@ -33,9 +33,9 @@ const classifyGraphemes = (response, graphemes) => {
     });
 };
 
-const groupSignotation = (graphemes) => {
+const groupSignotation = (graphemes, diacsInfo) => {
     let signotation = "";
-    let numAppearances = 0;
+    let rep = undefined;
 
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
@@ -44,32 +44,28 @@ const groupSignotation = (graphemes) => {
                 (graphemes["HEAD"].length == 0 || graphemes["HEAD"][0]["tags"]["SIGNOTATION"] === undefined)
                     ? ""
                     : ":" + graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
-			graphemes["DIAC"].forEach((diac) => {
-                if (numAppearances == 0 && diac["tags"]["SIGNOTATION"] === '*'){
-                    numAppearances++;
-                    signotation += ":" + diac["tags"]["SIGNOTATION"];
+
+            for(let diac in diacsInfo){
+                if(diacsInfo[diac]["numApps"] > 1){
+                    rep = ':R';
                 }
-                else if (numAppearances > 0 && diac["tags"]["SIGNOTATION"] === '*')
-                    numAppearances++;
-                else // All diacs that are not asterisks
-                    signotation += ":" + diac["tags"]["SIGNOTATION"];
-                
-                
-			});
+                signotation += ":" + diacsInfo[diac]["signotation"];
+            }
 			graphemes["STEM"].forEach((stem) => {
 				signotation += ":" + stem["tags"]["SIGNOTATION"];
-                if (stem["tags"]["REP"])
-                    numAppearances = 2;
+                if (stem["tags"]["EXTRA"] !== undefined)
+                    rep = stem["tags"]["EXTRA"] === "R" ? "R" : "N";
                     
 			});
 			graphemes["ARC"].forEach((arc) => {
 				signotation += ":" + arc["tags"]["SIGNOTATION"];
-                if (arc["tags"]["REP"])
-                    numAppearances = 2;
+                if (arc["tags"]["EXTRA"] !== undefined)
+                    rep = arc["tags"]["EXTRA"] === "R" ? "R" : "N";
 			});
 
-            if (numAppearances > 1)
-                signotation += ":R"; 
+            if (rep !== undefined) {
+                signotation += rep; 
+            }
             break;
         case 2: // There are 2 hands
             break;
@@ -89,6 +85,9 @@ const responseToSignotation = (response) => {
         STEM: [],
         ARC: [],
     };
+
+    const diacsInfo = {};
+
     classifyGraphemes(response["graphemes"], graphemes);
 
     console.log(graphemes);
@@ -97,7 +96,7 @@ const responseToSignotation = (response) => {
     });
 
     graphemes["DIAC"].forEach((grapheme) => {
-        diacToSignotation(grapheme["tags"]);
+        diacToSignotation(grapheme["tags"], diacsInfo);
     });
 
     graphemes["HAND"].forEach((grapheme) => {
@@ -112,7 +111,7 @@ const responseToSignotation = (response) => {
         arcToSignotation(grapheme, graphemes["ARRO"]);
     });
 
-	let r = groupSignotation(graphemes);
+	let r = groupSignotation(graphemes, diacsInfo);
 	console.log(r);
     return r;
 };
