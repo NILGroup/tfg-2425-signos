@@ -18,6 +18,8 @@ const ImageMode = () => {
       <div className={`flex flex-col items-center ${moreInfoVisible ? "blur-sm" : ""}`}>
         <ExplText  selectedFile={selectedFile}/>
 
+        <ExamplesButton/>
+
         <SignotationText signotationText={signotationText} isLoading={isLoading}/>
       
         <div className="bottom-12 flex flex-row gap-30 mt-20">
@@ -58,9 +60,19 @@ const ExplText = ({selectedFile}) => {
   <>
     {!selectedFile && 
     <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
-    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
+    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
   </>
   )
+}
+
+const ExamplesButton = () => {
+  return (
+    <>
+    <button className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+      <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
+    </button>
+    </>
+  );
 }
 
 const SignotationText = ({signotationText, isLoading}) => {
