@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import UploadImage from './UploadImage.jsx'
+import { useState } from 'react'
+import ImageMode from './ImageMode.jsx'
 import Canvas from './Canvas.jsx'
 
 
@@ -89,7 +89,7 @@ const SwitchMode = () => {
 
 const mode = (isChecked) => {
   if (isChecked) {
-    return <UploadImage className="image-buttons"/>;
+    return <ImageMode/>;
   } else {
     return <Canvas />;
   }
