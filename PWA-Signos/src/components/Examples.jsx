@@ -4,7 +4,7 @@ import profesorSign from '../examples/profesor.png'
 import alicanteSign from '../examples/alicante.png'
 import narizSign from '../examples/nariz.png'
 import hartoSign from '../examples/harto.png'
-import duracionSign from '../examples/duracion.png'
+import importaSign from '../examples/atiqueteimporta.png'
 import SwitchMode from './SwitchMode'
 
 const handleBack = () => {
@@ -22,7 +22,7 @@ const Examples = () => {
     const [selectedExample, setSelectedExample] = useState(null);
 
     const examples = [[profesorSign, "Profesor"], [alicanteSign, "Alicante"], [narizSign, "Nariz"],
-                        [hartoSign, "Harto"], [duracionSign, "Duración"]];
+                        [hartoSign, "Harto"], [importaSign, "A ti qué te importa"]];
 
     return (
         <div>
