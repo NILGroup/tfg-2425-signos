@@ -5,11 +5,7 @@ import alicanteSign from '../examples/alicante.png'
 import narizSign from '../examples/nariz.png'
 import hartoSign from '../examples/harto.png'
 import importaSign from '../examples/atiqueteimporta.png'
-import SwitchMode from './SwitchMode'
 
-const handleBack = () => {
-    return; // FALTA POR HACER
-};
 
 const Example = ({index, url, wordSign}) => {
     return (<div className="flex flex-col justify-center items-center gap-5 m-5"> 
@@ -18,8 +14,11 @@ const Example = ({index, url, wordSign}) => {
     </div>);
 };
 
-const Examples = () => {
-    const [selectedExample, setSelectedExample] = useState(null);
+const Examples = ({dispatch}) => {
+
+    const handleBack = () => {
+        dispatch({type: "hide_examples"})
+    };
 
     const examples = [[profesorSign, "Profesor"], [alicanteSign, "Alicante"], [narizSign, "Nariz"],
                         [hartoSign, "Harto"], [importaSign, "A ti qué te importa"]];

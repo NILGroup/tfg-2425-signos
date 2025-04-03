@@ -15,7 +15,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
       <div className={`flex flex-col items-center ${helpVisible ? "blur-sm" : ""}`}>
         <ExplText  fileSelected={image}/>
 
-        <ExamplesButton/>
+        <ExamplesButton dispatch={dispatch}/>
 
         <SignotationText signotation={signotation} isLoading={isLoading}/>
       
@@ -62,10 +62,15 @@ const ExplText = ({fileSelected}) => {
   )
 }
 
-const ExamplesButton = () => {
+const ExamplesButton = ({dispatch}) => {
+
+  const handleClick = () => {
+    dispatch({type: "show_examples"})
+  }
+
   return (
     <>
-    <button className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+    <button onClick={handleClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
       <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
     </button>
     </>

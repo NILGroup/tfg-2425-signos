@@ -59,9 +59,6 @@ function App() {
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-  // // Change mode between Upload images and Canvas
-  // const [isCanvasVisible, setIsCanvasVisible] = useState(false)
-
   let screen;
   if(state.screen === 'image_screen'){
     screen = <ImageMode dispatch={dispatch} {...state}/>
@@ -69,9 +66,9 @@ function App() {
   else if(state.screen === 'canvas_screen'){
     screen = <Canvas dispatch={dispatch} {...state}/>
   }
-  // else if(state.screen === 'examples_screen'){
-  //   screen = <Examples/>
-  // }
+  else if(state.screen === 'examples_screen'){
+    screen = <Examples dispatch={dispatch}/>
+  }
 
   return (
     <>
