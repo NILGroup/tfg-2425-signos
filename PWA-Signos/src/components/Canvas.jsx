@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import clearIcon from '../assets/delete.svg';
 import checkIcon from '../assets/check.svg';
 
-const Canvas = () => {
+const Canvas = (isLoading, dispatch) => {
     const canvasRef = useRef(null);
     const toolbarRef = useRef(null);
 
