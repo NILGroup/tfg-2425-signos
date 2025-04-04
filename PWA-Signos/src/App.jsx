@@ -74,19 +74,19 @@ function App() {
   // }
 
   return (
-    <>
-      <Header />
-      {state.switcherVisible && <SwitchMode dispatch={dispatch} screen={state.screen}/>}
-      {screen}
-    </>
+    <div className="flex flex-col items-center md:min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[70px_1fr] md:grid-cols-[70px_1fr]">
+      <Header/>
+        {state.switcherVisible && <SwitchMode dispatch={dispatch} screen={state.screen}/>}
+        {screen}
+    </div>
   )
 }
 
 const Header = () => {
   return (
-    <div className='mt-4 mb-4'>
-      <h1 className="text-2xl sm:text-3xl lg:text-4xl text-center text-[#4682A9] font-bold"> Traduciendo la SignoEscritura </h1>
-      <hr className="mx-2 mt-2.5  lg:mx-4 lg:mt-4 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
+    <div className='w-screen mt-2 mb-2 md:mb-0 md:mt-0 md:col-start-1 md:col-end-3'>
+      <h1 className="text-xl md:text-2xl text-center text-[#4682A9] font-bold"> Traduciendo la SignoEscritura </h1>
+      <hr className="mx-2 mt-1 md:mx-2.5 md:mt-1.5 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
     </div>
   )
 }
