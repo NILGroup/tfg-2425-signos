@@ -74,7 +74,7 @@ function App() {
   // }
 
   return (
-    <div className="flex flex-col items-center md:min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[70px_1fr] md:grid-cols-[70px_1fr]">
+    <div className="flex flex-col min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[70px_1fr] md:grid-cols-[70px_1fr]">
       <Header/>
         {state.switcherVisible && <SwitchMode dispatch={dispatch} screen={state.screen}/>}
         {screen}
