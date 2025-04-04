@@ -4,102 +4,99 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = ({moreInfoVisible, setMoreInfoVisible}) => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [videos, setVideos] = useState(null);
-  const [signotationText, setSignotationText] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedImageName, setSelectedImageName] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, dispatch}) => {
+  //const [selectedFile, setSelectedFile] = useState(null);
+  //const [videos, setVideos] = useState(null);
+  //const [signotationText, setSignotationText] = useState(null);
+  //const [helpVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
-      {/* Main Content */}
-      <div className={`relative flex flex-col h-full items-center ml-15 mr-2 lg:ml-25 lg:mr-10 transition duration-300 ${moreInfoVisible ? "blur-sm" : ""}`}>
-        <ExplText selectedFile={selectedFile} />
-  
-        <SignotationText signotationText={signotationText} isLoading={isLoading} />
-  
+      <div className={`flex flex-col items-center ${helpVisible ? "blur-sm" : ""}`}>
+        <ExplText  fileSelected={image}/>
+
+        <ExamplesButton/>
+
+        <SignotationText signotation={signotation} isLoading={isLoading}/>
+      
         <div className="bottom-12 flex flex-row gap-30 mt-20">
           <div className="flex flex-col gap-4">
-            <Image selectedImage={selectedImage} selectedImageName={selectedImageName} />
-  
+            <Image image={image} imageName={imageName}/>
+
             <div className="flex justify-center gap-10">
-              <SelectImageButton
-                setSelectedFile={setSelectedFile}
-                setSignotationText={setSignotationText}
-                setVideos={setVideos}
-                setSelectedImage={setSelectedImage}
-                setSelectedImageName={setSelectedImageName}
-              />
-  
-              <UploadImage
-                selectedFile={selectedFile}
-                setSignotationText={setSignotationText}
-                setIsLoading={setIsLoading}
-                setVideos={setVideos}
-              />
-  
-              <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible} />
+              
+              <SelectImageButton dispatch={dispatch}/>
+              
+              <UploadImage dispatch={dispatch} image={file}/>
+
+              {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
+            
             </div>
           </div>
-  
-          <Loading isLoading={isLoading} />
-  
-          <Videos videos={videos} isLoading={isLoading} />
+
+          {isLoading && <Loading/>}
+
+          <Videos videos={videos} isLoading={isLoading}/> 
+          
         </div>
       </div>
-  
-      {/* Overlay for More Info */}
-      {moreInfoVisible && (
-        <div className="fixed inset-0 flex justify-center items-center z-50">
-          <BackButton setMoreInfoVisible={setMoreInfoVisible} />
-          <MoreInfoCard />
-        </div>
-      )}
+    
+      {/* {helpVisible && (
+      <div className="absolute flex justify-center items-center">
+        <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
+        <MoreInfoCard />
+      </div>
+      )} */}
+
     </>
   );
 };
 
-const ExplText = ({selectedFile}) => {
+const ExplText = ({fileSelected}) => {
   return (
   <>
-    {!selectedFile && 
-    <div className="flex flex-col gap-10 mt-15 lg:mt-50 w-full"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
-    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
+    {!fileSelected && 
+    <div className="flex flex-col gap-10 mt-50"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
+    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
   </>
   )
 }
 
-const SignotationText = ({signotationText, isLoading}) => {
+const ExamplesButton = () => {
   return (
     <>
-    {signotationText && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
+    <button className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+      <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
+    </button>
+    </>
+  );
+}
+
+const SignotationText = ({signotation, isLoading}) => {
+  return (
+    <>
+    {signotation && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
               <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotationText}</h1> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotation}</h1> 
               </div> }
     </>
   )
 }
 
-const Image = ({selectedImage, selectedImageName}) => {
-    return (<>{selectedImage && <div className="flex flex-col gap-1"> 
-        <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={selectedImage} alt="Signoescritura"/> 
-        <p className="text-[#4682A9] font-bold text-lg"> {selectedImageName} </p> 
+const Image = ({image, imageName}) => {
+    return (<>{image && <div className="flex flex-col gap-1"> 
+        <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }
 
-const SelectImageButton = ({setSelectedFile, setSignotationText, setVideos, setSelectedImage, setSelectedImageName}) => {
+const SelectImageButton = ({dispatch}) => {
     const input = useRef(null);
 
     const handleFileSelect = (event) => {
         const file = event.target.files[0];
         if(file){
-          setSelectedFile(file);
-          setSignotationText(null);
-          setVideos(null);
-          setSelectedImage(URL.createObjectURL(file));
-          setSelectedImageName(file.name);
+          dispatch({type: 'select_image', image: file});
         }  
     };
 
@@ -160,9 +157,8 @@ const BackButton = ({setMoreInfoVisible}) => {
     </> );
 }
 
-const Loading = ({isLoading}) => {
+const Loading = () => {
   return (<>
-  {isLoading && (
     <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
       <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
         <circle
@@ -179,7 +175,6 @@ const Loading = ({isLoading}) => {
       </svg>
       Cargando vídeos...
     </h1>
-  )}
   </>)
 }
 
