@@ -16,7 +16,7 @@ const Example = ({index, url, wordSign, dispatch}) => {
     };
 
     return (<button onClick={exampleSelected} className="flex flex-col justify-center items-center gap-5 m-5"> 
-        <img className="h-75 w-110 border-4 rounded-xl border-[#4682A9] border-solid" src={url} alt="Wordsign"/> 
+        <img className="h-75 w-110 border-4 rounded-xl border-[#4682A9] border-solid cursor-pointer" src={url} alt="Wordsign"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {wordSign} </p> 
     </button>);
 };
