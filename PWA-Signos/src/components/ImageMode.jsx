@@ -26,8 +26,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 	
 		<Videos videos={videos} isLoading={isLoading}/> 
 
-
-        <div className={`flex justify-center items-end gap-10 md:col-start-1 ${!videos && !isLoading ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
+        <div className={`flex justify-center items-end gap-10 mb-4 md:col-start-1 ${!videos && !isLoading ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -73,18 +72,18 @@ const ExamplesButton = () => {
 const SignotationText = ({signotation, isLoading}) => {
   return (
     <>
-    {signotation && !isLoading && <div className="flex flex-col justify-center items-center gap-3 md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-4"> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotation}</h1> 
+    {signotation && !isLoading && <div className="flex flex-col justify-center items-center md:gap-3 md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-4"> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-xl md:text-3xl"> SIGNOTACIÓN </h1> 
+              <h1 className="signotacion text-[#4682A9] font-bold text-lg md:text-2xl"> {signotation}</h1> 
               </div> }
     </>
   )
 }
 
 const Image = ({image, imageName, videos, isLoading}) => {
-    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-1 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
-        <img className="mx-2 md:mx-0 scale-95 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
-        <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
+    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
+        <img className="mx-2 md:mx-0 scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }
 
