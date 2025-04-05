@@ -77,55 +77,54 @@ const groupSignotation = (graphemes, diacsInfo) => {
 };
 
 const createSignotation = (graphemes, diacsInfo) => {
-    let handSignotation = undefined;
-    let headSignotation = undefined;
+    let handSignotation = [];
+    let headSignotation = [];
     let diacSignotation = [];
     let stemSignotation = [];
     let arcSignotation = [];
+    let repRandN = [false, false];
     let repSignotation = [];
 
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
             // Hand signotation
-            handSignotation = graphemes["HAND"][0]["tags"]["SIGNOTATION"];
+            handSignotation.push(graphemes["HAND"][0]["tags"]["SIGNOTATION"]);
 
             // Head signotation
-            headSignotation =
-                (graphemes["HEAD"].length == 0 || graphemes["HEAD"][0]["tags"]["SIGNOTATION"] === undefined)
-                    ? undefined
-                    : graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
+            if(graphemes["HEAD"].length > 0 && graphemes["HEAD"][0]["tags"]["SIGNOTATION"] !== undefined)
+                headSignotation.push(graphemes["HEAD"][0]["tags"]["SIGNOTATION"]);
             
             // Diac signotation
-            let numDiac = 0;
             for(let diac in diacsInfo){
-                if(diacsInfo[diac]["numApps"] > 1){
-                    repSignotation[0] = 'R';
-                }
-                diacSignotation[numDiac] = diacsInfo[diac]["signotation"];
-                numDiac++;
+                if(diacsInfo[diac]["numApps"] > 1)
+                    repRandN[0] = true;
+                diacSignotation.push(diacsInfo[diac]["signotation"]);
             }
 
             // Stem signotation
-            let numStem = 0;
 			graphemes["STEM"].forEach((stem) => {
-				stemSignotation[numStem] = stem["tags"]["SIGNOTATION"];
+				stemSignotation.push(stem["tags"]["SIGNOTATION"]);
                 if (stem["tags"]["EXTRA"] !== undefined && stem["tags"]["EXTRA"] === 'R')
-                    repSignotation[0] = 'R';
+                    repRandN[0] = true;
                 else if (stem["tags"]["EXTRA"] !== undefined && stem["tags"]["EXTRA"] === 'N')
-                    repSignotation[1] = 'N';
-                numStem++;
+                    repRandN[1] = true;
 			});
 
             // Arc signotation
-            let numArc = 0;
 			graphemes["ARC"].forEach((arc) => {
-				arcSignotation[numArc] = arc["tags"]["SIGNOTATION"];
+				arcSignotation.push(arc["tags"]["SIGNOTATION"]);
                 if (arc["tags"]["EXTRA"] !== undefined && arc["tags"]["EXTRA"] === 'R')
-                    repSignotation[0] = 'R';
+                    repRandN[0] = true;
                 else if (arc["tags"]["EXTRA"] !== undefined && arc["tags"]["EXTRA"] === 'N')
-                    repSignotation[1] = 'N';
-                numArc++;
+                    repRandN[1] = true;
 			});
+
+            if(repRandN[0]) {
+                repSignotation.push('R');
+            }
+            if(repRandN[1]) {
+                repSignotation.push('N');
+            }
             break;
         case 2: // There are 2 hands
             break;
