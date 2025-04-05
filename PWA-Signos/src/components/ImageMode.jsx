@@ -12,24 +12,24 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 
   return (
     <>
-      <div className={`flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[1fr_100px] md:grid-cols-[1fr_1fr] ${helpVisible ? "blur-sm" : ""}`}>
-        <div className={`mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
-          <ExplText fileSelected={image}/>
-          <ExamplesButton image={image}/>
-        </div>
+      <div className={`flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[1fr_100px] md:grid-cols-[1fr_1fr] ${helpVisible ? "blur-sm" : ""}`}>
+        {!image && <div className={`flex flex-col flex-1 justify-center items-center mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
+          <ExplText/>
+          <ExamplesButton/>
+        </div>}
 
         <SignotationText signotation={signotation} isLoading={isLoading}/>
       
         <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading}/>
 
-        <div className={`flex justify-center gap-10 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3": "md:col-end-2"}`}>
+        <div className={`flex justify-center items-center mb-2.5 gap-10 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3": "md:col-end-2"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
 			<UploadImage dispatch={dispatch} image={file}/>
 
 			{/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
-        
+			
         </div>
 
           {isLoading && <Loading/>}
@@ -49,22 +49,22 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
   );
 };
 
-const ExplText = ({fileSelected}) => {
+const ExplText = () => {
   return (
   <>
-    {!fileSelected && 
+
     <div className="flex flex-col gap-10 mx-2 md:mx-0"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
-    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>}
+    <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>
   </>
   )
 }
 
-const ExamplesButton = ({image}) => {
+const ExamplesButton = () => {
   return (
     <>
-    {!image && <button className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+    <button className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
       <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
-    </button>}
+    </button>
     </>
   );
 }
@@ -81,7 +81,7 @@ const SignotationText = ({signotation, isLoading}) => {
 }
 
 const Image = ({image, imageName, videos, isLoading}) => {
-    return (<>{image && <div className={`flex flex-col items-center justify-center gap-1 md:row-start-1 md:row-end-2 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
+    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-1 md:row-start-1 md:row-end-2 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
         <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
