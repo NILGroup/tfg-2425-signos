@@ -12,17 +12,22 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 
   return (
     <>
-      <div className={`flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[1fr_100px] md:grid-cols-[1fr_1fr] ${helpVisible ? "blur-sm" : ""}`}>
-        {!image && <div className={`flex flex-col flex-1 justify-center items-center mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
+      <div className={`flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_100px] md:grid-cols-[1fr_1fr] ${helpVisible ? "blur-sm" : ""}`}>
+        {!image && <div className={`flex flex-col flex-1 justify-center items-center mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:row-start-1 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
           <ExplText/>
           <ExamplesButton/>
         </div>}
-
-        <SignotationText signotation={signotation} isLoading={isLoading}/>
       
         <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading}/>
 
-        <div className={`flex justify-center items-center mb-2.5 gap-10 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3": "md:col-end-2"}`}>
+		{isLoading && <Loading/>}
+		
+		<SignotationText signotation={signotation} isLoading={isLoading}/>
+	
+		<Videos videos={videos} isLoading={isLoading}/> 
+
+
+        <div className={`flex justify-center items-center my-2.5 gap-10 md:row-start-3 md:row-end-4 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3": "md:col-end-2"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -31,10 +36,6 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 			{/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
 			
         </div>
-
-          {isLoading && <Loading/>}
-
-          <Videos videos={videos} isLoading={isLoading}/> 
   
       </div>
     
@@ -72,7 +73,7 @@ const ExamplesButton = () => {
 const SignotationText = ({signotation, isLoading}) => {
   return (
     <>
-    {signotation && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
+    {signotation && !isLoading && <div className="flex flex-col justify-center items-center gap-3 md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-4"> 
               <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
               <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotation}</h1> 
               </div> }
@@ -81,7 +82,7 @@ const SignotationText = ({signotation, isLoading}) => {
 }
 
 const Image = ({image, imageName, videos, isLoading}) => {
-    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-1 md:row-start-1 md:row-end-2 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
+    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-1 md:row-start-1 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
         <img className="mx-2 md:mx-0 scale-95 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
@@ -156,7 +157,7 @@ const BackButton = ({setMoreInfoVisible}) => {
 
 const Loading = () => {
   return (<>
-    <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
+    <h1 className="flex justify-center items-center text-3xl text-[#4682A9] m-40 font-bold gap-5 md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
       <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
         <circle
           className="stroke-current"

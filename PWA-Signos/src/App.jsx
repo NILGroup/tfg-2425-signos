@@ -29,7 +29,7 @@ const reducer = (state, action) => {
         state.imageName = null;
         state.file = null;
       }
-      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, videos: null}
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, videos: null, signotation: null }
     case 'upload_image':
       return { ...state}
     case 'set_signotation':
