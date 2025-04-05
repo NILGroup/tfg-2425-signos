@@ -82,7 +82,7 @@ const SignotationText = ({signotation, isLoading}) => {
 
 const Image = ({image, imageName, videos, isLoading}) => {
     return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-1 md:row-start-1 md:row-end-2 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
-        <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <img className="mx-2 md:mx-0 scale-95 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }
