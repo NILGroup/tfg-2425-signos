@@ -37,7 +37,7 @@ const Video = ({ index, lastIndex, info}) => {
         className={`flex flex-col md:flex-row
                     ${index !== lastIndex ? "border-solid border-b-4 border-[#4682A9]" : ""}`}>
             
-            <video className='h-[200px] w-[350px] m-2' loop
+            <video className='max-h-[200px] max-w-[350px] m-2' loop
                                                      ref={video} >   
                 <source src={info.video} type="video/mp4" />
             </video>

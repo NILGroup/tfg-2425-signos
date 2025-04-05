@@ -156,7 +156,7 @@ const BackButton = ({setMoreInfoVisible}) => {
 
 const Loading = () => {
   return (<>
-    <h1 className="flex justify-center items-center text-3xl text-[#4682A9] m-40 font-bold gap-5 md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
+    <h1 className="flex flex-1 justify-center items-center text-2xl text-[#4682A9] font-bold gap-5 md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
       <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
         <circle
           className="stroke-current"
