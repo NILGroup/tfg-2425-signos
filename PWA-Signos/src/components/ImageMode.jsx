@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import SignotationText from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
 import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
@@ -76,17 +77,6 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
     </button>}
     </>
   );
-}
-
-const SignotationText = ({signotation, isLoading}) => {
-  return (
-    <>
-    {signotation && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotation}</h1> 
-              </div> }
-    </>
-  )
 }
 
 const Image = ({image, imageName}) => {
