@@ -40,6 +40,13 @@ const reducer = (state, action) => {
       return { ...state }
     case 'show_examples':
       return { ...state, screen: 'examples_screen', switcherVisible: false }
+    case 'example_selected':
+      if (state.image) {
+        URL.revokeObjectURL(state.image);
+        state.imageName = null;
+        state.file = null;
+      }
+      return { ...state, screen: 'image_screen', file: action.file, image: action.image, imageName: action.imageName, switcherVisible: true}
     case 'hide_examples':
       return { ...state, screen: 'image_screen', switcherVisible: true }
     case 'show_help':

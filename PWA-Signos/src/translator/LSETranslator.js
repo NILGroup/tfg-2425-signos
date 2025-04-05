@@ -54,13 +54,13 @@ const groupSignotation = (graphemes, diacsInfo) => {
 			graphemes["STEM"].forEach((stem) => {
 				signotation += ":" + stem["tags"]["SIGNOTATION"];
                 if (stem["tags"]["EXTRA"] !== undefined)
-                    rep = stem["tags"]["EXTRA"] === "R" ? "R" : "N";
+                    rep = stem["tags"]["EXTRA"] === "R" ? ":R" : ":N";
                     
 			});
 			graphemes["ARC"].forEach((arc) => {
 				signotation += ":" + arc["tags"]["SIGNOTATION"];
                 if (arc["tags"]["EXTRA"] !== undefined)
-                    rep = arc["tags"]["EXTRA"] === "R" ? "R" : "N";
+                    rep = arc["tags"]["EXTRA"] === "R" ? ":R" : ":N";
 			});
 
             if (rep !== undefined) {

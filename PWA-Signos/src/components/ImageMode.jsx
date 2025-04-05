@@ -15,7 +15,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
       <div className={`flex flex-col items-center ${helpVisible ? "blur-sm" : ""}`}>
         <ExplText  fileSelected={image}/>
 
-        <ExamplesButton dispatch={dispatch}/>
+        <ExamplesButton dispatch={dispatch} fileSelected={image} />
 
         <SignotationText signotation={signotation} isLoading={isLoading}/>
       
@@ -62,7 +62,7 @@ const ExplText = ({fileSelected}) => {
   )
 }
 
-const ExamplesButton = ({dispatch}) => {
+const ExamplesButton = ({dispatch, fileSelected}) => {
 
   const handleClick = () => {
     dispatch({type: "show_examples"})
@@ -70,9 +70,10 @@ const ExamplesButton = ({dispatch}) => {
 
   return (
     <>
+    {!fileSelected && 
     <button onClick={handleClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
       <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
-    </button>
+    </button>}
     </>
   );
 }
@@ -140,7 +141,7 @@ const MoreInfoButton = ({setMoreInfoVisible}) => {
 
   return (
     <>
-    {/*More infgo buttton*/}
+    {/*More info buttton*/}
     <button onClick={handleMoreInfoClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
         <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
@@ -155,7 +156,7 @@ const BackButton = ({setMoreInfoVisible}) => {
 
   return (
     <>
-    {/*More infgo buttton*/}
+    {/*More info buttton*/}
     <button onClick={handleBackButtonClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
         <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>

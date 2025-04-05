@@ -7,11 +7,18 @@ import hartoSign from '../examples/harto.png'
 import importaSign from '../examples/atiqueteimporta.png'
 
 
-const Example = ({index, url, wordSign}) => {
-    return (<div className="flex flex-col justify-center items-center gap-5 m-5"> 
+const Example = ({index, url, wordSign, dispatch}) => {
+
+    async function exampleSelected() {
+        const res = await fetch(url);
+        const blob = await res.blob();
+        dispatch({type: 'example_selected', file: new File([blob], wordSign, { type: blob.type }), image: url, imageName: wordSign});
+    };
+
+    return (<button onClick={exampleSelected} className="flex flex-col justify-center items-center gap-5 m-5"> 
         <img className="h-75 w-110 border-4 rounded-xl border-[#4682A9] border-solid" src={url} alt="Wordsign"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {wordSign} </p> 
-    </div>);
+    </button>);
 };
 
 const Examples = ({dispatch}) => {
@@ -38,6 +45,7 @@ const Examples = ({dispatch}) => {
                     index={index}
                     url = {examples[index][0]}
                     wordSign = {examples[index][1]}
+                    dispatch = {dispatch}
                     />
                 ))}
             </div>
