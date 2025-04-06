@@ -15,29 +15,30 @@ const INITIAL_STATE = {
   imageName: null,
   signotation: null,
   videos: null,
+  error: null
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'canvas_mode':
-      return { ...state, screen: 'canvas_screen' }
+      return { ...state, screen: 'canvas_screen', error: null }
     case 'image_mode':
-      return { ...state, screen: 'image_screen' }
+      return { ...state, screen: 'image_screen', error: null }
     case 'select_image':
       if(state.image) {
         URL.revokeObjectURL(state.image);
         state.imageName = null;
         state.file = null;
       }
-      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, videos: null, signotation: null }
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, videos: null, signotation: null, error: null }
     case 'upload_image':
       return { ...state}
     case 'set_signotation':
-      return { ...state, signotation: action.signotation }
+      return { ...state, signotation: action.signotation, error: null }
     case 'signario_response':
       return { ...state, videos: action.videos}
     case 'error_response':
-      return { ...state }
+      return { ...state , error: action.error }
     case 'show_examples':
       return { ...state, screen: 'examples_screen', switcherVisible: false }
     case 'hide_examples':

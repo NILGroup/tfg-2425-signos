@@ -4,7 +4,7 @@ import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
 
-const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, dispatch}) => {
+const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, error, dispatch}) => {
   //const [selectedFile, setSelectedFile] = useState(null);
   //const [videos, setVideos] = useState(null);
   //const [signotationText, setSignotationText] = useState(null);
@@ -18,7 +18,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
           <ExamplesButton/>
         </div>}
       
-        <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading}/>
+        <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error}/>
 
 		{isLoading && <Loading/>}
 		
@@ -26,7 +26,9 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 	
 		<Videos videos={videos} isLoading={isLoading}/> 
 
-        <div className={`flex justify-center items-end gap-10 mb-4 md:col-start-1 ${!videos && !isLoading ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
+		{error && <Error error={error}/>}
+
+        <div className={`flex justify-center items-end gap-10 mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -80,8 +82,8 @@ const SignotationText = ({signotation, isLoading}) => {
   )
 }
 
-const Image = ({image, imageName, videos, isLoading}) => {
-    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}> 
+const Image = ({image, imageName, videos, isLoading, error}) => {
+    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         <img className="mx-2 md:mx-0 scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
@@ -173,6 +175,14 @@ const Loading = () => {
       Cargando vídeos...
     </h1>
   </>)
+}
+
+const Error = ({error}) => {
+	return (
+	<div className="flex flex-1 justify-center items-center text-2xl text-[#4682A9] font-bold md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
+	  <h1>{error}</h1>
+	</div>
+  )
 }
 
 export default ImageMode;

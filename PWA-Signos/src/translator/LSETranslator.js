@@ -67,10 +67,8 @@ const groupSignotation = (graphemes, diacsInfo) => {
                 signotation += rep; 
             }
             break;
-        case 2: // There are 2 hands
-            break;
         default: // No hands
-            break;
+            throw new Error("¡Lo sentimos! No se ha podido traducir la imagen");
     }
 
     return signotation;
@@ -87,29 +85,34 @@ const responseToSignotation = (response) => {
     };
 
     const diacsInfo = {};
+    try{
 
-    classifyGraphemes(response["graphemes"], graphemes);
+        classifyGraphemes(response["graphemes"], graphemes);
 
-    console.log(graphemes);
-    graphemes["HEAD"].forEach((grapheme) => {
-        headToSignotation(grapheme["tags"]);
-    });
+        console.log(graphemes);
+        graphemes["HEAD"].forEach((grapheme) => {
+            headToSignotation(grapheme["tags"]);
+        });
 
-    graphemes["DIAC"].forEach((grapheme) => {
-        diacToSignotation(grapheme["tags"], diacsInfo);
-    });
+        graphemes["DIAC"].forEach((grapheme) => {
+            diacToSignotation(grapheme["tags"], diacsInfo);
+        });
 
-    graphemes["HAND"].forEach((grapheme) => {
-        handToSignotation(grapheme["tags"]);
-    });
+        graphemes["HAND"].forEach((grapheme) => {
+            handToSignotation(grapheme["tags"]);
+        });
 
-    graphemes["STEM"].forEach((grapheme) => {
-        stemToSignotation(grapheme, graphemes["ARRO"]);
-    });
+        graphemes["STEM"].forEach((grapheme) => {
+            stemToSignotation(grapheme, graphemes["ARRO"]);
+        });
 
-    graphemes["ARC"].forEach((grapheme) => {
-        arcToSignotation(grapheme, graphemes["ARRO"]);
-    });
+        graphemes["ARC"].forEach((grapheme) => {
+            arcToSignotation(grapheme, graphemes["ARRO"]);
+        });
+    }
+    catch (error) {
+        throw new Error("¡Lo sentimos! No se ha podido traducir la imagen");
+    }
 
 	let r = groupSignotation(graphemes, diacsInfo);
 	console.log(r);

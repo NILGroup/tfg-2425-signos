@@ -35,8 +35,11 @@ const UploadImage = ({image, dispatch}) => {
       console.log(videosData);
       dispatch({ type: "signario_response", videos: videosData["signs"] });
     } catch (error) {
-      dispatch({ type: "error_response", error: error });
-      console.error("Error uploading image:", error);
+      const message = error.message.includes("Failed to fetch")
+        ? "¡Lo sentimos! No se ha podido conectar con el servidor"
+        : error.message;
+        
+      dispatch({ type: "error_response", error: message });
     }
     finally {
       dispatch({ type: "set_loaded" } )
