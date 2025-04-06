@@ -93,7 +93,7 @@ function App() {
             )}
             {screen}
 
-            {state.helpVisible && <MoreInfoCard dispatch={dispatch} />}
+            {state.helpVisible && <HelpCard dispatch={dispatch} />}
         </div>
     );
 }
@@ -110,8 +110,8 @@ const Header = () => {
     );
 };
 
-const BackButton = ({ dispatch }) => {
-    const handleBackButtonClick = () => {
+const QuitButton = ({ dispatch }) => {
+    const handleQuitButtonClick = () => {
         dispatch({ type: "hide_help" });
     };
 
@@ -119,8 +119,8 @@ const BackButton = ({ dispatch }) => {
         <>
             {/*More info buttton*/}
             <button
-                onClick={handleBackButtonClick}
-                className="group border-[#4682A9] border-3 hover:bg-[#4682A9] rounded-full w-10 h-10 cursor-pointer"
+                onClick={handleQuitButtonClick}
+                className="group border-[#4682A9] border-2 md:border-3 hover:bg-[#4682A9] rounded-full w-8 h-8 md:w-10 md:h-10 cursor-pointer"
             >
                 
                 <svg
@@ -148,23 +148,21 @@ const BackButton = ({ dispatch }) => {
     );
 };
 
-const MoreInfoCard = ({ dispatch }) => {
+const HelpCard = ({ dispatch }) => {
     return (
         <div className="fixed inset-0 z-10 bg-black/40 flex justify-center items-center">
-            <div className="relative rounded-xl max-w-md w-full">
-                <div className="flex flex-col gap-4 p-4 bg-[#c5dbe6] rounded-xl">
-                  <div className="flex flex-row items-center gap-4">
-                    <BackButton dispatch={dispatch} />
-                    <h1 className="text-xl md:text-2xl text-center text-[#4682A9] font-bold">Traduciendo la signoescritura</h1>
-                    </div>
+                <div className="relative rounded-xl flex flex-col gap-2 p-3 md:p-4 mx-3 md:mx-0 bg-[#c5dbe6] rounded-xl">
+                  <QuitButton dispatch={dispatch} />
+                  <div className="flex flex-col items-center text-justify">
+                    <h1 className="text-center text-xl md:text-2xl text-center text-[#4682A9] font-bold">Traduciendo la Signoescritura</h1>
                     <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
                     <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
                     <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
                     <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
                     <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
+                  </div>
                 </div>
             </div>
-        </div>
     );
 };
 
