@@ -18,18 +18,18 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow north
                 dir = shape === 's' ? 'F' : 'H';
                 extra = arro1[1] ? 'R' : undefined;
-                arroDescription += shape === 's' ? 'el frente.' : 'arriba.';
+                arroDescription += shape === 's' ? 'el frente' : 'arriba';
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south
                 dir = shape === 's' ? 'B' : 'L';
                 extra = arro2[1] ? 'R' : undefined;
-                arroDescription += shape === 's' ? 'atrás.' : 'abajo.';
+                arroDescription += shape === 's' ? 'atrás' : 'abajo';
             }
             else{ // Arrow on both sides
                 dir = '';
                 extra = 'N';
                 arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
-                                    shape === 's' ?  "de delante a atrás." : "de arriba a abajo.";
+                                    shape === 's' ?  "de delante a atrás" : "de arriba a abajo";
             }
             break;
         case 'NE':
@@ -41,19 +41,19 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow north east
                 dir = shape === 's' ? 'FY' : 'HY';
                 extra = arro1[1] ? 'R' : undefined;
-                arroDescription += shape === 's' ? 'el frente a la derecha.' : 'arriba a la derecha.';
+                arroDescription += shape === 's' ? 'el frente a la derecha' : 'arriba a la derecha';
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south west
                 dir = shape === 's' ? 'BX' : 'LX';
                 extra = arro2[1] ? 'R' : undefined;
-                arroDescription += shape === 's' ? 'atrás a la izquierda.' : 'abajo a la izquierda.';
+                arroDescription += shape === 's' ? 'atrás a la izquierda' : 'abajo a la izquierda';
             }
             else{ // Arrow on both sides
                 dir = "";
                 extra = 'N';
                 arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
-                                    shape === 's' ?  "desde el frente a la derecha hacia atrás a la izquierda." 
-                                    : "desde arriba a la derecha hacia abajo a la izquierda.";
+                                    shape === 's' ?  "desde el frente a la derecha hacia atrás a la izquierda" 
+                                    : "desde arriba a la derecha hacia abajo a la izquierda";
             }
             break;
         case 'E': // Horizontal
@@ -65,17 +65,17 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow east
                 dir = 'Y';
                 extra = arro1[1] ? 'R' : undefined;
-                arroDescription += "la derecha.";
+                arroDescription += "la derecha";
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow west
                 dir = 'X';
                 extra = arro2[1] ? 'R' : undefined;
-                arroDescription += "la izquierda.";
+                arroDescription += "la izquierda";
             }
             else{ // Arrow on both sides
                 dir = "";
                 extra = 'N';
-                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén de derecha a izquierda.";
+                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén de derecha a izquierda";
             }
             break;
         case 'SE':
@@ -87,19 +87,19 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow north west
                 dir = shape === 's' ? 'FX' : 'HX';
                 extra = arro1[1] ? 'R' : undefined;
-                arroDescription += shape === 's' ? 'el frente a la izquierda.' : 'arriba a la izquierda.';
+                arroDescription += shape === 's' ? 'el frente a la izquierda' : 'arriba a la izquierda';
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south east
                 dir = shape === 's' ? 'BY' : 'LY';
                 extra = arro2[1] ? 'R' : undefined;
-                arroDescription += shape === 's' ? 'atrás a la derecha.' : 'abajo a la derecha.';
+                arroDescription += shape === 's' ? 'atrás a la derecha' : 'abajo a la derecha';
             }
             else{
                 dir = "";
                 extra = 'N';
                 arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
-                                    shape === 's' ?  "desde el frente a la izquierda hacia atrás a la derecha." 
-                                    : "desde arriba a la izquierda hacia abajo a la derecha.";
+                                    shape === 's' ?  "desde el frente a la izquierda hacia atrás a la derecha" 
+                                    : "desde arriba a la izquierda hacia abajo a la derecha";
                                 }
             break;
         default:
@@ -108,6 +108,7 @@ const stemToSignotation = (stem, arros) => {
 
     stem["tags"]["SIGNOTATION"] = dir === undefined ? undefined : '->:' + dir;
     stem["tags"]["EXTRA"] = extra;
+    stem["description"] += arroDescription + (extra === 'R' ? " y se repite" : "") + '.';
 };
 
 export default stemToSignotation;
