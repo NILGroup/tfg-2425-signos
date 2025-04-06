@@ -5,7 +5,8 @@ const stemToSignotation = (stem, arros) => {
     const shape = stem['tags']['SHAPE'];
     const [cx, cy, h, w] = stem['box'];
     let arro1, arro2, dir;
-    let extra = undefined;
+    let extra = undefined; 
+    let arroDescription = 'La punta de la flecha indica que el movimiento es hacia ';
 
     switch (rot){
         case 'N': // Vertical
@@ -17,14 +18,18 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow north
                 dir = shape === 's' ? 'F' : 'H';
                 extra = arro1[1] ? 'R' : undefined;
+                arroDescription += shape === 's' ? 'el frente.' : 'arriba.';
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south
                 dir = shape === 's' ? 'B' : 'L';
                 extra = arro2[1] ? 'R' : undefined;
+                arroDescription += shape === 's' ? 'atrás.' : 'abajo.';
             }
             else{ // Arrow on both sides
                 dir = '';
                 extra = 'N';
+                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
+                                    shape === 's' ?  "de delante a atrás." : "de arriba a abajo.";
             }
             break;
         case 'NE':
@@ -36,14 +41,19 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow north east
                 dir = shape === 's' ? 'FY' : 'HY';
                 extra = arro1[1] ? 'R' : undefined;
+                arroDescription += shape === 's' ? 'el frente a la derecha.' : 'arriba a la derecha.';
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south west
                 dir = shape === 's' ? 'BX' : 'LX';
                 extra = arro2[1] ? 'R' : undefined;
+                arroDescription += shape === 's' ? 'atrás a la izquierda.' : 'abajo a la izquierda.';
             }
             else{ // Arrow on both sides
                 dir = "";
                 extra = 'N';
+                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
+                                    shape === 's' ?  "desde el frente a la derecha hacia atrás a la izquierda." 
+                                    : "desde arriba a la derecha hacia abajo a la izquierda.";
             }
             break;
         case 'E': // Horizontal
@@ -55,14 +65,17 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow east
                 dir = 'Y';
                 extra = arro1[1] ? 'R' : undefined;
+                arroDescription += "la derecha.";
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow west
                 dir = 'X';
                 extra = arro2[1] ? 'R' : undefined;
+                arroDescription += "la izquierda.";
             }
             else{ // Arrow on both sides
                 dir = "";
                 extra = 'N';
+                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén de derecha a izquierda.";
             }
             break;
         case 'SE':
@@ -74,15 +87,20 @@ const stemToSignotation = (stem, arros) => {
             if(arro1 != undefined && arro2 === undefined){ // Arrow north west
                 dir = shape === 's' ? 'FX' : 'HX';
                 extra = arro1[1] ? 'R' : undefined;
+                arroDescription += shape === 's' ? 'el frente a la izquierda.' : 'arriba a la izquierda.';
             }
             else if(arro2 != undefined && arro1 === undefined){ // Arrow south east
                 dir = shape === 's' ? 'BY' : 'LY';
                 extra = arro2[1] ? 'R' : undefined;
+                arroDescription += shape === 's' ? 'atrás a la derecha.' : 'abajo a la derecha.';
             }
             else{
                 dir = "";
                 extra = 'N';
-            }
+                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
+                                    shape === 's' ?  "desde el frente a la izquierda hacia atrás a la derecha." 
+                                    : "desde arriba a la izquierda hacia abajo a la derecha.";
+                                }
             break;
         default:
             break;

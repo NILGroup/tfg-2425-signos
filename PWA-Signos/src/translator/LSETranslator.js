@@ -165,16 +165,16 @@ const responseToSignotation = (response) => {
     classifyGraphemes(response, graphemes);
 
     console.log(graphemes);
+    graphemes["HAND"].forEach((grapheme) => {
+        handToSignotation(grapheme["tags"]);
+    });
+    
     graphemes["HEAD"].forEach((grapheme) => {
         headToSignotation(grapheme["tags"]);
     });
 
     graphemes["DIAC"].forEach((grapheme) => {
         diacToSignotation(grapheme["tags"], diacsInfo);
-    });
-
-    graphemes["HAND"].forEach((grapheme) => {
-        handToSignotation(grapheme["tags"]);
     });
 
     graphemes["STEM"].forEach((grapheme) => {
