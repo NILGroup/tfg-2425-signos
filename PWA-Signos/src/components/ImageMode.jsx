@@ -21,14 +21,16 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
         <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error}/>
 
 		{isLoading && <Loading/>}
+
+    {error && <Error error={error}/>}
 		
 		<SignotationText signotation={signotation} isLoading={isLoading}/>
 	
 		<Videos videos={videos} isLoading={isLoading}/> 
 
-		{error && <Error error={error}/>}
+		
 
-    <div className={`flex justify-center items-end gap-10 mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
+    <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -133,8 +135,8 @@ const MoreInfoButton = ({dispatch}) => {
 
 const Loading = () => {
   return (<>
-    <h1 className="flex flex-1 justify-center items-center text-2xl text-[#4682A9] font-bold gap-5 md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
-      <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">
+    <h1 className="flex flex-1 justify-center items-center text-xl md:text-2xl text-[#4682A9] font-bold gap-5 md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
+      <svg className="w-6.5 h-6.5 md:w-8.5 md:h-8.5 animate-spin" viewBox="0 0 50 50">
         <circle
           className="stroke-current"
           cx="25"
@@ -154,7 +156,7 @@ const Loading = () => {
 
 const Error = ({error}) => {
 	return (
-	<div className="flex flex-col gap-3 justify-center items-center text-2xl text-[#4682A9] font-bold md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
+	<div className="flex flex-1 flex-col justify-center items-center gap-1 md:gap-3 mx-4 md:mx-0 text-xl md:text-2xl text-[#4682A9] font-bold md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
     <h1>¡Lo sentimos!</h1>
 	  <h1>{error}</h1>
     <h1>Por favor, vuelva a intentarlo.</h1>     
