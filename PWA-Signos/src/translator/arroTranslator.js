@@ -8,9 +8,9 @@ const findClosestArro = (x, y, arrows, margin) => {
   arrows.forEach((arro, index) => {
     if (!arro["paired"]) {
       let dist = distanceTo(x, y, arro["box"][0], arro["box"][1]);
-      if (dist < minDist)
       // Stems and half arcs
-      if (margin===undefined && dist < Math.max(arro["box"][2], arro["box"][3])) {
+      let d = 1.1*Math.max(arro["box"][2], arro["box"][3]);
+      if (margin===undefined && dist < d) {
         minDist = dist;
         closestArro = arro;
         closestArroIdx = index;

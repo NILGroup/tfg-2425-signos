@@ -88,7 +88,7 @@ const stemToSignotation = (stem, arros) => {
             break;
     }
 
-    stem["tags"]["SIGNOTATION"] = dir === undefined ? "" : '->:' + dir;
+    stem["tags"]["SIGNOTATION"] = dir === undefined ? undefined : '->:' + dir;
     stem["tags"]["EXTRA"] = extra;
 };
 
