@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Videos from "./Videos.jsx";
 import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
@@ -12,7 +12,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 
   return (
     <>
-      <div className={`flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_100px] md:grid-cols-[1fr_1fr] ${helpVisible ? "blur-sm" : ""}`}>
+      <div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_100px] md:grid-cols-[1fr_1fr]">
         {!image && <div className={`flex flex-col flex-1 justify-center items-center mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:row-start-1 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
           <ExplText/>
           <ExamplesButton/>
@@ -34,18 +34,12 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 			
 			<UploadImage dispatch={dispatch} image={file}/>
 
-			{/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
+			<MoreInfoButton dispatch={dispatch}/>
 			
         </div>
   
       </div>
-    
-      {/* {helpVisible && (
-      <div className="absolute flex justify-center items-center">
-        <BackButton setMoreInfoVisible={setMoreInfoVisible}/>
-        <MoreInfoCard />
-      </div>
-      )} */}
+
 
     </>
   );
@@ -118,18 +112,11 @@ const SelectImageButton = ({dispatch}) => {
     );
 }
 
-const MoreInfoCard = () => {
-  return (
-    <div className="h-100 w-100 bg-blue-50 rounded-lg">
-      <h1>Traduciendo la signoescritura</h1>
-    </div>
-  )
-}
 
-const MoreInfoButton = ({setMoreInfoVisible}) => {
+const MoreInfoButton = ({dispatch}) => {
 
   const handleMoreInfoClick = () => {
-    setMoreInfoVisible(true);
+    dispatch({ type: "show_help" });
   }
 
   return (
@@ -142,19 +129,7 @@ const MoreInfoButton = ({setMoreInfoVisible}) => {
   );
 }
 
-const BackButton = ({setMoreInfoVisible}) => {
-  const handleBackButtonClick = () => {
-    setMoreInfoVisible(false);
-  }
 
-  return (
-    <>
-    {/*More infgo buttton*/}
-    <button onClick={handleBackButtonClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
-        <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
-     </button>
-    </> );
-}
 
 const Loading = () => {
   return (<>
