@@ -28,7 +28,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 
 		{error && <Error error={error}/>}
 
-        <div className={`flex justify-center items-end gap-10 mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
+    <div className={`flex justify-center items-end gap-10 mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -58,7 +58,7 @@ const ExplText = () => {
 const ExamplesButton = () => {
   return (
     <>
-    <button className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+    <button className="group border-[#4682A9] border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
       <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
     </button>
     </>
@@ -154,9 +154,11 @@ const Loading = () => {
 
 const Error = ({error}) => {
 	return (
-	<div className="flex flex-1 justify-center items-center text-2xl text-[#4682A9] font-bold md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
+	<div className="flex flex-col gap-3 justify-center items-center text-2xl text-[#4682A9] font-bold md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
+    <h1>¡Lo sentimos!</h1>
 	  <h1>{error}</h1>
-	</div>
+    <h1>Por favor, vuelva a intentarlo.</h1>     
+	</div>  
   )
 }
 

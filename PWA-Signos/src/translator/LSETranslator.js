@@ -38,37 +38,65 @@ const groupSignotation = (graphemes, diacsInfo) => {
     let rep = undefined;
 
     switch (graphemes["HAND"].length) {
-        case 1: // There is only 1 hand
-            signotation += graphemes["HAND"][0]["tags"]["SIGNOTATION"];
+        case 0: // There is no hand
             signotation +=
-                (graphemes["HEAD"].length == 0 || graphemes["HEAD"][0]["tags"]["SIGNOTATION"] === undefined)
+                graphemes["HEAD"].length == 0 ||
+                graphemes["HEAD"][0]["tags"]["SIGNOTATION"] === undefined
                     ? ""
                     : ":" + graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
 
-            for(let diac in diacsInfo){
-                if(diacsInfo[diac]["numApps"] > 1){
-                    rep = ':R';
+            for (let diac in diacsInfo) {
+                if (diacsInfo[diac]["numApps"] > 1) {
+                    rep = ":R";
                 }
                 signotation += ":" + diacsInfo[diac]["signotation"];
             }
-			graphemes["STEM"].forEach((stem) => {
-				signotation += ":" + stem["tags"]["SIGNOTATION"];
+            graphemes["STEM"].forEach((stem) => {
+                signotation += ":" + stem["tags"]["SIGNOTATION"];
                 if (stem["tags"]["EXTRA"] !== undefined)
                     rep = stem["tags"]["EXTRA"] === "R" ? "R" : "N";
-                    
-			});
-			graphemes["ARC"].forEach((arc) => {
-				signotation += ":" + arc["tags"]["SIGNOTATION"];
+            });
+            graphemes["ARC"].forEach((arc) => {
+                signotation += ":" + arc["tags"]["SIGNOTATION"];
                 if (arc["tags"]["EXTRA"] !== undefined)
                     rep = arc["tags"]["EXTRA"] === "R" ? "R" : "N";
-			});
+            });
 
             if (rep !== undefined) {
-                signotation += rep; 
+                signotation += rep;
             }
             break;
-        default: // No hands
-            throw new Error("¡Lo sentimos! No se ha podido traducir la imagen");
+        case 1: // There is only 1 hand
+            signotation += graphemes["HAND"][0]["tags"]["SIGNOTATION"];
+            signotation +=
+                graphemes["HEAD"].length == 0 ||
+                graphemes["HEAD"][0]["tags"]["SIGNOTATION"] === undefined
+                    ? ""
+                    : ":" + graphemes["HEAD"][0]["tags"]["SIGNOTATION"];
+
+            for (let diac in diacsInfo) {
+                if (diacsInfo[diac]["numApps"] > 1) {
+                    rep = ":R";
+                }
+                signotation += ":" + diacsInfo[diac]["signotation"];
+            }
+            graphemes["STEM"].forEach((stem) => {
+                signotation += ":" + stem["tags"]["SIGNOTATION"];
+                if (stem["tags"]["EXTRA"] !== undefined)
+                    rep = stem["tags"]["EXTRA"] === "R" ? "R" : "N";
+            });
+            graphemes["ARC"].forEach((arc) => {
+                signotation += ":" + arc["tags"]["SIGNOTATION"];
+                if (arc["tags"]["EXTRA"] !== undefined)
+                    rep = arc["tags"]["EXTRA"] === "R" ? "R" : "N";
+            });
+
+            if (rep !== undefined) {
+                signotation += rep;
+            }
+            break;
+        default:
+            throw new Error("Se ha identificado más de una mano en la imagen.");
     }
 
     return signotation;
@@ -85,8 +113,7 @@ const responseToSignotation = (response) => {
     };
 
     const diacsInfo = {};
-    try{
-
+    try {
         classifyGraphemes(response["graphemes"], graphemes);
 
         console.log(graphemes);
@@ -109,13 +136,12 @@ const responseToSignotation = (response) => {
         graphemes["ARC"].forEach((grapheme) => {
             arcToSignotation(grapheme, graphemes["ARRO"]);
         });
-    }
-    catch (error) {
-        throw new Error("¡Lo sentimos! No se ha podido traducir la imagen");
+    } catch (error) {
+        throw new Error("No se ha podido traducir la imagen");
     }
 
-	let r = groupSignotation(graphemes, diacsInfo);
-	console.log(r);
+    let r = groupSignotation(graphemes, diacsInfo);
+    console.log(r);
     return r;
 };
 
