@@ -152,7 +152,7 @@ const HelpCard = ({ dispatch }) => {
     return (
         <div className="fixed inset-0 z-10 bg-black/30 flex justify-center items-center animate-fadeIn">
                 <div className="relative rounded-xl flex flex-col gap-2 p-3 md:p-4 mx-3 md:mx-0 bg-[#c5dbe6] rounded-xl
-                transition-all duration-200 ease-in-out transform scale-95 animate-scaleIn">
+                transition-all duration-300 ease-in-out transform animate-scaleIn">
                   <QuitButton dispatch={dispatch} />
                   <div className="flex flex-col items-center text-justify">
                     <h1 className="text-center text-xl md:text-2xl text-center text-[#4682A9] font-bold">Traduciendo la Signoescritura</h1>
