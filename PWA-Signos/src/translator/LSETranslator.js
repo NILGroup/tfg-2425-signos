@@ -89,12 +89,12 @@ const createSignotation = (graphemes, diacsInfo) => {
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
             // Hand signotation
-            handSignotation.push(graphemes["HAND"][0]["tags"]["SIGNOTATION"]);
+            handSignotation.push({signotation: graphemes["HAND"][0]["tags"]["SIGNOTATION"], description: graphemes["HAND"][0]["description"][0]});
             signotation.push(handSignotation);
 
             // Head signotation
             if(graphemes["HEAD"].length > 0 && graphemes["HEAD"][0]["tags"]["SIGNOTATION"] !== undefined){
-                headSignotation.push(graphemes["HEAD"][0]["tags"]["SIGNOTATION"]);
+                headSignotation.push({signotation: graphemes["HEAD"][0]["tags"]["SIGNOTATION"], description: graphemes["HEAD"][0]["description"]});
                 signotation.push(headSignotation);
             }
                 
@@ -103,7 +103,7 @@ const createSignotation = (graphemes, diacsInfo) => {
             for(let diac in diacsInfo){
                 if(diacsInfo[diac]["numApps"] > 1)
                     repRandN[0] = true;
-                diacSignotation.push(diacsInfo[diac]["signotation"]);
+                diacSignotation.push({signotation: diacsInfo[diac]["signotation"], description: diacsInfo[diac]["description"]});
             }
             if(diacSignotation.length > 0)
                 signotation.push(diacSignotation);
@@ -112,7 +112,7 @@ const createSignotation = (graphemes, diacsInfo) => {
             // Stem signotation
 			graphemes["STEM"].forEach((stem) => {
                 if (stem["tags"]["SIGNOTATION"] !== undefined){
-                    stemSignotation.push(stem["tags"]["SIGNOTATION"]);
+                    stemSignotation.push({signotation: stem["tags"]["SIGNOTATION"], description: stem["description"]});
                     if (stem["tags"]["EXTRA"] !== undefined && stem["tags"]["EXTRA"] === 'R')
                         repRandN[0] = true;
                     else if (stem["tags"]["EXTRA"] !== undefined && stem["tags"]["EXTRA"] === 'N')
@@ -134,10 +134,10 @@ const createSignotation = (graphemes, diacsInfo) => {
                 signotation.push(arcSignotation);
 
             if(repRandN[0]) {
-                repSignotation.push('R');
+                repSignotation.push({signotation: 'R', description: 'La *R* indica repetición'});
             }
             if(repRandN[1]) {
-                repSignotation.push('N');
+                repSignotation.push({signotation:'N', description: 'La *N* indica vaivén en un movimiento'});
             }
             if(repSignotation.length > 0)
                 signotation.push(repSignotation);
@@ -174,7 +174,7 @@ const responseToSignotation = (response) => {
     });
 
     graphemes["DIAC"].forEach((grapheme) => {
-        diacToSignotation(grapheme["tags"], diacsInfo);
+        diacToSignotation(grapheme, diacsInfo);
     });
 
     graphemes["STEM"].forEach((grapheme) => {
@@ -187,7 +187,7 @@ const responseToSignotation = (response) => {
 
 	//let r = groupSignotation(graphemes, diacsInfo);
     let r = createSignotation(graphemes, diacsInfo);
-    console.log('signotacion creada: ' + r);
+    console.log(r);
     return r;
 };
 

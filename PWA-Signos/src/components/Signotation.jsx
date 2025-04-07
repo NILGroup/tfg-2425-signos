@@ -1,6 +1,9 @@
-import React from "react";
+import { useState } from "react";
 
-const Signotation = ({ signotation, isLoading }) => {
+const Signotation = ({ signotation, isLoading, dispatch}) => {
+
+  const [selected, setSelected] = useState(null);
+
   return (
     <>
       {signotation && !isLoading && (
@@ -13,7 +16,7 @@ const Signotation = ({ signotation, isLoading }) => {
               signotation[i].length > 0 &&
               signotation[i].map((_, j) => (
                 <div className="flex items-center" key={`${i}-${j}`}>
-                  <ButtonSignotation signotationText={signotation[i][j]} indexi={i} indexj={j} signotation={signotation}/>
+                  <ButtonSignotation selected={selected} setSelected={setSelected} dispatch={dispatch} signotationText={signotation[i][j].signotation} i={i} j={j}/>
                   {(i != signotation.length - 1 || (i == signotation.length - 1 && j != signotation[i].length - 1)) && 
                     <span className="text-[#4682A9] font-bold">:</span>}
                 </div>
@@ -26,16 +29,22 @@ const Signotation = ({ signotation, isLoading }) => {
   );
 };
 
-const handleSignotation = (i, j, signotation) => {
-  return <h1 className="text-[#4682A9] font-bold text-xl">
-        signotation[i][j][description]
-      </h1>
-};
+const ButtonSignotation = ({ selected, setSelected, signotationText, i, j, dispatch}) => {
 
-const ButtonSignotation = ({ signotationText, i, j, signotation }) => {
+  const handleClick = () => {
+    if(selected && selected.i == i && selected.j == j){
+      setSelected(null);
+      dispatch({ type: "unselect_signotation"});
+    }
+    else{
+      setSelected({ i: i, j: j });
+      dispatch({ type: "select_signotation", i: i, j: j });
+    }
+  };
+
   return (
-    <button onClick={handleSignotation(i,j, signotation)} className="group rounded-xl overflow-hidden hover:bg-[#4682A9] cursor-pointer mx-1 px-4 py-2">
-      <h1 className="group-hover:brightness-0 group-hover:invert group-hover:scale-110 text-[#4682A9] font-bold text-xl">
+    <button onClick={handleClick} className={`${selected && selected.i == i && selected.j == j ? "bg-[#4682A9]" : "hover:bg-[#91bbd6]"} group rounded-xl overflow-hidden cursor-pointer mx-1 px-4 py-2`}>
+      <h1 className={`${selected && selected.i == i && selected.j == j ? "brightness-0 invert scale-110" : "group-hover:scale-110"}  text-[#4682A9] font-bold text-xl`}>
         {signotationText}
       </h1>
     </button>

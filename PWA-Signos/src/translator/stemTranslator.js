@@ -6,7 +6,7 @@ const stemToSignotation = (stem, arros) => {
     const [cx, cy, h, w] = stem['box'];
     let arro1, arro2, dir;
     let extra = undefined; 
-    let arroDescription = 'La punta de la flecha indica que el movimiento es hacia ';
+    let arroDescription = ' La punta de la flecha indica que el movimiento es hacia ';
 
     switch (rot){
         case 'N': // Vertical
@@ -28,7 +28,7 @@ const stemToSignotation = (stem, arros) => {
             else{ // Arrow on both sides
                 dir = '';
                 extra = 'N';
-                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
+                arroDescription = " Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
                                     shape === 's' ?  "de delante a atrás" : "de arriba a abajo";
             }
             break;
@@ -51,7 +51,7 @@ const stemToSignotation = (stem, arros) => {
             else{ // Arrow on both sides
                 dir = "";
                 extra = 'N';
-                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
+                arroDescription = " Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
                                     shape === 's' ?  "desde el frente a la derecha hacia atrás a la izquierda" 
                                     : "desde arriba a la derecha hacia abajo a la izquierda";
             }
@@ -75,7 +75,7 @@ const stemToSignotation = (stem, arros) => {
             else{ // Arrow on both sides
                 dir = "";
                 extra = 'N';
-                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén de derecha a izquierda";
+                arroDescription = " Las puntas de flecha a cada lado indican que es un movimiento de vaivén de derecha a izquierda";
             }
             break;
         case 'SE':
@@ -97,7 +97,7 @@ const stemToSignotation = (stem, arros) => {
             else{
                 dir = "";
                 extra = 'N';
-                arroDescription = "Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
+                arroDescription = " Las puntas de flecha a cada lado indican que es un movimiento de vaivén " + 
                                     shape === 's' ?  "desde el frente a la izquierda hacia atrás a la derecha" 
                                     : "desde arriba a la izquierda hacia abajo a la derecha";
                                 }

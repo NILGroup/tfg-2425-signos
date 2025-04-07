@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   image: null,
   imageName: null,
   signotation: null,
+  selectedSignotation: null,
   videos: null,
 }
 
@@ -34,6 +35,10 @@ const reducer = (state, action) => {
       return { ...state}
     case 'set_signotation':
       return { ...state, signotation: action.signotation }
+    case 'select_signotation':
+      return { ...state, selectedSignotation: {i: action.i, j: action.j} }
+    case 'unselect_signotation':
+      return { ...state, selectedSignotation: null }
     case 'signario_response':
       return { ...state, videos: action.videos}
     case 'error_response':
