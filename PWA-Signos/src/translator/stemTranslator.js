@@ -13,8 +13,10 @@ const stemToSignotation = (stem, arros) => {
             arro1 = findClosest(cx, cy - h/2, arros); // Find arrow North
             arro2 = findClosest(cx, cy + h/2, arros); // Find arrow South
 
-            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+            if(arro1 === undefined && arro2 === undefined){ // Shoulders, waists, forearms or complex movements are ignored
+                arroDescription = "";
                 break;
+            }
             if(arro1 != undefined && arro2 === undefined){ // Arrow north
                 dir = shape === 's' ? 'F' : 'H';
                 extra = arro1[1] ? 'R' : undefined;
@@ -36,8 +38,10 @@ const stemToSignotation = (stem, arros) => {
             arro1 = findClosest(cx + w/2, cy - h/2, arros);  // Find arrow North East
             arro2 = findClosest(cx - w/2, cy + h/2, arros);  // Find arrow South West
 
-            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+            if(arro1 === undefined && arro2 === undefined){ // Shoulders, waists, forearms or complex movements are ignored
+                arroDescription = "";
                 break;
+            }
             if(arro1 != undefined && arro2 === undefined){ // Arrow north east
                 dir = shape === 's' ? 'FY' : 'HY';
                 extra = arro1[1] ? 'R' : undefined;
@@ -60,8 +64,10 @@ const stemToSignotation = (stem, arros) => {
             arro1 = findClosest(cx + w/2, cy, arros);  // Find arrow East
             arro2 = findClosest(cx - w/2, cy, arros);  // Find arrow West
 
-            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+            if(arro1 === undefined && arro2 === undefined){ // Shoulders, waists, forearms or complex movements are ignored
+                arroDescription = "";
                 break;
+            }
             if(arro1 != undefined && arro2 === undefined){ // Arrow east
                 dir = 'Y';
                 extra = arro1[1] ? 'R' : undefined;
@@ -82,8 +88,10 @@ const stemToSignotation = (stem, arros) => {
             arro1 = findClosest(cx - w/2, cy - h/2, arros);  // Find arrow North West
             arro2 = findClosest(cx + w/2, cy + h/2, arros);  // Find arrow South East
 
-            if(arro1 === undefined && arro2 === undefined) // Shoulders, waists, forearms or complex movements are ignored
+            if(arro1 === undefined && arro2 === undefined){ // Shoulders, waists, forearms or complex movements are ignored
+                arroDescription = "";
                 break;
+            }
             if(arro1 != undefined && arro2 === undefined){ // Arrow north west
                 dir = shape === 's' ? 'FX' : 'HX';
                 extra = arro1[1] ? 'R' : undefined;
