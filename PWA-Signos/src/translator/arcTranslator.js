@@ -6,7 +6,6 @@ const incompleteArcs = (arc, arros) => {
   const [cx, cy, h, w] = arc["box"];
   let arro1, arro2, dir, coda;
   let extra = undefined;
-  let arroDescription = "La punta de la flecha indica que el movimiento es hacia ";
 
   switch (rot) {
     case "N": // Middle point of the ARC segment
