@@ -17,8 +17,9 @@ const Canvas = (isLoading, dispatch) => {
         const canvasOffsetY = canvas.offsetTop;
         const canvasMarginTop = 10;
 
-        canvas.width = window.innerWidth - canvasOffsetX * 2;
-        canvas.height = window.innerHeight - canvasOffsetY * 2 - canvasMarginTop;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
 
         let drawing = false;
 
