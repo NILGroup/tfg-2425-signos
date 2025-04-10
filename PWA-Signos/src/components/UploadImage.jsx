@@ -10,7 +10,7 @@ const UploadImage = ({image, dispatch}) => {
     try {
       dispatch({ type: "set_loading" } )
       const response = await fetch(
-        /*VISSE_BACKEND_URL*/ "http://localhost:3999/recognize/raw",
+        /*VISSE_BACKEND_URL*/ "http://localhost:3999/recognize?raw=true",
         {
           method: "POST",
           body: image,

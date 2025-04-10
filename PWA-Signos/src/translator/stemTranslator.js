@@ -1,9 +1,10 @@
 import { findClosest } from "./arroTranslator";
 
 const stemToSignotation = (stem, arros) => {
-    const rot = stem['tags']['ROT'];
-    const shape = stem['tags']['SHAPE'];
-    const [cx, cy, h, w] = stem['box'];
+    const rot = stem['grapheme']['ROT'];
+    const shape = stem['grapheme']['SHAPE'];
+    const [cx, cy, h, w] = [stem["explanation"]["left"] + stem["explanation"]["width"] / 2, stem["explanation"]["top"] + stem["explanation"]["height"] / 2,
+                            stem["explanation"]["height"], stem["explanation"]["width"]];
     let arro1, arro2, dir;
     let extra = undefined; 
     let arroDescription = ' La punta de la flecha indica que el movimiento es hacia ';
@@ -114,9 +115,9 @@ const stemToSignotation = (stem, arros) => {
             break;
     }
 
-    stem["tags"]["SIGNOTATION"] = dir === undefined ? undefined : '->:' + dir;
-    stem["tags"]["EXTRA"] = extra;
-    stem["description"] += arroDescription + (extra === 'R' ? " y se repite" : "") + '.';
+    stem["signotation"] = dir === undefined ? undefined : '->:' + dir;
+    stem["extra"] = extra;
+    stem["explanation"]["text"] += arroDescription + (extra === 'R' ? " y se repite" : "") + '.';
 };
 
 export default stemToSignotation;

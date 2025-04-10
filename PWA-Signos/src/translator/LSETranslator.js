@@ -5,26 +5,26 @@ import stemToSignotation from "./stemTranslator";
 import arcToSignotation from "./arcTranslator";
 
 const classifyGraphemes = (response, graphemes) => {
-    response.forEach((grapheme) => {
-        switch (grapheme["tags"]["CLASS"]) {
+    response["raw_tags"].forEach((grapheme, index) => {
+        switch (grapheme["CLASS"]) {
             case "HEAD":
-                graphemes["HEAD"].push(grapheme);
+                graphemes["HEAD"].push({grapheme: grapheme, explanation: response["explanations"][index]});
                 break;
             case "DIAC":
-                graphemes["DIAC"].push(grapheme);
+                graphemes["DIAC"].push({grapheme: grapheme, explanation: response["explanations"][index]});
                 break;
             case "HAND":
-                graphemes["HAND"].push(grapheme);
+                graphemes["HAND"].push({grapheme: grapheme, explanation: response["explanations"][index]});
                 break;
             case "ARRO":
                 grapheme["paired"] = false;
-                graphemes["ARRO"].push(grapheme);
+                graphemes["ARRO"].push({grapheme: grapheme, explanation: response["explanations"][index]});
                 break;
             case "STEM":
-                graphemes["STEM"].push(grapheme);
+                graphemes["STEM"].push({grapheme: grapheme, explanation: response["explanations"][index]});
                 break;
             case "ARC":
-                graphemes["ARC"].push(grapheme);
+                graphemes["ARC"].push({grapheme: grapheme, explanation: response["explanations"][index]});
                 break;
             default:
                 break;
@@ -89,12 +89,12 @@ const createSignotation = (graphemes, diacsInfo) => {
     switch (graphemes["HAND"].length) {
         case 1: // There is only 1 hand
             // Hand signotation
-            handSignotation.push({signotation: graphemes["HAND"][0]["tags"]["SIGNOTATION"], description: graphemes["HAND"][0]["description"][0]});
+            handSignotation.push({signotation: graphemes["HAND"][0]["signotation"], description: graphemes["HAND"][0]["explanation"]["text"]});
             signotation.push(handSignotation);
 
             // Head signotation
-            if(graphemes["HEAD"].length > 0 && graphemes["HEAD"][0]["tags"]["SIGNOTATION"] !== undefined){
-                headSignotation.push({signotation: graphemes["HEAD"][0]["tags"]["SIGNOTATION"], description: graphemes["HEAD"][0]["description"]});
+            if(graphemes["HEAD"].length > 0 && graphemes["HEAD"][0]["signotation"] !== undefined){
+                headSignotation.push({signotation: graphemes["HEAD"][0]["signotation"], description: graphemes["HEAD"][0]["explanation"]["text"]});
                 signotation.push(headSignotation);
             }
                 
@@ -111,11 +111,11 @@ const createSignotation = (graphemes, diacsInfo) => {
             
             // Stem signotation
 			graphemes["STEM"].forEach((stem) => {
-                if (stem["tags"]["SIGNOTATION"] !== undefined){
-                    stemSignotation.push({signotation: stem["tags"]["SIGNOTATION"], description: stem["description"]});
-                    if (stem["tags"]["EXTRA"] !== undefined && stem["tags"]["EXTRA"] === 'R')
+                if (stem["signotation"] !== undefined){
+                    stemSignotation.push({signotation: stem["signotation"], description: stem["explanation"]["text"]});
+                    if (stem["extra"] !== undefined && stem["extra"] === 'R')
                         repRandN[0] = true;
-                    else if (stem["tags"]["EXTRA"] !== undefined && stem["tags"]["EXTRA"] === 'N')
+                    else if (stem["extra"] !== undefined && stem["extra"] === 'N')
                         repRandN[1] = true;
                 }		
 			});
@@ -124,10 +124,10 @@ const createSignotation = (graphemes, diacsInfo) => {
 
             // Arc signotation
 			graphemes["ARC"].forEach((arc) => {
-				arcSignotation.push(arc["tags"]["SIGNOTATION"]);
-                if (arc["tags"]["EXTRA"] !== undefined && arc["tags"]["EXTRA"] === 'R')
+				arcSignotation.push(arc["signotation"]);
+                if (arc["extra"] !== undefined && arc["extra"] === 'R')
                     repRandN[0] = true;
-                else if (arc["tags"]["EXTRA"] !== undefined && arc["tags"]["EXTRA"] === 'N')
+                else if (arc["extra"] !== undefined && arc["extra"] === 'N')
                     repRandN[1] = true;
 			});
             if(arcSignotation.length > 0)
@@ -166,11 +166,11 @@ const responseToSignotation = (response) => {
 
     console.log(graphemes);
     graphemes["HAND"].forEach((grapheme) => {
-        handToSignotation(grapheme["tags"]);
+        handToSignotation(grapheme);
     });
     
     graphemes["HEAD"].forEach((grapheme) => {
-        headToSignotation(grapheme["tags"]);
+        headToSignotation(grapheme);
     });
 
     graphemes["DIAC"].forEach((grapheme) => {
