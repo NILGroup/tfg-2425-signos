@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import clearIcon from '../assets/delete.svg';
 import checkIcon from '../assets/check.svg';
 
-const Canvas = (isLoading, dispatch) => {
+const Canvas = ({dispatch}) => {
     const canvasRef = useRef(null);
     const toolbarRef = useRef(null);
 
@@ -15,7 +15,6 @@ const Canvas = (isLoading, dispatch) => {
 
         let canvasOffsetX = canvas.offsetLeft;
         let canvasOffsetY = canvas.offsetTop;
-        const canvasMarginTop = 10;
 
         let rect = canvas.getBoundingClientRect();
         canvas.width = rect.width;
@@ -61,8 +60,9 @@ const Canvas = (isLoading, dispatch) => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             }
             else if (e.target.id === "check") {
-                let dataURL = canvas.toDataURL();
-                // handleFileUpload -> subir imagen a VisSE
+                canvas.toBlob((blob) => {
+                    dispatch({ type: "image_selected", file: new File([blob], "SignoEscritura", { type: blob.type }) });
+                }, "image/png");
             }
         };
 
