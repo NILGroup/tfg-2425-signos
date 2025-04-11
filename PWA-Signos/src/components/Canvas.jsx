@@ -13,12 +13,21 @@ const Canvas = (isLoading, dispatch) => {
 
         const ctx = canvas.getContext("2d");
 
-        const canvasOffsetX = canvas.offsetLeft;
-        const canvasOffsetY = canvas.offsetTop;
+        let canvasOffsetX = canvas.offsetLeft;
+        let canvasOffsetY = canvas.offsetTop;
         const canvasMarginTop = 10;
 
-        canvas.width = window.innerWidth - canvasOffsetX * 2;
-        canvas.height = window.innerHeight - canvasOffsetY * 2 - canvasMarginTop;
+        let rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        window.onresize = () => {
+            canvasOffsetX = canvas.offsetLeft;
+            canvasOffsetY = canvas.offsetTop;
+            rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+        }
 
         let drawing = false;
 
