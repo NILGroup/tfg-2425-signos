@@ -71,14 +71,20 @@ const Canvas = ({dispatch}) => {
             if (e.target.id === "clear") {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             } else if (e.target.id === "upload") {
-                // Fill with white background
-                ctx.fillStyle = 'white';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                // Create temporary canvas
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = canvas.width;
+                tempCanvas.height = canvas.height;
+                const tempCtx = tempCanvas.getContext('2d');
                 
-                // Draw original canvas content on top
-                ctx.drawImage(canvas, 0, 0);
+                // 1. Fill temp canvas with white
+                tempCtx.fillStyle = 'white';
+                tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
                 
-             canvas.toBlob((blob) => {
+                // 2. Draw original content on top
+                tempCtx.drawImage(canvas, 0, 0);
+                            
+                tempCanvas.toBlob((blob) => {
                      
                     const image = new File([blob], "SignoEscritura", { type: blob.type })
 
@@ -88,7 +94,6 @@ const Canvas = ({dispatch}) => {
                     });
                     const upload = new FormData();
                     upload.append("image", image);
-                    console.log(upload);
                     // Send selected image to VisSE
                     connection(dispatch, upload);                 
                 }, "image/png");

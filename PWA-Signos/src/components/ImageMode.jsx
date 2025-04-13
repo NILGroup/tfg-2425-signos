@@ -87,7 +87,6 @@ const SignotationText = ({signotation, isLoading}) => {
 }
 
 export const Image = ({image, imageName}) => {
-  console.log(image);
     return (<>{image && <div className="flex flex-col gap-1"> 
         <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
