@@ -2,7 +2,7 @@ import { useReducer } from 'react'
 import './App.css'
 import SwitchMode from './components/SwitchMode.jsx'
 import ImageMode from './components/ImageMode.jsx'
-import Canvas from './components/Canvas.jsx'
+import CanvasMode from './components/CanvasMode.jsx'
 import Examples from './components/Examples.jsx'
 
 const INITIAL_STATE = {
@@ -32,6 +32,13 @@ const reducer = (state, action) => {
       return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, videos: null}
     case 'upload_image':
       return { ...state}
+    case 'upload_canvas':
+      if (state.image) {
+        URL.revokeObjectURL(state.image);
+        state.imageName = null;
+        state.file = null;
+      }
+      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name}
     case 'set_signotation':
       return { ...state, signotation: action.signotation }
     case 'signario_response':
@@ -71,7 +78,7 @@ function App() {
     screen = <ImageMode dispatch={dispatch} {...state}/>
   }
   else if(state.screen === 'canvas_screen'){
-    screen = <Canvas dispatch={dispatch} {...state}/>
+    screen = <CanvasMode dispatch={dispatch} {...state}/>
   }
   else if(state.screen === 'examples_screen'){
     screen = <Examples dispatch={dispatch}/>

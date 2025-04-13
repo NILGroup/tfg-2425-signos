@@ -1,14 +1,11 @@
 import { useState, useRef } from "react";
 import Videos from "./Videos.jsx";
-import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
+import checkIcon from '../assets/check.svg';
+import { connection } from "../connection.js";
 
 const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, dispatch}) => {
-  //const [selectedFile, setSelectedFile] = useState(null);
-  //const [videos, setVideos] = useState(null);
-  //const [signotationText, setSignotationText] = useState(null);
-  //const [helpVisible, setMoreInfoVisible] = useState(null);
 
   return (
     <>
@@ -27,7 +24,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
               
               <SelectImageButton dispatch={dispatch}/>
               
-              <UploadImage dispatch={dispatch} image={file}/>
+              <UploadImageButton dispatch={dispatch} image={file}/>
 
               {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
             
@@ -89,7 +86,8 @@ const SignotationText = ({signotation, isLoading}) => {
   )
 }
 
-const Image = ({image, imageName}) => {
+export const Image = ({image, imageName}) => {
+  console.log(image);
     return (<>{image && <div className="flex flex-col gap-1"> 
         <img className="border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="text-[#4682A9] font-bold text-lg"> {imageName} </p> 
@@ -124,6 +122,26 @@ const SelectImageButton = ({dispatch}) => {
         </>
     );
 }
+
+const UploadImageButton = ({dispatch, image}) => {
+
+  const handleFileUpload = () => {
+    const upload = new FormData();
+    upload.append("image", image);
+    console.log(image);
+    // Send selected image to VisSE
+    connection(dispatch, upload);
+  };
+
+  return (
+    <>   
+      {/*Check button*/}
+      <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+        <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+      </button>
+    </>
+  );
+};
 
 const MoreInfoCard = () => {
   return (
