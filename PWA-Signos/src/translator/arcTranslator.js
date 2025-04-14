@@ -1,9 +1,10 @@
 import { findClosest } from "./arroTranslator.js";
 
 const incompleteArcs = (arc, arros) => {
-  const rot = arc["tags"]["ROT"];
-  const shape = arc["tags"]["SHAPE"][0];
-  const [cx, cy, h, w] = arc["box"];
+  const rot = arc["grapheme"]["ROT"];
+  const shape = arc["grapheme"]["SHAPE"][0];
+  const [cx, cy, h, w] = [arc["explanation"]["left"] + arc["explanation"]["width"] / 2, arc["explanation"]["top"] + arc["explanation"]["height"] / 2,
+                          arc["explanation"]["height"], arc["explanation"]["width"]];
   let arro1, arro2, dir, coda;
   let extra = undefined;
 
@@ -174,9 +175,10 @@ const incompleteArcs = (arc, arros) => {
 };
 
 const fullArcs = (arc, arros) => {
-  const rot = arc["tags"]["ROT"];
-  const shape = arc["tags"]["SHAPE"][0];
-  const [cx, cy, h, w] = arc["box"];
+  const rot = arc["grapheme"]["ROT"];
+  const shape = arc["grapheme"]["SHAPE"][0];
+  const [cx, cy, h, w] = [arc["explanation"]["left"] + arc["explanation"]["width"] / 2, arc["explanation"]["top"] + arc["explanation"]["height"] / 2,
+                          arc["explanation"]["height"], arc["explanation"]["width"]];
   let arro;
   let ini = "", dir = "";
   let extra = false;
@@ -233,7 +235,7 @@ const fullArcs = (arc, arros) => {
 };
 
 const arcToSignotation = (arc, arros) => {
-  const shape = arc["tags"]["SHAPE"];
+  const shape = arc["grapheme"]["SHAPE"];
   let signotation = undefined;
 
   if (shape[1] == "q" || shape[1] == "h") {
@@ -243,8 +245,8 @@ const arcToSignotation = (arc, arros) => {
     // Traduction for full arcs
     signotation = fullArcs(arc, arros);
   }
-  arc["tags"]["SIGNOTATION"] = signotation[0];
-  arc["tags"]["extra"] = signotation[1];
+  arc["signotation"] = signotation[0];
+  arc["extra"] = signotation[1];
 };
 
 export default arcToSignotation;

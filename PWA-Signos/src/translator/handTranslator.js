@@ -83,10 +83,10 @@ const handOrientation = (ori, rot, ref) => {
 };
 
 const handToSignotation = (hand) => {
-  hand["SIGNOTATION"] =
-    hand["SHAPE"] +
+  hand["signotation"] =
+    hand["grapheme"]["SHAPE"] +
     ":" +
-    handOrientation(hand["VAR"], hand["ROT"], hand["REF"]);
+    handOrientation(hand["grapheme"]["VAR"], hand["grapheme"]["ROT"], hand["grapheme"]["REF"]);
 };
 
 export default handToSignotation;

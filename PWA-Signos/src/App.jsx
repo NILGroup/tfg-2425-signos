@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   image: null,
   imageName: null,
   signotation: null,
+  selectedSignotation: null,
   videos: null,
 }
 
@@ -26,14 +27,17 @@ const reducer = (state, action) => {
     case 'select_image':
       if(state.image) {
         URL.revokeObjectURL(state.image);
-        state.imageName = null;
-        state.file = null;
       }
-      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, videos: null}
+      state = INITIAL_STATE;
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name}
     case 'upload_image':
       return { ...state}
     case 'set_signotation':
       return { ...state, signotation: action.signotation }
+    case 'select_signotation':
+      return { ...state, selectedSignotation: {i: action.i, j: action.j} }
+    case 'unselect_signotation':
+      return { ...state, selectedSignotation: null }
     case 'signario_response':
       return { ...state, videos: action.videos}
     case 'error_response':

@@ -1,10 +1,12 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
+import Signotation from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
 import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
+import Description from "./Description.jsx";
 
-const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, dispatch}) => {
+const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, selectedSignotation, videos, dispatch}) => {
   //const [selectedFile, setSelectedFile] = useState(null);
   //const [videos, setVideos] = useState(null);
   //const [signotationText, setSignotationText] = useState(null);
@@ -17,10 +19,11 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
 
         <ExamplesButton dispatch={dispatch} fileSelected={image} />
 
-        <SignotationText signotation={signotation} isLoading={isLoading}/>
-      
+        <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
+
         <div className="bottom-12 flex flex-row gap-30 mt-20">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 max-w-[700px]">
+            <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
             <Image image={image} imageName={imageName}/>
 
             <div className="flex justify-center gap-10">
@@ -76,17 +79,6 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
     </button>}
     </>
   );
-}
-
-const SignotationText = ({signotation, isLoading}) => {
-  return (
-    <>
-    {signotation && !isLoading && <div className="flex flex-col gap-4 mt-10"> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-2xl"> {signotation}</h1> 
-              </div> }
-    </>
-  )
 }
 
 const Image = ({image, imageName}) => {
