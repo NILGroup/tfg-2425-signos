@@ -31,7 +31,7 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
               
               <SelectImageButton dispatch={dispatch}/>
               
-              <UploadImageButton dispatch={dispatch} image={file}/>
+              <UploadImageButton dispatch={dispatch} image={file} showButton={signotation==null && !isLoading}/>
 
               {/* <MoreInfoButton setMoreInfoVisible={setMoreInfoVisible}/> */}
             
@@ -118,12 +118,12 @@ const SelectImageButton = ({dispatch}) => {
     );
 }
 
-const UploadImageButton = ({dispatch, image}) => {
+const UploadImageButton = ({dispatch, image, showButton}) => {
 
   const handleFileUpload = () => {
+    dispatch({type: 'upload_image'});  
     const upload = new FormData();
     upload.append("image", image);
-    console.log(image);
     // Send selected image to VisSE
     connection(dispatch, upload);
   };
@@ -131,9 +131,9 @@ const UploadImageButton = ({dispatch, image}) => {
   return (
     <>   
       {/*Check button*/}
-      <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+      {showButton && <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
         <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
-      </button>
+      </button>}
     </>
   );
 };

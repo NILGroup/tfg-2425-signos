@@ -12,19 +12,19 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
         <div className="flex flex-col items-center">
             <Canvas dispatch={dispatch}/>
 
+            <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
 
-        <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
             <div className="bottom-12 flex flex-row gap-30 mt-20">
-          <div className="flex flex-col gap-4 max-w-[700px]">
-            <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
-            <Image image={image} imageName={imageName}/>
-          </div>
+                <div className="flex flex-col gap-4 max-w-[700px]">
+                    <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
+                    <Image image={image} imageName={imageName}/>
+                </div>
 
-          {isLoading && <Loading/>}
+                {isLoading && <Loading/>}
 
-          <Videos videos={videos} isLoading={isLoading}/> 
-          
-        </div>
+                <Videos videos={videos} isLoading={isLoading}/> 
+
+            </div>
         </div>
     );
 };
@@ -173,7 +173,6 @@ const ClearButton = () => {
         </button>
     );
 }
-
 
 const UploadCanvasButton = () => {
     return (

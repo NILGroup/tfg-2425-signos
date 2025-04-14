@@ -31,7 +31,7 @@ const reducer = (state, action) => {
       state = INITIAL_STATE;
       return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name}
     case 'upload_image':
-      return { ...state}
+      return { ...state, selectedSignotation: null}
     case 'upload_canvas':
       if (state.image) {
         URL.revokeObjectURL(state.image);
