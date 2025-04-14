@@ -7,37 +7,31 @@ import Description from "./Description.jsx";
 import checkIcon from '../assets/check.svg';
 import { connection } from "../connection.js";
 
-const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, selectedSignotation, videos, dispatch}) => {
-  //const [selectedFile, setSelectedFile] = useState(null);
-  //const [videos, setVideos] = useState(null);
-  //const [signotationText, setSignotationText] = useState(null);
-  //const [helpVisible, setMoreInfoVisible] = useState(null);
-
+const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, selectedSignotation, videos, error, dispatch}) => {
   return (
     <>
       <div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_100px] md:grid-cols-[1fr_1fr]">
         {!image && <div className={`flex flex-col flex-1 justify-center items-center mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:row-start-1 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
           <ExplText/>
-          <ExamplesButton/>
+          <ExamplesButton dispatch={dispatch}/>
         </div>}
       
+        <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
         <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error}/>
 
 		{isLoading && <Loading/>}
 
     {error && <Error error={error}/>}
 		
-		<SignotationText signotation={signotation} isLoading={isLoading}/>
+		<Signotation signotation={signotation} isLoading={isLoading}/>
 	
 		<Videos videos={videos} isLoading={isLoading}/> 
-
-		
 
     <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
-			<UploadImage dispatch={dispatch} image={file}/>
+      <UploadImageButton dispatch={dispatch} image={file}/>
 
 			<MoreInfoButton dispatch={dispatch}/>
 			
@@ -76,18 +70,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
   );
 }
 
-const SignotationText = ({signotation, isLoading}) => {
-  return (
-    <>
-    {signotation && !isLoading && <div className="flex flex-col justify-center items-center md:gap-3 md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-4"> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-xl md:text-3xl"> SIGNOTACIÓN </h1> 
-              <h1 className="signotacion text-[#4682A9] font-bold text-lg md:text-2xl"> {signotation}</h1> 
-              </div> }
-    </>
-  )
-}
-
-const Image = ({image, imageName, videos, isLoading, error}) => {
+export const Image = ({image, imageName, videos, isLoading, error}) => {
     return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         <img className="mx-2 md:mx-0 scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 

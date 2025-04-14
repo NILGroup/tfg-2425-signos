@@ -23,15 +23,15 @@ const INITIAL_STATE = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'canvas_mode':
-      return { ...state, screen: 'canvas_screen' }
+      return { ...state, screen: 'canvas_screen', error: null  }
     case 'image_mode':
-      return { ...state, screen: 'image_screen' }
+      return { ...state, screen: 'image_screen', error: null }
     case 'select_image':
       if(state.image) {
         URL.revokeObjectURL(state.image);
       }
       state = INITIAL_STATE;
-      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name}
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, error: null}
     case 'upload_image':
       return { ...state}
     case 'upload_canvas':
@@ -40,9 +40,9 @@ const reducer = (state, action) => {
         state.imageName = null;
         state.file = null;
       }
-      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name}
+      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name, error: null}
     case 'set_signotation':
-      return { ...state, signotation: action.signotation }
+      return { ...state, signotation: action.signotation, error: null}
     case 'select_signotation':
       return { ...state, selectedSignotation: {i: action.i, j: action.j} }
     case 'unselect_signotation':
@@ -74,54 +74,6 @@ const reducer = (state, action) => {
       return state
   }
 }
-    switch (action.type) {
-        case "canvas_mode":
-            return { ...state, screen: "canvas_screen", error: null };
-        case "image_mode":
-            return { ...state, screen: "image_screen", error: null };
-        case "select_image":
-            if (state.image) {
-                URL.revokeObjectURL(state.image);
-                state.imageName = null;
-                state.file = null;
-            }
-            return {
-                ...state,
-                file: action.image,
-                image: URL.createObjectURL(action.image),
-                imageName: action.image.name,
-                videos: null,
-                signotation: null,
-                error: null,
-            };
-        case "upload_image":
-            return { ...state };
-        case "set_signotation":
-            return { ...state, signotation: action.signotation, error: null };
-        case "signario_response":
-            return { ...state, videos: action.videos };
-        case "error_response":
-            return { ...state, error: action.error };
-        case "show_examples":
-            return {
-                ...state,
-                screen: "examples_screen",
-                switcherVisible: false,
-            };
-        case "hide_examples":
-            return { ...state, screen: "image_screen", switcherVisible: true };
-        case "show_help":
-            return { ...state, helpVisible: true };
-        case "hide_help":
-            return { ...state, helpVisible: false };
-        case "set_loading":
-            return { ...state, isLoading: true };
-        case "set_loaded":
-            return { ...state, isLoading: false };
-        default:
-            return state;
-    }
-};
 
 function App() {
 
