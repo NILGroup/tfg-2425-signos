@@ -15,8 +15,8 @@ export const connection = async (dispatch, image) => {
         );
         const responseData = await response.json();
         console.log(responseData);
-        const signotation = await responseToSignotation(responseData);
-        dispatch({ type: "set_signotation", signotation: signotation });
+        const [signotationElems, signotation] = await responseToSignotation(responseData);
+        dispatch({ type: "set_signotation", signotation: signotationElems });
         const url = new URL(
             SIGNARIO_URL +
                 new URLSearchParams({

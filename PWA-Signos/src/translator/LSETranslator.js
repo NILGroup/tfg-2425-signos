@@ -94,49 +94,6 @@ const createSignotation = (graphemes, diacsInfo) => {
                 signotation.push(headSignotation);
             }
                 
-            
-            // Diac signotation
-            for(let diac in diacsInfo){
-                if(diacsInfo[diac]["numApps"] > 1)
-                    repRandN[0] = true;
-                diacSignotation.push({signotation: diacsInfo[diac]["signotation"], description: diacsInfo[diac]["description"]});
-            }
-            if(diacSignotation.length > 0)
-                signotation.push(diacSignotation);
-
-            
-            // Stem signotation
-			graphemes["STEM"].forEach((stem) => {
-                if (stem["signotation"] !== undefined){
-                    stemSignotation.push({signotation: stem["signotation"], description: stem["explanation"]["text"]});
-                    if (stem["extra"] !== undefined && stem["extra"] === 'R')
-                        repRandN[0] = true;
-                    else if (stem["extra"] !== undefined && stem["extra"] === 'N')
-                        repRandN[1] = true;
-                }		
-			});
-            if(stemSignotation.length > 0)
-                signotation.push(stemSignotation);
-
-            // Arc signotation
-			graphemes["ARC"].forEach((arc) => {
-				arcSignotation.push(arc["signotation"]);
-                if (arc["extra"] !== undefined && arc["extra"] === 'R')
-                    repRandN[0] = true;
-                else if (arc["extra"] !== undefined && arc["extra"] === 'N')
-                    repRandN[1] = true;
-			});
-            if(arcSignotation.length > 0)
-                signotation.push(arcSignotation);
-
-            if(repRandN[0]) {
-                repSignotation.push({signotation: 'R', description: 'La *R* indica repetición'});
-            }
-            if(repRandN[1]) {
-                repSignotation.push({signotation:'N', description: 'La *N* indica vaivén en un movimiento'});
-            }
-            if(repSignotation.length > 0)
-                signotation.push(repSignotation);
             break;
         case 1: // There is only 1 hand
             // Hand signotation
@@ -198,7 +155,15 @@ const createSignotation = (graphemes, diacsInfo) => {
         default: // No hands
             break;
     }
-    return signotation;
+
+    let signotationStr = "";
+    signotation.forEach((part) => {
+        part.forEach((grapheme) => {
+           signotationStr += grapheme["signotation"] + ":";
+        });
+    });
+    signotationStr = signotationStr.slice(0, -1); // Remove the last ":"
+    return [signotation, signotationStr];
 };
 
 const responseToSignotation = (response) => {
