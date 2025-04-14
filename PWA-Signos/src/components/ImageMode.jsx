@@ -176,7 +176,7 @@ const BackButton = ({setMoreInfoVisible}) => {
     </> );
 }
 
-const Loading = () => {
+export const Loading = () => {
   return (<>
     <h1 className="flex text-3xl text-[#4682A9] m-40 font-bold gap-5">
       <svg className="w-8.5 h-8.5 animate-spin" viewBox="0 0 50 50">

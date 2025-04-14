@@ -87,6 +87,57 @@ const createSignotation = (graphemes, diacsInfo) => {
     let signotation = [];
 
     switch (graphemes["HAND"].length) {
+        case 0: // No hands
+            // Head signotation
+            if(graphemes["HEAD"].length > 0 && graphemes["HEAD"][0]["signotation"] !== undefined){
+                headSignotation.push({signotation: graphemes["HEAD"][0]["signotation"], description: graphemes["HEAD"][0]["explanation"]["text"]});
+                signotation.push(headSignotation);
+            }
+                
+            
+            // Diac signotation
+            for(let diac in diacsInfo){
+                if(diacsInfo[diac]["numApps"] > 1)
+                    repRandN[0] = true;
+                diacSignotation.push({signotation: diacsInfo[diac]["signotation"], description: diacsInfo[diac]["description"]});
+            }
+            if(diacSignotation.length > 0)
+                signotation.push(diacSignotation);
+
+            
+            // Stem signotation
+			graphemes["STEM"].forEach((stem) => {
+                if (stem["signotation"] !== undefined){
+                    stemSignotation.push({signotation: stem["signotation"], description: stem["explanation"]["text"]});
+                    if (stem["extra"] !== undefined && stem["extra"] === 'R')
+                        repRandN[0] = true;
+                    else if (stem["extra"] !== undefined && stem["extra"] === 'N')
+                        repRandN[1] = true;
+                }		
+			});
+            if(stemSignotation.length > 0)
+                signotation.push(stemSignotation);
+
+            // Arc signotation
+			graphemes["ARC"].forEach((arc) => {
+				arcSignotation.push(arc["signotation"]);
+                if (arc["extra"] !== undefined && arc["extra"] === 'R')
+                    repRandN[0] = true;
+                else if (arc["extra"] !== undefined && arc["extra"] === 'N')
+                    repRandN[1] = true;
+			});
+            if(arcSignotation.length > 0)
+                signotation.push(arcSignotation);
+
+            if(repRandN[0]) {
+                repSignotation.push({signotation: 'R', description: 'La *R* indica repetición'});
+            }
+            if(repRandN[1]) {
+                repSignotation.push({signotation:'N', description: 'La *N* indica vaivén en un movimiento'});
+            }
+            if(repSignotation.length > 0)
+                signotation.push(repSignotation);
+            break;
         case 1: // There is only 1 hand
             // Hand signotation
             handSignotation.push({signotation: graphemes["HAND"][0]["signotation"], description: graphemes["HAND"][0]["explanation"]["text"]});

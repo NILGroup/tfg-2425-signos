@@ -1,14 +1,30 @@
 import { useEffect, useRef } from "react";
 import clearIcon from "../assets/delete.svg";
 import checkIcon from "../assets/check.svg";
+import Description from "./Description.jsx";
+import Signotation from "./Signotation.jsx";  
+import Videos from "./Videos.jsx";
 import { connection } from "../connection.js";
-import { Image } from "./ImageMode.jsx";
+import { Image, Loading } from "./ImageMode.jsx";
 
-const CanvasMode = ({ image, imageName, dispatch }) => {
+const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, dispatch }) => {
     return (
         <div className="flex flex-col items-center">
             <Canvas dispatch={dispatch}/>
+
+
+        <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
+            <div className="bottom-12 flex flex-row gap-30 mt-20">
+          <div className="flex flex-col gap-4 max-w-[700px]">
+            <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
             <Image image={image} imageName={imageName}/>
+          </div>
+
+          {isLoading && <Loading/>}
+
+          <Videos videos={videos} isLoading={isLoading}/> 
+          
+        </div>
         </div>
     );
 };
