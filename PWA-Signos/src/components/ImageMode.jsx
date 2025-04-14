@@ -1,10 +1,13 @@
 import { useRef } from "react";
+import Signotation from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
-import UploadImage from "./UploadImage.jsx"
 import uploadIcon from '../assets/upload-image.svg';
 import QuestionIcon from '../assets/question.svg';
+import Description from "./Description.jsx";
+import checkIcon from '../assets/check.svg';
+import { connection } from "../connection.js";
 
-const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, videos, error, dispatch}) => {
+const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation, selectedSignotation, videos, dispatch}) => {
   //const [selectedFile, setSelectedFile] = useState(null);
   //const [videos, setVideos] = useState(null);
   //const [signotationText, setSignotationText] = useState(null);
@@ -57,12 +60,18 @@ const ExplText = () => {
   )
 }
 
-const ExamplesButton = () => {
+const ExamplesButton = ({dispatch, fileSelected}) => {
+
+  const handleClick = () => {
+    dispatch({type: "show_examples"})
+  }
+
   return (
     <>
-    <button className="group border-[#4682A9] border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+    {!fileSelected && 
+    <button onClick={handleClick} className="group border-[#4682A9] border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
       <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
-    </button>
+    </button>}
     </>
   );
 }
@@ -114,6 +123,26 @@ const SelectImageButton = ({dispatch}) => {
     );
 }
 
+const UploadImageButton = ({dispatch, image}) => {
+
+  const handleFileUpload = () => {
+    const upload = new FormData();
+    upload.append("image", image);
+    console.log(image);
+    // Send selected image to VisSE
+    connection(dispatch, upload);
+  };
+
+  return (
+    <>   
+      {/*Check button*/}
+      <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+        <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+      </button>
+    </>
+  );
+};
+
 
 const MoreInfoButton = ({dispatch}) => {
 
@@ -123,7 +152,7 @@ const MoreInfoButton = ({dispatch}) => {
 
   return (
     <>
-    {/*More infgo buttton*/}
+    {/*More info buttton*/}
     <button onClick={handleMoreInfoClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
         <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
@@ -131,9 +160,21 @@ const MoreInfoButton = ({dispatch}) => {
   );
 }
 
+const BackButton = ({setMoreInfoVisible}) => {
+  const handleBackButtonClick = () => {
+    setMoreInfoVisible(false);
+  }
 
+  return (
+    <>
+    {/*More info buttton*/}
+    <button onClick={handleBackButtonClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+        <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
+     </button>
+    </> );
+}
 
-const Loading = () => {
+export const Loading = () => {
   return (<>
     <h1 className="flex flex-1 justify-center items-center text-xl md:text-2xl text-[#4682A9] font-bold gap-5 md:row-start-1 md:row-end-3 md:col-start-2 md:col-end-3">
       <svg className="w-6.5 h-6.5 md:w-8.5 md:h-8.5 animate-spin" viewBox="0 0 50 50">

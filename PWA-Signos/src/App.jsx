@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import "./App.css";
 import SwitchMode from "./components/SwitchMode.jsx";
 import ImageMode from "./components/ImageMode.jsx";
-import Canvas from "./components/Canvas.jsx";
+import CanvasMode from "./components/CanvasMode.jsx";
 import QuestionIcon from "./assets/question.svg";
 import Examples from "./components/Examples.jsx";
 
@@ -15,11 +15,65 @@ const INITIAL_STATE = {
     image: null,
     imageName: null,
     signotation: null,
+  selectedSignotation: null,
     videos: null,
     error: null,
 };
 
 const reducer = (state, action) => {
+  switch (action.type) {
+    case 'canvas_mode':
+      return { ...state, screen: 'canvas_screen' }
+    case 'image_mode':
+      return { ...state, screen: 'image_screen' }
+    case 'select_image':
+      if(state.image) {
+        URL.revokeObjectURL(state.image);
+      }
+      state = INITIAL_STATE;
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name}
+    case 'upload_image':
+      return { ...state}
+    case 'upload_canvas':
+      if (state.image) {
+        URL.revokeObjectURL(state.image);
+        state.imageName = null;
+        state.file = null;
+      }
+      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name}
+    case 'set_signotation':
+      return { ...state, signotation: action.signotation }
+    case 'select_signotation':
+      return { ...state, selectedSignotation: {i: action.i, j: action.j} }
+    case 'unselect_signotation':
+      return { ...state, selectedSignotation: null }
+    case 'signario_response':
+      return { ...state, videos: action.videos}
+    case 'error_response':
+      return { ...state }
+    case 'show_examples':
+      return { ...state, screen: 'examples_screen', switcherVisible: false }
+    case 'example_selected':
+      if (state.image) {
+        URL.revokeObjectURL(state.image);
+        state.imageName = null;
+        state.file = null;
+      }
+      return { ...state, screen: 'image_screen', file: action.file, image: action.image, imageName: action.imageName, switcherVisible: true}
+    case 'hide_examples':
+      return { ...state, screen: 'image_screen', switcherVisible: true }
+    case 'show_help':
+      return { ...state, helpVisible: true }
+    case 'hide_help':
+      return { ...state, helpVisible: false }
+    case 'set_loading':
+      return { ...state, isLoading: true }
+    case 'set_loaded':
+      return { ...state, isLoading: false }
+    default:
+      return state
+  }
+}
     switch (action.type) {
         case "canvas_mode":
             return { ...state, screen: "canvas_screen", error: null };
@@ -70,20 +124,19 @@ const reducer = (state, action) => {
 };
 
 function App() {
-    const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-    // // Change mode between Upload images and Canvas
-    // const [isCanvasVisible, setIsCanvasVisible] = useState(false)
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
-    let screen;
-    if (state.screen === "image_screen") {
-        screen = <ImageMode dispatch={dispatch} {...state} />;
-    } else if (state.screen === "canvas_screen") {
-        screen = <Canvas dispatch={dispatch} {...state} />;
-    }
-    // else if(state.screen === 'examples_screen'){
-    //   screen = <Examples/>
-    // }
+  let screen;
+  if(state.screen === 'image_screen'){
+    screen = <ImageMode dispatch={dispatch} {...state}/>
+  }
+  else if(state.screen === 'canvas_screen'){
+    screen = <CanvasMode dispatch={dispatch} {...state}/>
+  }
+  else if(state.screen === 'examples_screen'){
+    screen = <Examples dispatch={dispatch}/>
+  }
 
     return (
         <div className="flex flex-col min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[70px_1fr] md:grid-cols-[70px_1fr]">
