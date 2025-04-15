@@ -16,18 +16,17 @@ const ImageMode = ({isLoading, helpVisible, file, image, imageName, signotation,
           <ExamplesButton dispatch={dispatch}/>
         </div>}
       
-        <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
-        <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error}/>
+        <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error} signotation={signotation} selectedSignotation={selectedSignotation} dispatch={dispatch}/>
 
 		{isLoading && <Loading/>}
 
     {error && <Error error={error}/>}
 		
-		<Signotation signotation={signotation} isLoading={isLoading}/>
+		<Signotation signotation={signotation} isLoading={isLoading} dispatch={dispatch}/>
 	
 		<Videos videos={videos} isLoading={isLoading}/> 
 
-    <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-4 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-2 md:row-end-3"}`}>
+    <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3 md:mb-10"}`}>
           
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -70,8 +69,9 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
   );
 }
 
-export const Image = ({image, imageName, videos, isLoading, error}) => {
-    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
+export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation, dispatch}) => {
+    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-3 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
+        <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
         <img className="mx-2 md:mx-0 scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)

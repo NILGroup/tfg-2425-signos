@@ -145,7 +145,7 @@ const Canvas = ({dispatch}) => {
         <div className="justify-center items-center flex flex-col">
             <canvas
                 ref={canvasRef}
-                className="h-140 bg-[#FFFFFF] ml-8 my-10 "
+                className="border-4 border-[#4682A9] rounded-xl h-140 bg-[#FFFFFF] ml-8 my-10 "
                 id="canvas"
             />
             <div ref={toolbarRef} id="toolbar" className="flex flex-row gap-10">

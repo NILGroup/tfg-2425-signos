@@ -112,7 +112,14 @@ const createSignotation = (graphemes, diacsInfo) => {
         default: // No hands
             throw new Error("Se ha identificado más de una mano en la imagen.");
     }
-    return signotation;
+    let signotationStr = "";
+    signotation.forEach((part) => {
+        part.forEach((grapheme) => {
+           signotationStr += grapheme["signotation"] + ":";
+        });
+    });
+    signotationStr = signotationStr.slice(0, -1); // Remove the last ":"
+    return [signotation, signotationStr];
 };
 
 const responseToSignotation = (response) => {

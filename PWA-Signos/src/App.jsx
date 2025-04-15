@@ -15,7 +15,7 @@ const INITIAL_STATE = {
     image: null,
     imageName: null,
     signotation: null,
-  selectedSignotation: null,
+    selectedSignotation: null,
     videos: null,
     error: null,
 };
