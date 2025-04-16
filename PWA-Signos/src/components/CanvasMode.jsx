@@ -9,7 +9,7 @@ import { Image, Error, Loading } from "./ImageMode.jsx";
 
 const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, error, dispatch }) => {
     return (
-        <div className="flex flex-1 flex-col">
+        <div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_1fr]">
             {!image && <Canvas dispatch={dispatch}/>}
             
             <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error} signotation={signotation} selectedSignotation={selectedSignotation} dispatch={dispatch}/>
@@ -27,7 +27,7 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
     );
 };
 
-const Canvas = ({dispatch}) => {
+const Canvas = ({videos, isLoading, error, dispatch}) => {
     const canvasRef = useRef(null);
     const toolbarRef = useRef(null);
 
@@ -72,17 +72,23 @@ const Canvas = ({dispatch}) => {
             ctx.beginPath();
         };
 
+        // Touch Events (using ontouch* properties)
         canvas.ontouchstart = (e) => {
+            e.preventDefault(); // Crucial for touch to work
             drawing = true;
-            e.preventDefault();
+            const touch = e.touches[0];
+            const x = touch.clientX - canvasOffsetX;
+            const y = touch.clientY - canvasOffsetY;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
         };
 
         canvas.ontouchmove = (e) => {
             if (!drawing) return;
-            e.preventDefault();
+            e.preventDefault(); // Crucial to prevent scrolling
             const touch = e.touches[0];
-            const x = touch.clientX - canvas.offsetLeft;
-            const y = touch.clientY - canvas.offsetTop;
+            const x = touch.clientX - canvasOffsetX;
+            const y = touch.clientY - canvasOffsetY;
             draw(x, y);
         };
 
@@ -141,15 +147,19 @@ const Canvas = ({dispatch}) => {
             canvas.onmousedown = null;
             canvas.onmouseup = null;
             canvas.onmousemove = null;
+            canvas.ontouchstart = null;
+            canvas.ontouchmove = null;
+            canvas.ontouchend = null;
+            canvas.onresize = null;
         };
     }, []);
 
    
     return (
-        <div className="flex flex-col flex-1 h-screen justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mx-0 md:mb-0">
+        <div className={`flex flex-col  justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mb-0 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}>
             <canvas
                 ref={canvasRef}
-                className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full h-[65vh]"
+                className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full md:max-w-[600px] lg:max-w-[800px] xl:max-w-[1200px] 2xl:max-w-[1600px] h-[65vh]"
                 id="canvas"
             />
             <div ref={toolbarRef} id="toolbar" className="flex flex-row gap-10">

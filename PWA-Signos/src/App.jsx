@@ -23,8 +23,10 @@ const INITIAL_STATE = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'canvas_mode':
+      state = INITIAL_STATE;
       return { ...state, screen: 'canvas_screen', error: null  }
     case 'image_mode':
+      state = INITIAL_STATE;
       return { ...state, screen: 'image_screen', error: null }
     case 'select_image':
       if(state.image) {

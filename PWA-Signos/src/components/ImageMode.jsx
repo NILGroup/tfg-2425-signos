@@ -43,7 +43,6 @@ const ImageMode = ({isLoading, file, image, imageName, signotation, selectedSign
 const ExplText = () => {
   return (
   <>
-
     <div className="flex flex-col gap-4 md:gap-10 mx-3 md:mx-0"> <h1 className="text-[#4682A9] font-bold text-lg md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
     <h2 className="text-[#4682A9] text-lg md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>
   </>
@@ -69,7 +68,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
 export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation, dispatch}) => {
     return (<>{image && <div className={`flex flex-col-reverse md:flex-col flex-1 items-center justify-center md:gap-5 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
-        <img className="mx-2 md:mx-0 scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <img className="mx-2 md:mx-0 md:max-w-[650px] lg:max-w-[800px] scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }
