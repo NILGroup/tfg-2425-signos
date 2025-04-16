@@ -106,7 +106,7 @@ function App() {
 const Header = () => {
     return (
         <div className="w-screen mt-2 mb-2 md:mb-0 md:mt-0 md:col-start-1 md:col-end-3">
-            <h1 className="text-xl md:text-2xl text-center text-[#4682A9] font-bold">
+            <h1 className="text-2xl md:text-3xl text-center text-[#4682A9] font-bold">
                 {" "}
                 Traduciendo la SignoEscritura{" "}
             </h1>

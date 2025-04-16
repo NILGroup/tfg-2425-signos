@@ -47,7 +47,7 @@ const ExplText = () => {
   return (
   <>
 
-    <div className="flex flex-col gap-4 md:gap-10 mx-2 md:mx-0"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
+    <div className="flex flex-col gap-4 md:gap-10 mx-3 md:mx-0"> <h1 className="text-[#4682A9] font-bold text-md md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
     <h2 className="text-[#4682A9] text-md md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>
   </>
   )
@@ -62,7 +62,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
   return (
     <>
     {!fileSelected && 
-    <button onClick={handleClick} className="group border-[#4682A9] md:mb-4 border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-70 h-15 cursor-pointer">
+    <button onClick={handleClick} className="group border-[#4682A9] md:mb-4 border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-65 h-13 md:w-70 md:h-15 cursor-pointer">
       <h3 className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-xl">Prueba con un ejemplo</h3>
     </button>}
     </>
@@ -70,7 +70,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
 }
 
 export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation, dispatch}) => {
-    return (<>{image && <div className={`flex flex-col flex-1 items-center justify-center gap-3 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
+    return (<>{image && <div className={`flex flex-col-reverse md:flex-col flex-1 items-center justify-center md:gap-5 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
         <img className="mx-2 md:mx-0 scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
@@ -99,7 +99,7 @@ const SelectImageButton = ({dispatch}) => {
             />
             
             {/*Choose image buttton*/}
-            <button onClick={() => input.current.click()} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+            <button onClick={() => input.current.click()} className="group border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
               <img src={uploadIcon} alt="Upload Icon" className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
@@ -119,7 +119,7 @@ const UploadImageButton = ({dispatch, image}) => {
   return (
     <>   
       {/*Check button*/}
-      <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-6 rounded-full w-20 h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+      <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-4 md:border-6 rounded-full w-18 md:w-20 h-18 md:h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
         <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
       </button>
     </>
@@ -136,7 +136,7 @@ const MoreInfoButton = ({dispatch}) => {
   return (
     <>
     {/*More info buttton*/}
-    <button onClick={handleMoreInfoClick} className="group border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+    <button onClick={handleMoreInfoClick} className="group border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
         <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
     </>  
