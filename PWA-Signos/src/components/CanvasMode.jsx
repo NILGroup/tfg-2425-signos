@@ -146,7 +146,7 @@ const Canvas = ({dispatch}) => {
 
    
     return (
-        <div className="flex flex-col flex-1 h-screen justify-center items-center gap-5 mx-5 mb-5">
+        <div className="flex flex-col flex-1 h-screen justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mx-0 md:mb-0">
             <canvas
                 ref={canvasRef}
                 className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full h-[65vh]"

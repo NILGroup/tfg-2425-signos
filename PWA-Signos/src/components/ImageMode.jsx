@@ -60,7 +60,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
     <>
     {!fileSelected && 
     <button onClick={handleClick} className="group border-[#4682A9] md:mb-4 border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-58 h-12 md:w-70 md:h-15 cursor-pointer">
-      <p className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-lg">Prueba con un ejemplo</p>
+      <p className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-lg md:text-xl">Prueba con un ejemplo</p>
     </button>}
     </>
   );
