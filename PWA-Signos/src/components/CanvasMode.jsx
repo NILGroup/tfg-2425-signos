@@ -5,26 +5,24 @@ import Description from "./Description.jsx";
 import Signotation from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
 import { connection } from "../connection.js";
-import { Image, Loading } from "./ImageMode.jsx";
+import { Image, Error, Loading } from "./ImageMode.jsx";
 
-const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, dispatch }) => {
+const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, error, dispatch }) => {
     return (
-        <div className="flex flex-col items-center">
-            <Canvas dispatch={dispatch}/>
+        <div className="flex flex-1 flex-col">
+            {!image && <Canvas dispatch={dispatch}/>}
+            
+            <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error} signotation={signotation} selectedSignotation={selectedSignotation} dispatch={dispatch}/>
 
+            {isLoading && <Loading/>}
 
-        <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
-            <div className="bottom-12 flex flex-row gap-30 mt-20">
-          <div className="flex flex-col gap-4 max-w-[700px]">
-            <Description signotation={signotation} selectedSignotation={selectedSignotation}/>
-            <Image image={image} imageName={imageName}/>
-          </div>
+            <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
 
-          {isLoading && <Loading/>}
+            {error && <Error error={error}/>}
 
-          <Videos videos={videos} isLoading={isLoading}/> 
-          
-        </div>
+            <Videos videos={videos} isLoading={isLoading}/> 
+        
+            
         </div>
     );
 };
@@ -74,6 +72,27 @@ const Canvas = ({dispatch}) => {
             ctx.beginPath();
         };
 
+        canvas.ontouchstart = (e) => {
+            drawing = true;
+            e.preventDefault();
+        };
+
+        canvas.ontouchmove = (e) => {
+            if (!drawing) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const x = touch.clientX - canvas.offsetLeft;
+            const y = touch.clientY - canvas.offsetTop;
+            draw(x, y);
+        };
+
+        canvas.ontouchend = () => {
+            drawing = false;
+            ctx.stroke();
+            ctx.beginPath();
+        };
+
+        
         const draw = (x, y) => {
             if (!drawing) return;
             ctx.lineWidth = 5;
@@ -125,27 +144,12 @@ const Canvas = ({dispatch}) => {
         };
     }, []);
 
-    const handleCanvasUpload = () => {
-        
-        canvasRef.current.toBlob((blob) => {
-            image = new File([blob], "SignoEscritura", { type: blob.type })
-        }, "image/png");
-
-        dispatch({
-            type: "select_image",
-            file: image,
-        });
-        const upload = new FormData();
-        upload.append("image", image);
-        // Send selected image to VisSE
-        uploadImage(upload);
-    };
-
+   
     return (
-        <div className="justify-center items-center flex flex-col">
+        <div className="flex flex-col flex-1 h-screen justify-center items-center gap-5 mx-5 mb-5">
             <canvas
                 ref={canvasRef}
-                className="border-4 border-[#4682A9] rounded-xl h-140 bg-[#FFFFFF] ml-8 my-10 "
+                className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full h-[65vh]"
                 id="canvas"
             />
             <div ref={toolbarRef} id="toolbar" className="flex flex-row gap-10">
