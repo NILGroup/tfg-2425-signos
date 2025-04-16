@@ -72,9 +72,8 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
             ctx.beginPath();
         };
 
-        // Touch Events (using ontouch* properties)
         canvas.ontouchstart = (e) => {
-            e.preventDefault(); // Crucial for touch to work
+            e.preventDefault();
             drawing = true;
             const touch = e.touches[0];
             const x = touch.clientX - canvasOffsetX;
@@ -85,7 +84,7 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
 
         canvas.ontouchmove = (e) => {
             if (!drawing) return;
-            e.preventDefault(); // Crucial to prevent scrolling
+            e.preventDefault();
             const touch = e.touches[0];
             const x = touch.clientX - canvasOffsetX;
             const y = touch.clientY - canvasOffsetY;
@@ -98,7 +97,6 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
             ctx.beginPath();
         };
 
-        
         const draw = (x, y) => {
             if (!drawing) return;
             ctx.lineWidth = 5;
