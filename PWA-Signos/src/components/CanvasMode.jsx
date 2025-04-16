@@ -200,7 +200,6 @@ const ClearButton = () => {
     );
 }
 
-
 const UploadCanvasButton = () => {
     return (
         <button
