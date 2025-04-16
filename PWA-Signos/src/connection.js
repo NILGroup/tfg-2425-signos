@@ -32,8 +32,11 @@ export const connection = async (dispatch, image) => {
         console.log(videosData);
         dispatch({ type: "signario_response", videos: videosData["signs"] });
     } catch (error) {
-        dispatch({ type: "error_response", error: error });
-        console.error("Error uploading image:", error);
+        const message = error.message.includes("Failed to fetch")
+            ? "No se ha podido reconocer la imagen."
+            : error.message;
+
+        dispatch({ type: "error_response", error: message });
     } finally {
         dispatch({ type: "set_loaded" });
     }

@@ -109,9 +109,10 @@ const SelectImageButton = ({dispatch}) => {
 const UploadImageButton = ({dispatch, image}) => {
 
   const handleFileUpload = () => {
+    dispatch({ type: "upload_image" });
     const upload = new FormData();
     upload.append("image", image);
-    console.log(image);
+    
     // Send selected image to VisSE
     connection(dispatch, upload);
   };

@@ -5,6 +5,10 @@ import stemToSignotation from "./stemTranslator";
 import arcToSignotation from "./arcTranslator";
 
 const classifyGraphemes = (response, graphemes) => {
+
+    if(response["raw_tags"] === undefined || response["raw_tags"].length === 0){
+        throw new Error();
+    }
     response["raw_tags"].forEach((grapheme, index) => {
         switch (grapheme["CLASS"]) {
             case "HEAD":
@@ -107,8 +111,6 @@ const createSignotation = (graphemes, diacsInfo) => {
             if(repSignotation.length > 0)
                 signotation.push(repSignotation);
             break;
-        case 2: // There are 2 hands
-            break;
         default: // No hands
             throw new Error("Se ha identificado más de una mano en la imagen.");
     }
@@ -158,7 +160,7 @@ const responseToSignotation = (response) => {
         });
         
     } catch (error) {
-        throw new Error("¡Lo sentimos! No se ha podido traducir la imagen");
+        throw new Error("No se ha podido traducir la imagen.");
     }
 
     let r = createSignotation(graphemes, diacsInfo);

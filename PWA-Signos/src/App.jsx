@@ -33,7 +33,7 @@ const reducer = (state, action) => {
       state = INITIAL_STATE;
       return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, error: null}
     case 'upload_image':
-      return { ...state}
+      return { ...state, error: null}
     case 'upload_canvas':
       if (state.image) {
         URL.revokeObjectURL(state.image);
@@ -50,7 +50,7 @@ const reducer = (state, action) => {
     case 'signario_response':
       return { ...state, videos: action.videos}
     case 'error_response':
-      return { ...state }
+      return { ...state, error: action.error}
     case 'show_examples':
       return { ...state, screen: 'examples_screen', switcherVisible: false }
     case 'example_selected':
