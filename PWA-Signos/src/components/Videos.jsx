@@ -4,8 +4,8 @@ import { useRef } from "react";
 const Videos = ({videos, isLoading}) => {
   
     return (<>{videos && !isLoading && (
-      <div className='flex items-center justify-center my-3 md:mt-0 md:row-start-2 md:row-end-4 md:col-start-2 md:col-end-3  md:mr-8'>
-          <div className="flex flex-col overflow-y-scroll h-full mx-4 md:mx-0 max-w-90 md:max-w-250 max-h-100 md:max-h-180 border-4 border-[#4682A9] rounded-xl 
+      <div className='flex items-center justify-center my-3 md:mt-8 md:row-start-2 md:row-end-4 md:col-start-2 md:col-end-3  md:mr-8'>
+          <div className="flex flex-col overflow-y-scroll h-full mx-4 md:mx-0 max-w-90 md:max-w-250 max-h-100 md:max-h-200 border-4 border-[#4682A9] rounded-xl 
                   md:[&::-webkit-scrollbar]:w-1.5
                   md:[&::-webkit-scrollbar-track]:rounded-full
                   md:[&::-webkit-scrollbar-track]:bg-neutral-700

@@ -73,7 +73,7 @@ export const Image = ({image, imageName, videos, isLoading, error, signotation, 
         </div>}</>)
 }
 
-const SelectImageButton = ({dispatch}) => {
+export const SelectImageButton = ({dispatch}) => {
     const input = useRef(null);
 
     const handleFileSelect = (event) => {
@@ -101,7 +101,6 @@ const SelectImageButton = ({dispatch}) => {
         </>
     );
 }
-
 const UploadImageButton = ({dispatch, image}) => {
 
   const handleFileUpload = () => {
@@ -124,7 +123,7 @@ const UploadImageButton = ({dispatch, image}) => {
 };
 
 
-const MoreInfoButton = ({dispatch}) => {
+export const MoreInfoButton = ({dispatch}) => {
 
   const handleMoreInfoClick = () => {
     dispatch({ type: "show_help" });

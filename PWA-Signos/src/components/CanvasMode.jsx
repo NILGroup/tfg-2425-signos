@@ -1,16 +1,16 @@
 import { useEffect, useRef } from "react";
 import clearIcon from "../assets/delete.svg";
 import checkIcon from "../assets/check.svg";
-import Description from "./Description.jsx";
 import Signotation from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
+import { SelectImageButton, MoreInfoButton } from "./ImageMode.jsx";
 import { connection } from "../connection.js";
 import { Image, Error, Loading } from "./ImageMode.jsx";
 
 const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, error, dispatch }) => {
     return (
         <div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_1fr]">
-            {!image && <Canvas dispatch={dispatch}/>}
+            <Canvas dispatch={dispatch} showCanvas={image == null}/>
             
             <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error} signotation={signotation} selectedSignotation={selectedSignotation} dispatch={dispatch}/>
 
@@ -20,14 +20,22 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
 
             {error && <Error error={error}/>}
 
-            <Videos videos={videos} isLoading={isLoading}/> 
+            <Videos videos={videos} isLoading={isLoading}/>
+
+            {image && <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3 md:mb-10"}`}>
+				
+                <SelectImageButton dispatch={dispatch}/>
+
+                <MoreInfoButton dispatch={dispatch}/>
+			
+		    </div>}
         
             
         </div>
     );
 };
 
-const Canvas = ({videos, isLoading, error, dispatch}) => {
+const Canvas = ({showCanvas, dispatch}) => {
     const canvasRef = useRef(null);
     const toolbarRef = useRef(null);
 
@@ -72,6 +80,12 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
             ctx.beginPath();
         };
 
+        canvas.onmouseout = () => {
+            drawing = false;
+            ctx.stroke();
+            ctx.beginPath();
+        };
+
         canvas.ontouchstart = (e) => {
             e.preventDefault();
             drawing = true;
@@ -110,17 +124,15 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
             if (e.target.id === "clear") {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             } else if (e.target.id === "upload") {
-                // Create temporary canvas
+
                 const tempCanvas = document.createElement('canvas');
                 tempCanvas.width = canvas.width;
                 tempCanvas.height = canvas.height;
                 const tempCtx = tempCanvas.getContext('2d');
                 
-                // 1. Fill temp canvas with white
                 tempCtx.fillStyle = 'white';
                 tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
                 
-                // 2. Draw original content on top
                 tempCtx.drawImage(canvas, 0, 0);
                             
                 tempCanvas.toBlob((blob) => {
@@ -154,10 +166,11 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
 
    
     return (
-        <div className={`flex flex-col  justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mb-0 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}>
+        <>
+        {showCanvas && <div className="flex flex-col  justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mb-0 md:row-start-2 md:row-end-4 md:col-start-1 md:col-end-3">
             <canvas
                 ref={canvasRef}
-                className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full md:max-w-[600px] lg:max-w-[800px] xl:max-w-[1200px] 2xl:max-w-[1600px] h-[65vh]"
+                className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full md:max-w-[500px] lg:max-w-[600px] xl:max-w-[800px] 2xl:max-w-[1000px] h-[65vh]"
                 id="canvas"
             />
             <div ref={toolbarRef} id="toolbar" className="flex flex-row gap-10">
@@ -166,7 +179,8 @@ const Canvas = ({videos, isLoading, error, dispatch}) => {
                 <UploadCanvasButton/> 
                 
             </div>
-        </div>
+        </div>}
+        </>
     );
 
 }
