@@ -52,7 +52,7 @@ const SwitchMode = ({ screen, dispatch }) => {
                 }`}
             >
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                   className="h-[26px] w-[26px] md:h-[32px] md:w-[32px] lg:h-[36px] lg:w-[36px] pl-1">
+                   className="h-[28px] w-[28px] md:h-[32px] md:w-[32px] lg:h-[36px] lg:w-[36px] pl-1">
                     
 
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
