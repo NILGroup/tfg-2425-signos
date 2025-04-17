@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import clearIcon from "../assets/delete.svg";
 import checkIcon from "../assets/check.svg";
+import drawIcon from "../assets/draw.svg";
 import Signotation from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
 import { MoreInfoButton } from "./ImageMode.jsx";
@@ -225,7 +226,7 @@ const CanvasButton = ({dispatch}) => {
         onClick={handleClick}
         className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
             <img
-                src={checkIcon}
+                src={drawIcon}
                 id="upload"
                 alt="Upload Icon"
                 className="hover:brightness-0 hover:invert"

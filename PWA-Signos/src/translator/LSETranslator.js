@@ -72,7 +72,7 @@ const createSignotation = (graphemes, diacsInfo) => {
             for(let diac in diacsInfo){
                 if(diacsInfo[diac]["numApps"] > 1)
                     repRandN[0] = true;
-                diacSignotation.push({signotation: diacsInfo[diac]["signotation"], description: diacsInfo[diac]["description"]});
+                diacSignotation.push({signotation: diacsInfo[diac]["signotation"], description: diacsInfo[diac]["explanation"].join(". ")});
             }
             if(diacSignotation.length > 0)
                 signotation.push(diacSignotation);
@@ -144,8 +144,8 @@ const responseToSignotation = (response) => {
         });
     
         graphemes["HEAD"].forEach((grapheme) => {
-                headToSignotation(grapheme);
-            });
+            headToSignotation(grapheme);
+        });
 
         graphemes["DIAC"].forEach((grapheme) => {
             diacToSignotation(grapheme, diacsInfo);
