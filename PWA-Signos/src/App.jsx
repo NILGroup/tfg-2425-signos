@@ -156,18 +156,21 @@ const QuitButton = ({ dispatch }) => {
 };
 
 const HelpCard = ({ dispatch }) => {
+
+    const text = "Traduciendo la SignoEscritura es una herramienta para facilitar la interpretación de \
+    la lengua de signos que permite al usuario obtener una representación visual de un signo \
+    partiendo de su representación en SignoEscritura, ya sea por medio de una imagen o un \
+    dibujo.";
+
     return (
         <div className="fixed inset-0 z-10 bg-black/30 flex justify-center items-center animate-fadeIn">
                 <div className="relative rounded-xl flex flex-col gap-2 p-3 md:p-4 mx-3 md:mx-0 bg-[#c5dbe6] rounded-xl
-                transition-all duration-300 ease-in-out transform animate-scaleIn">
+                transition-all duration-300 ease-in-out transform animate-scaleIn lg:max-w-[1200px]">
                   <QuitButton dispatch={dispatch} />
                   <div className="flex flex-col items-center text-justify">
                     <h1 className="text-center text-xl md:text-2xl text-center text-[#4682A9] font-bold">Traduciendo la Signoescritura</h1>
-                    <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
-                    <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
-                    <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
-                    <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
-                    <p className="text-l md:text-xl text-center text-[#4682A9]">prueba</p>
+                    <p className="text-l md:text-xl text-center text-[#4682A9]">{text}</p>
+                    
                   </div>
                 </div>
             </div>
