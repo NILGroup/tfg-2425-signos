@@ -10,7 +10,7 @@ import { Image, Error, Loading } from "./ImageMode.jsx";
 const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, error, dispatch }) => {
     return (
         <div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_1fr]">
-            <Canvas dispatch={dispatch} showCanvas={image == null}/>
+            {!image && <Canvas dispatch={dispatch} showCanvas={image == null}/>}
             
             <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error} signotation={signotation} selectedSignotation={selectedSignotation} dispatch={dispatch}/>
 
@@ -166,8 +166,8 @@ const Canvas = ({showCanvas, dispatch}) => {
 
    
     return (
-        <>
-        {showCanvas && <div className="flex flex-col  justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mb-0 md:row-start-2 md:row-end-4 md:col-start-1 md:col-end-3">
+        
+       <div className="flex flex-col  justify-center items-center gap-5 md:gap-10 mx-5 mb-5 md:mb-0 md:row-start-2 md:row-end-4 md:col-start-1 md:col-end-3">
             <canvas
                 ref={canvasRef}
                 className="border-4 border-[#4682A9] rounded-xl bg-[#FFFFFF] w-full md:max-w-[500px] lg:max-w-[600px] xl:max-w-[800px] 2xl:max-w-[1000px] h-[65vh]"
@@ -179,8 +179,8 @@ const Canvas = ({showCanvas, dispatch}) => {
                 <UploadCanvasButton/> 
                 
             </div>
-        </div>}
-        </>
+        </div>
+        
     );
 
 }
