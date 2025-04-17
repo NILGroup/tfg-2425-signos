@@ -10,7 +10,7 @@ import { Image, Error, Loading } from "./ImageMode.jsx";
 const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotation, videos, error, dispatch }) => {
     return (
         <div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_80px] md:grid-cols-[1fr_1fr]">
-            {!image && <Canvas dispatch={dispatch} showCanvas={image == null}/>}
+            {!image && <Canvas dispatch={dispatch}/>}
             
             <Image image={image} imageName={imageName} videos={videos} isLoading={isLoading} error={error} signotation={signotation} selectedSignotation={selectedSignotation} dispatch={dispatch}/>
 
@@ -35,7 +35,7 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
     );
 };
 
-const Canvas = ({showCanvas, dispatch}) => {
+const Canvas = ({dispatch}) => {
     const canvasRef = useRef(null);
     const toolbarRef = useRef(null);
 
