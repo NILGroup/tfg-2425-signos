@@ -3,7 +3,7 @@ import clearIcon from "../assets/delete.svg";
 import checkIcon from "../assets/check.svg";
 import Signotation from "./Signotation.jsx";  
 import Videos from "./Videos.jsx";
-import { SelectImageButton, MoreInfoButton } from "./ImageMode.jsx";
+import { MoreInfoButton } from "./ImageMode.jsx";
 import { connection } from "../connection.js";
 import { Image, Error, Loading } from "./ImageMode.jsx";
 
@@ -24,7 +24,7 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
 
             {image && <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3 md:mb-10"}`}>
 				
-                <SelectImageButton dispatch={dispatch}/>
+                <CanvasButton dispatch={dispatch}/>
 
                 <MoreInfoButton dispatch={dispatch}/>
 			
@@ -214,5 +214,25 @@ const UploadCanvasButton = () => {
         </button>
     );
 }
+
+const CanvasButton = ({dispatch}) => {
+    const handleClick = () => {
+        dispatch({ type: "canvas_mode" });
+    };
+
+    return (
+        <button
+        onClick={handleClick}
+        className="border-[#4682A9] border-6 hover:bg-[#4682A9] rounded-full w-20 h-20 cursor-pointer">
+            <img
+                src={checkIcon}
+                id="upload"
+                alt="Upload Icon"
+                className="hover:brightness-0 hover:invert"
+            />
+        </button>
+    );
+}
+
 
 export default CanvasMode;

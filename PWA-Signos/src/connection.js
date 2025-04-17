@@ -14,7 +14,6 @@ export const connection = async (dispatch, image) => {
             }
         );
         const responseData = await response.json();
-        console.log(responseData);
         const [signotationElems, signotation] = await responseToSignotation(responseData);
         dispatch({ type: "set_signotation", signotation: signotationElems });
         const url = new URL(
@@ -29,7 +28,6 @@ export const connection = async (dispatch, image) => {
             method: "GET",
         });
         const videosData = await videosResponse.json();
-        console.log(videosData);
         dispatch({ type: "signario_response", videos: videosData["signs"] });
     } catch (error) {
         const message = error.message.includes("Failed to fetch")
