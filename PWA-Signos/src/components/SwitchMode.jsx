@@ -8,15 +8,15 @@ const SwitchMode = ({ screen, dispatch }) => {
     };
 
     return (
-        <div className="mt-2 md:mt-0 mb-2 md:mb-0 md:ml-3 lg:ml-6 flex flex-row items-center justify-center md:w-fit md:flex md:flex-col md:items-center md:justify-center">
+        <div className="mt-2 md:mt-0 mb-2 md:mb-0 md:ml-3 lg:ml-5 flex flex-row items-center justify-center md:w-fit md:flex md:flex-col md:items-center md:justify-center">
             <button
                 onClick={handleModeChange}
-                className={`border-3 md:border-4 max-md:rounded-l-xl md:rounded-t-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${
+                className={`border-3 lg:border-4 max-md:rounded-l-xl md:rounded-t-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${
                     screen === "image_screen" ? "bg-[#4682A9]" : "max-md:border-r-2 md:border-b-3"
                 }`}
             >
                 <svg
-                    className="h-[28px] w-[28px] md:h-[32px] md:w-[32px] lg:h-[36px] lg:w-[36px]"
+                    className="h-[28px] w-[28px] md:h-[30px] md:w-[30px] lg:h-[36px] lg:w-[36px]"
                     
                     viewBox="-0.5 -0.5 25 25"
                     fill="none"
@@ -47,12 +47,12 @@ const SwitchMode = ({ screen, dispatch }) => {
             </button>
             <button
                 onClick={handleModeChange}
-                className={`border-3 md:border-4 max-md:rounded-r-xl md:rounded-b-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${
+                className={`border-3 lg:border-4 max-md:rounded-r-xl md:rounded-b-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${
                     screen === "canvas_screen" ? "bg-[#4682A9]" : "max-md:border-l-2 md:border-t-3"
                 }`}
             >
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                   className="h-[28px] w-[28px] md:h-[32px] md:w-[32px] lg:h-[36px] lg:w-[36px] pl-1">
+                   className="h-[28px] w-[28px] md:h-[30px] md:w-[30px] lg:h-[36px] lg:w-[36px] pl-0.5 md:pl-1">
                     
 
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

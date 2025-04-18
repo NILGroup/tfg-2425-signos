@@ -4,13 +4,13 @@ import { useRef } from "react";
 const Videos = ({videos, isLoading}) => {
   
     return (<>{videos && !isLoading && (
-      <div className='flex items-center justify-center my-3 md:mt-8 md:row-start-2 md:row-end-4 md:col-start-2 md:col-end-3  md:mr-8'>
-          <div className="flex flex-col overflow-y-scroll h-full mx-4 md:mx-0 max-w-90 md:max-w-250 max-h-100 md:max-h-200 border-4 border-[#4682A9] rounded-xl 
-                  md:[&::-webkit-scrollbar]:w-1.5
-                  md:[&::-webkit-scrollbar-track]:rounded-full
-                  md:[&::-webkit-scrollbar-track]:bg-neutral-700
-                  md:[&::-webkit-scrollbar-thumb]:rounded-full
-                  md:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+      <div className='flex items-center justify-center my-3 lg:mt-8 lg:row-start-2 lg:row-end-4 lg:col-start-2 lg:col-end-3  lg:mr-8'>
+          <div className="flex flex-col overflow-y-scroll h-full mx-4 lg:mx-0 max-w-90 lg:max-w-250 max-h-100 lg:max-h-200 border-4 border-[#4682A9] rounded-xl 
+                  lg:[&::-webkit-scrollbar]:w-1.5
+                  lg:[&::-webkit-scrollbar-track]:rounded-full
+                  lg:[&::-webkit-scrollbar-track]:bg-neutral-700
+                  lg:[&::-webkit-scrollbar-thumb]:rounded-full
+                  lg:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
             {videos.map((_, index) => (
               <Video 
                 key={index}
@@ -34,7 +34,7 @@ const Video = ({ index, lastIndex, info}) => {
 
     return (
         <div onMouseEnter={play} onMouseLeave={stop}
-        className={`flex flex-col md:flex-row
+        className={`flex flex-col lg:flex-row
                     ${index !== lastIndex ? "border-solid border-b-4 border-[#4682A9]" : ""}`}>
             
             <video className='max-h-[200px] max-w-[350px] m-2' loop

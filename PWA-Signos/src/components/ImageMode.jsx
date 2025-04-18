@@ -10,8 +10,8 @@ import { connection } from "../connection.js";
 const ImageMode = ({isLoading, file, image, imageName, signotation, selectedSignotation, videos, error, dispatch}) => {
   return (
 
-	<div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[80px_1fr_120px] md:grid-cols-[1fr_1fr]">
-		{!image && <div className={`flex flex-col flex-1 justify-center items-center gap-4 mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:row-start-1 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
+	<div className="flex flex-1 flex-col md:min-h-full md:grid md:grid-cols-2 md:grid-rows-3 md:grid-rows-[auto_1fr_auto] md:grid-cols-[1fr_1fr]">
+		{!image && <div className={`flex flex-col flex-1 justify-center items-center gap-4 mx-3 md:mx-3 mt-2 md:mt-0 mb-4 md:mb-0 md:content-center md:row-start-1 md:row-end-3 md:col-start-1 ${!videos && !isLoading ? "md:col-end-3" : "md:col-end-2"}`}>
 			<ExplText/>
 			<ExamplesButton dispatch={dispatch}/>
 		</div>}
@@ -26,7 +26,7 @@ const ImageMode = ({isLoading, file, image, imageName, signotation, selectedSign
 		
 		<Videos videos={videos} isLoading={isLoading}/> 
 
-		<div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3 md:mb-10"}`}>
+		<div className={`flex justify-center items-center gap-10 my-4 md:my-0 md:mb-3 lg:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3"}`}>
 				
 			<SelectImageButton dispatch={dispatch}/>
 			
@@ -43,7 +43,7 @@ const ImageMode = ({isLoading, file, image, imageName, signotation, selectedSign
 const ExplText = () => {
   return (
   <>
-    <div className="flex flex-col gap-4 md:gap-10 mx-3 md:mx-0"> <h1 className="text-[#4682A9] font-bold text-lg md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
+    <div className="flex flex-col gap-4 md:gap-10"> <h1 className="text-[#4682A9] font-bold text-lg md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
     <h2 className="text-[#4682A9] text-lg md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>
   </>
   )
@@ -58,8 +58,8 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
   return (
     <>
     {!fileSelected && 
-    <button onClick={handleClick} className="group border-[#4682A9] md:mb-4 border-3 md:border-4 hover:bg-[#4682A9] rounded-full w-58 h-12 md:w-70 md:h-15 cursor-pointer">
-      <p className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-lg md:text-xl">Prueba con un ejemplo</p>
+    <button onClick={handleClick} className="group border-[#4682A9] lg:mb-4 border-3 lg:border-4 hover:bg-[#4682A9] rounded-full w-58 h-12 lg:w-70 lg:h-15 cursor-pointer">
+      <p className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-lg lg:text-xl">Prueba con un ejemplo</p>
     </button>}
     </>
   );
@@ -68,7 +68,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
 export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation, dispatch}) => {
     return (<>{image && <div className={`flex flex-col-reverse md:flex-col flex-1 items-center justify-center md:gap-5 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         {selectedSignotation && <Description signotation={signotation} selectedSignotation={selectedSignotation}/>}
-        <img className="mx-2 md:mx-0 md:max-w-[650px] lg:max-w-[800px] scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <img className="mx-2 md:mx-0 md:max-w-[350px] lg:max-w-[800px] scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }
@@ -95,7 +95,7 @@ export const SelectImageButton = ({dispatch}) => {
             />
             
             {/*Choose image buttton*/}
-            <button onClick={() => input.current.click()} className="group border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
+            <button onClick={() => input.current.click()} className="group button cursor-pointer">
               <img src={uploadIcon} alt="Upload Icon" className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
@@ -115,8 +115,8 @@ const UploadImageButton = ({dispatch, image, showButton}) => {
   return (
     <>   
       {/*Check button*/}
-      {showButton && <button onClick={handleFileUpload} disabled={!image} className={`group border-[#4682A9] border-4 md:border-6 rounded-full w-18 md:w-20 h-18 md:h-20 ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
-        <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+      {showButton && <button onClick={handleFileUpload} disabled={!image} className={`group button ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
+        <img src={checkIcon} alt="Send image" className={`${!image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
       </button>}
     </>
   );
@@ -132,7 +132,7 @@ export const MoreInfoButton = ({dispatch}) => {
   return (
     <>
     {/*More info buttton*/}
-    <button onClick={handleMoreInfoClick} className="group border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
+    <button onClick={handleMoreInfoClick} className="group button cursor-pointer">
         <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
     </>  

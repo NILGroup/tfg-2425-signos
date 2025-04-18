@@ -50,6 +50,7 @@ const Canvas = ({dispatch}) => {
 
         let canvasOffsetX = canvas.offsetLeft;
         let canvasOffsetY = canvas.offsetTop;
+        
 
         let rect = canvas.getBoundingClientRect();
         canvas.width = rect.width;
@@ -62,6 +63,7 @@ const Canvas = ({dispatch}) => {
             canvas.width = rect.width;
             canvas.height = rect.height;
         };
+
 
         let drawing = false;
 
@@ -190,7 +192,7 @@ const ClearButton = () => {
     return (
         <button
         id="clear"
-        className="border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
+        className="button cursor-pointer">
             <img
                 src={clearIcon}
                 id="clear"
@@ -205,7 +207,7 @@ const UploadCanvasButton = () => {
     return (
         <button
         id="upload"
-        className="border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
+        className="button cursor-pointer">
             <img
                 src={checkIcon}
                 id="upload"
@@ -224,7 +226,7 @@ const CanvasButton = ({dispatch}) => {
     return (
         <button
         onClick={handleClick}
-        className="border-[#4682A9] border-4 md:border-6 hover:bg-[#4682A9] rounded-full w-18 md:w-20 h-18 md:h-20 cursor-pointer">
+        className="button cursor-pointer">
             <img
                 src={drawIcon}
                 id="upload"
