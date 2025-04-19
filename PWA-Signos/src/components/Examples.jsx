@@ -13,7 +13,7 @@ const Examples = ({dispatch}) => {
 
     return (
         <div className="flex flex-col min-w-screen">
-            <div className="flex flex-row w-full mt-2 items-center ">
+            <div className="grid grid-cols-3 w-full mt-2 items-center ">
                 <BackButton dispatch={dispatch}/>
                 <h1 className="text-center text-[#4682A9] font-bold text-2xl md:text-3xl flex-grow">Ejemplos</h1>
             </div>

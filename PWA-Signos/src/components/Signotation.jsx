@@ -7,7 +7,7 @@ const Signotation = ({ signotation, isLoading, dispatch}) => {
   return (
     <>
       {signotation && !isLoading && (
-        <div className="flex flex-col items-center justify-center gap-4  mt-3 md:mt-0 md:row-start-1 md:row-end-1 md:col-start-1 md:col-end-3">
+        <div className="flex flex-col items-center justify-center gap-2 mt-3 md:mt-3 md:row-start-1 md:row-end-1 md:col-start-1 md:col-end-3">
           <h1 className="signotacion text-[#4682A9] font-bold text-2xl">
             SIGNOTACIÓN
           </h1>
