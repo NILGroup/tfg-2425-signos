@@ -50,6 +50,8 @@ const Canvas = ({dispatch}) => {
 
         let canvasOffsetX = canvas.offsetLeft;
         let canvasOffsetY = canvas.offsetTop;
+        let scrollX = window.scrollX;
+        let scrollY = window.scrollY;
         
 
         let rect = canvas.getBoundingClientRect();
@@ -64,6 +66,10 @@ const Canvas = ({dispatch}) => {
             canvas.height = rect.height;
         };
 
+        window.onscroll = () => {
+            scrollX = window.scrollX;
+            scrollY = window.scrollY;
+        };
 
         let drawing = false;
 
@@ -71,8 +77,8 @@ const Canvas = ({dispatch}) => {
             drawing = true;
             canvas.onmousemove = (event) => {
                 if (!drawing) return;
-                const x = event.clientX - canvasOffsetX;
-                const y = event.clientY - canvasOffsetY;
+                const x = event.clientX - canvasOffsetX + scrollX;
+                const y = event.clientY - canvasOffsetY + scrollY;
                 draw(x, y);
             };
         };
@@ -93,8 +99,8 @@ const Canvas = ({dispatch}) => {
             e.preventDefault();
             drawing = true;
             const touch = e.touches[0];
-            const x = touch.clientX - canvasOffsetX;
-            const y = touch.clientY - canvasOffsetY;
+            const x = touch.clientX - canvasOffsetX + scrollX;
+            const y = touch.clientY - canvasOffsetY + scrollY;
             ctx.beginPath();
             ctx.moveTo(x, y);
         };
@@ -103,8 +109,8 @@ const Canvas = ({dispatch}) => {
             if (!drawing) return;
             e.preventDefault();
             const touch = e.touches[0];
-            const x = touch.clientX - canvasOffsetX;
-            const y = touch.clientY - canvasOffsetY;
+            const x = touch.clientX - canvasOffsetX + scrollX;
+            const y = touch.clientY - canvasOffsetY + scrollY;
             draw(x, y);
         };
 
