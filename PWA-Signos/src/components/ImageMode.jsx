@@ -65,10 +65,10 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
   );
 }
 
-export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation, dispatch}) => {
+export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation}) => {
     return (<>{image && <div className={`flex flex-col-reverse md:flex-col flex-1 items-center justify-center md:gap-5 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         {selectedSignotation && <Description signotation={signotation} selectedSignotation={selectedSignotation}/>}
-        <img className="mx-2 md:mx-0 md:max-w-[350px] lg:max-w-[800px] scale-80 md:scale-100 border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <img className="mx-2 md:mx-0 md:max-w-[325px] lg:max-w-[400px] xl:max-w-[600px] 2xl:max-w-[800px] scale-80 md:scale-100 border-3 md:border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg"> {imageName} </p> 
         </div>}</>)
 }

@@ -5,12 +5,12 @@ const Videos = ({videos, isLoading}) => {
   
     return (<>{videos && !isLoading && (
       <div className='flex items-center justify-center my-3 lg:mt-8 lg:row-start-2 lg:row-end-4 lg:col-start-2 lg:col-end-3  lg:mr-8'>
-          <div className="flex flex-col overflow-y-scroll h-full mx-4 lg:mx-0 max-w-90 lg:max-w-250 max-h-100 lg:max-h-200 border-4 border-[#4682A9] rounded-xl 
-                  lg:[&::-webkit-scrollbar]:w-1.5
-                  lg:[&::-webkit-scrollbar-track]:rounded-full
-                  lg:[&::-webkit-scrollbar-track]:bg-neutral-700
-                  lg:[&::-webkit-scrollbar-thumb]:rounded-full
-                  lg:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+          <div className="flex flex-col overflow-y-scroll h-full mx-4 lg:mx-0 max-w-90 lg:max-w-250 max-h-100 md:max-h-130 lg:max-h-135 xl:max-h-200 border-3 md:border-4 border-[#4682A9] rounded-xl 
+                  [&::-webkit-scrollbar]:w-1.5
+                  [&::-webkit-scrollbar-track]:rounded-full
+                  [&::-webkit-scrollbar-track]:bg-neutral-700
+                  [&::-webkit-scrollbar-thumb]:rounded-full
+                  [&::-webkit-scrollbar-thumb]:bg-neutral-500">
             {videos.map((_, index) => (
               <Video 
                 key={index}
