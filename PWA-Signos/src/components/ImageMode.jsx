@@ -116,7 +116,7 @@ const UploadImageButton = ({dispatch, image, showButton}) => {
     <>   
       {/*Check button*/}
       {showButton && <button onClick={handleFileUpload} disabled={!image} className={`group button ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
-        <img src={checkIcon} alt="Send image" className={`${!image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+        <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
       </button>}
     </>
   );

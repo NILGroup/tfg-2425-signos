@@ -42,7 +42,7 @@ const reducer = (state, action) => {
         state.imageName = null;
         state.file = null;
       }
-      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name, error: null}
+      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name,  selectedSignotation: null, error: null}
     case 'set_signotation':
       return { ...state, signotation: action.signotation, error: null}
     case 'select_signotation':
