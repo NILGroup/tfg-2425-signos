@@ -27,7 +27,6 @@ const diacToSignotation = (diac, diacsInfo) => {
 
       } else {
         diacsInfo[diac_shape[diac["grapheme"]["SHAPE"]]]["numApps"]++;
-        //diacsInfo[diac_shape[diac["grapheme"]["SHAPE"]]]["explanation"].push(diac["explanation"]["text"]);
       }
     }
 };
