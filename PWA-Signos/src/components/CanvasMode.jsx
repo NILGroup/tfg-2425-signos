@@ -17,7 +17,7 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
 
             {isLoading && <Loading/>}
 
-            <Signotation dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
+            <Signotation selectedSignotation={selectedSignotation} dispatch={dispatch} signotation={signotation} isLoading={isLoading}/>
 
             {error && <Error error={error}/>}
 

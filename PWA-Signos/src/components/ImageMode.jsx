@@ -22,7 +22,7 @@ const ImageMode = ({isLoading, file, image, imageName, signotation, selectedSign
 
 		{error && <Error error={error}/>}
 		
-		<Signotation signotation={signotation} isLoading={isLoading} dispatch={dispatch}/>
+		<Signotation selectedSignotation={selectedSignotation} signotation={signotation} isLoading={isLoading} dispatch={dispatch}/>
 		
 		<Videos videos={videos} isLoading={isLoading}/> 
 
