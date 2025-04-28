@@ -23,7 +23,7 @@ const CanvasMode = ({isLoading, image, imageName, signotation, selectedSignotati
 
             <Videos videos={videos} isLoading={isLoading}/>
 
-            {image && <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3 md:mb-10"}`}>
+            {image && <div className={`flex justify-center items-end gap-10 my-4 md:my-0 md:mb-4 lg:mb-8 md:col-start-1 ${!videos && !isLoading && !error ? "md:mb-8 md:row-start-3 md:row-end-4 md:col-end-3": "md:col-end-2 md:row-start-3 md:row-end-3 md:mb-10"}`}>
 				
                 <CanvasButton dispatch={dispatch}/>
 
