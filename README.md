@@ -24,6 +24,10 @@ Acceder al directorio del proyecto
 ```
 cd tfg-2425-signos/
 ```
+Acceder al directorio de la PWA
+```
+cd PWA-Signos/
+```
 Instalar las dependencias
 ```
 npm install
@@ -31,11 +35,6 @@ npm install
 
 ## Ejecución
 Pasos para ejecutar la aplicación en modo desarrollo de forma local:
-
-Acceder al directorio de la PWA
-```
-cd PWA-Signos/
-```
 Ejecutar la aplicación
 ```
 npm run dev
