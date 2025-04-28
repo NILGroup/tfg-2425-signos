@@ -115,8 +115,9 @@ const UploadImageButton = ({dispatch, image, showButton}) => {
   return (
     <>   
       {/*Check button*/}
-      {showButton && <button onClick={handleFileUpload} disabled={!image} className={`group button ${image ? "hover:bg-[#4682A9] cursor-pointer" : "cursor-not-allowed"}`}>  
-        <img src={checkIcon} alt="Send image" className={`${image ? "group-hover:brightness-0 group-hover:invert" : ""}`}/>
+      {showButton && <button onClick={handleFileUpload} disabled={!image} className={` border-[#4682A9] border-4 lg:border-6 rounded-full w-18 md:w-16 lg:w-20 h-18 md:h-16 lg:h-20
+                                                                                     ${!image ? "" : "group hover:bg-[#4682A9]"} ${image ? "cursor-pointer" : "cursor-not-allowed"}`}>  
+        <img src={checkIcon} alt="Send image" className={`${!image ? "" : "group-hover:brightness-0 group-hover:invert"}`}/>
       </button>}
     </>
   );
