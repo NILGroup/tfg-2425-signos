@@ -19,6 +19,20 @@ const INITIAL_STATE = {
     error: null,
 };
 
+const CANVAS_STATE = {
+  screen: "canvas_screen",
+  isLoading: false,
+  helpVisible: false,
+  switcherVisible: true,
+  file: null,
+  image: null,
+  imageName: null,
+  signotation: null,
+  selectedSignotation: null,
+  videos: null,
+  error: null,
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'canvas_mode':
@@ -32,16 +46,15 @@ const reducer = (state, action) => {
         URL.revokeObjectURL(state.image);
       }
       state = INITIAL_STATE;
-      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name, error: null}
+      return { ...state,  file: action.image, image: URL.createObjectURL(action.image), imageName: action.image.name}
     case 'upload_image':
       return { ...state, error: null, selectedSignotation: null}
     case 'upload_canvas':
       if (state.image) {
         URL.revokeObjectURL(state.image);
-        state.imageName = null;
-        state.file = null;
       }
-      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name,  selectedSignotation: null, error: null}
+      state = CANVAS_STATE;
+      return { ...state, file: action.file, image: URL.createObjectURL(action.file), imageName: action.file.name}
     case 'set_signotation':
       return { ...state, signotation: action.signotation, error: null}
     case 'select_signotation':
