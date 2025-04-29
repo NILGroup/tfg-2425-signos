@@ -62,7 +62,8 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
   return (
     <>
     {!fileSelected && 
-    <button onClick={handleClick} className="group border-[#4682A9] lg:mb-4 border-3 lg:border-4 hover:bg-[#4682A9] rounded-full w-58 h-12 lg:w-70 lg:h-15 cursor-pointer">
+    <button onClick={handleClick} className="group border-[#4682A9] lg:mb-4 border-3 lg:border-4 hover:bg-[#4682A9] rounded-full w-58 h-12 lg:w-70 lg:h-15 cursor-pointer"
+                                              aria-label="Ver ejemplos de SignoEscritura">
       <p className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-lg lg:text-xl">Prueba con un ejemplo</p>
     </button>}
     </>
@@ -72,7 +73,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
 export const Image = ({image, imageName, videos, isLoading, error, signotation, selectedSignotation}) => {
     return (<>{image && <div className={`flex flex-col-reverse md:flex-col flex-1 items-center justify-center md:gap-5 md:row-start-2 md:row-end-3 md:col-start-1 ${!videos && !isLoading && !error ? "md:col-end-3" : "md:col-end-2"}`}> 
         {selectedSignotation && <Description signotation={signotation} selectedSignotation={selectedSignotation}/>}
-        <img className="mx-2 md:mx-0 md:max-w-[325px] lg:max-w-[400px] xl:max-w-[600px] 2xl:max-w-[800px] scale-80 md:scale-100 border-3 md:border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="Signoescritura"/> 
+        <img className="mx-2 md:mx-0 md:max-w-[325px] lg:max-w-[400px] xl:max-w-[600px] 2xl:max-w-[800px] scale-80 md:scale-100 border-3 md:border-4 rounded-xl border-[#4682A9] border-solid" src={image} alt="SignoEscritura"/> 
         <p className="hidden md:block text-[#4682A9] font-bold text-lg cursor-default"> {imageName} </p> 
         </div>}</>)
 }
@@ -99,7 +100,7 @@ export const SelectImageButton = ({dispatch}) => {
             />
             
             {/*Choose image buttton*/}
-            <button onClick={() => input.current.click()} className="group button cursor-pointer">
+            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar imagen">
               <img src={uploadIcon} alt="Upload Icon" className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
@@ -120,7 +121,8 @@ const UploadImageButton = ({dispatch, image, showButton}) => {
     <>   
       {/*Check button*/}
       {showButton && <button onClick={handleFileUpload} disabled={!image} className={` border-[#4682A9] border-4 lg:border-6 rounded-full w-18 md:w-16 lg:w-20 h-18 md:h-16 lg:h-20
-                                                                                     ${!image ? "" : "group hover:bg-[#4682A9]"} ${image ? "cursor-pointer" : "cursor-not-allowed"}`}>  
+                                                                                     ${!image ? "" : "group hover:bg-[#4682A9]"} ${image ? "cursor-pointer" : "cursor-not-allowed"}`}
+                                                                                     aria-label="Enviar imagen">  
         <img src={checkIcon} alt="Send image" className={`${!image ? "" : "group-hover:brightness-0 group-hover:invert"}`}/>
       </button>}
     </>
@@ -137,7 +139,7 @@ export const MoreInfoButton = ({dispatch}) => {
   return (
     <>
     {/*More info buttton*/}
-    <button onClick={handleMoreInfoClick} className="group button cursor-pointer">
+    <button onClick={handleMoreInfoClick} className="group button cursor-pointer" aria-label="Más información">
         <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
     </>  

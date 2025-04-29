@@ -131,6 +131,7 @@ const QuitButton = ({ dispatch }) => {
             <button
                 onClick={handleQuitButtonClick}
                 className="group border-[#4682A9] border-2 md:border-3 hover:bg-[#4682A9] rounded-full w-8 h-8 md:w-10 md:h-10 cursor-pointer"
+                aria-label="Cerrar ayuda"
             >
                 
                 <svg

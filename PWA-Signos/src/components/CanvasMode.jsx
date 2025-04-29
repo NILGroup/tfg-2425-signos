@@ -204,6 +204,7 @@ const ClearButton = () => {
                 id="clear"
                 alt="Clear Icon"
                 className="hover:brightness-0 hover:invert"
+                aria-label="Limpiar canvas"
             />
         </button>
     );
@@ -219,6 +220,7 @@ const UploadCanvasButton = () => {
                 id="upload"
                 alt="Upload Icon"
                 className="hover:brightness-0 hover:invert"
+                aria-label="Enviar imagen"
             />
         </button>
     );
