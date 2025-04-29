@@ -53,10 +53,9 @@ const BackButton = ({dispatch}) => {
   
     return (
       <>
-      {/*More info buttton*/}
       <button onClick={handleBack} className="group border-[#4682A9] border-3 md:border-5 hover:bg-[#4682A9] rounded-full w-10 h-10 md:w-16 md:h-16 ml-4 md:ml-10 cursor-pointer"
-                                              aria-label="Volver">
-          <img src={backIcon} alt="More info Icon" className="group-hover:brightness-0 group-hover:invert"/>
+                                              aria-label="Volver atrás">
+          <img src={backIcon} alt="Volver atrás" className="group-hover:brightness-0 group-hover:invert"/>
        </button>
       </> );
 }
