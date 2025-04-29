@@ -93,7 +93,7 @@ function App() {
 
     return (
         <div className="flex flex-col min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[auto_1fr] md:grid-cols-[auto_1fr]">
-            <Header dispatch={dispatch}/>
+            <Header dispatch={dispatch} isLoading={state.isLoading}/>
             {state.switcherVisible && (
                 <SwitchMode dispatch={dispatch} screen={state.screen} />
             )}
@@ -104,13 +104,14 @@ function App() {
     );
 }
 
-const Header = ({dispatch}) => {
+const Header = ({dispatch, isLoading}) => {
     const handleClick = () => {
+        if (isLoading) return;
         dispatch({ type: "image_mode" });
     }
 
     return (
-        <div onClick={handleClick} className="w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3 cursor-pointer">
+        <div onClick={handleClick} className={`w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3 ${isLoading ? "" : "cursor-pointer"}`}>
             <h1 className="text-2xl lg:text-3xl text-center text-[#4682A9] font-bold">       
                 Traduciendo la SignoEscritura
             </h1>
