@@ -40,8 +40,8 @@ const Example = ({index, url, wordSign, dispatch}) => {
         dispatch({type: 'example_selected', file: new File([blob], wordSign, { type: blob.type }), image: url, imageName: wordSign});
     };
 
-    return (<button onClick={exampleSelected} className="flex flex-col justify-center items-center gap-3 m-4 md:m-8"> 
-        <img className="border-3 md:border-4 md:max-h-82 md:max-w-125 rounded-xl border-[#4682A9] border-solid cursor-pointer" src={url} alt={wordSign}/> 
+    return (<button onClick={exampleSelected} aria-label={`Elegir ejemplo "${wordSign}"`} className="flex flex-col justify-center items-center gap-3 m-4 md:m-8"> 
+        <img alt={`SignoEscritura de "${wordSign}"`} className="border-3 md:border-4 md:max-h-82 md:max-w-125 rounded-xl border-[#4682A9] border-solid cursor-pointer" src={url}/> 
         <p className="text-[#4682A9] font-bold text-lg"> {wordSign} </p> 
     </button>);
 };
