@@ -111,8 +111,8 @@ const Header = ({dispatch, isLoading}) => {
     }
 
     return (
-        <div onClick={handleClick} className={`w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3 ${isLoading ? "cursor-default" : "cursor-pointer"}`}>
-            <h1 className="text-2xl lg:text-3xl text-center text-[#4682A9] font-bold">       
+        <div onClick={handleClick} className={`w-screen mt-2 lg:mt-4 mb-2 md:mb-0 md:col-start-1 md:col-end-3 ${isLoading ? "cursor-default" : "cursor-pointer"}`}>
+            <h1 className="text-2xl lg:text-4xl lg:mb-4 text-center text-[#4682A9] font-bold">       
                 Traduciendo la SignoEscritura
             </h1>
             <hr className="mx-2 mt-1 md:mx-2.5 md:mt-1.5 md:mb-1 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>

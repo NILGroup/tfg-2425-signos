@@ -42,7 +42,7 @@ const ButtonSignotation = ({ selectedSignotation, signotationText, i, j, dispatc
 
   return (
     <button onClick={handleClick} className={`${selectedSignotation && selectedSignotation.i == i && selectedSignotation.j == j ? "bg-[#4682A9]" : "hover:bg-[#91bbd6]"} group rounded-xl overflow-hidden cursor-pointer mx-1 px-4 py-2`}
-            aria-label="Seleccionar signotación para ver su descripción">
+            aria-label="Seleccionar este fragmento de signotación para ver su descripción">
       <h1 className={`${selectedSignotation && selectedSignotation.i == i && selectedSignotation.j == j ? "brightness-0 invert scale-110" : "group-hover:scale-110"}  text-[#4682A9] font-bold text-xl`}>
         {signotationText}
       </h1>

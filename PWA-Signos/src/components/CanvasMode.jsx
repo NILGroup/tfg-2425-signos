@@ -198,13 +198,13 @@ const ClearButton = () => {
     return (
         <button
         id="clear"
-        className="button cursor-pointer">
+        className="button cursor-pointer"
+        aria-label="Limpiar canvas" >
             <img
                 src={clearIcon}
                 id="clear"
-                alt="Clear Icon"
+                alt="Limpiar canvas"
                 className="hover:brightness-0 hover:invert"
-                aria-label="Limpiar canvas"
             />
         </button>
     );
@@ -214,13 +214,13 @@ const UploadCanvasButton = () => {
     return (
         <button
         id="upload"
-        className="button cursor-pointer">
+        className="button cursor-pointer"
+        aria-label="Enviar SignoEscritura">
             <img
                 src={checkIcon}
                 id="upload"
-                alt="Upload Icon"
+                alt="Enviar SignoEscritura"
                 className="hover:brightness-0 hover:invert"
-                aria-label="Enviar imagen"
             />
         </button>
     );
@@ -234,11 +234,12 @@ const CanvasButton = ({dispatch}) => {
     return (
         <button
         onClick={handleClick}
-        className="button cursor-pointer">
+        className="button cursor-pointer"
+        aria-label="Volver al modo dibujo" >
             <img
                 src={drawIcon}
                 id="upload"
-                alt="Upload Icon"
+                alt="Volver al modo dibujo"
                 className="hover:brightness-0 hover:invert"
             />
         </button>

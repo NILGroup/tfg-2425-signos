@@ -100,8 +100,8 @@ export const SelectImageButton = ({dispatch}) => {
             />
             
             {/*Choose image buttton*/}
-            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar imagen">
-              <img src={uploadIcon} alt="Upload Icon" className=" group-hover:brightness-0 group-hover:invert"/>
+            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar SignoEscritura">
+              <img src={uploadIcon} alt="Seleccionar SignoEscritura" className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
     );
@@ -122,8 +122,8 @@ const UploadImageButton = ({dispatch, image, showButton}) => {
       {/*Check button*/}
       {showButton && <button onClick={handleFileUpload} disabled={!image} className={` border-[#4682A9] border-4 lg:border-6 rounded-full w-18 md:w-16 lg:w-20 h-18 md:h-16 lg:h-20
                                                                                      ${!image ? "" : "group hover:bg-[#4682A9]"} ${image ? "cursor-pointer" : "cursor-not-allowed"}`}
-                                                                                     aria-label="Enviar imagen">  
-        <img src={checkIcon} alt="Send image" className={`${!image ? "" : "group-hover:brightness-0 group-hover:invert"}`}/>
+                                                                                     aria-label="Enviar SignoEscritura">  
+        <img src={checkIcon} alt="Enviar SignoEscritura" className={`${!image ? "" : "group-hover:brightness-0 group-hover:invert"}`}/>
       </button>}
     </>
   );
@@ -140,7 +140,7 @@ export const MoreInfoButton = ({dispatch}) => {
     <>
     {/*More info buttton*/}
     <button onClick={handleMoreInfoClick} className="group button cursor-pointer" aria-label="Más información">
-        <img src={QuestionIcon} alt="More info Icon" className=" group-hover:brightness-0 group-hover:invert"/>
+        <img src={QuestionIcon} alt="Más información" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
     </>  
   );
