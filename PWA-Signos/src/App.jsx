@@ -3,7 +3,6 @@ import "./App.css";
 import SwitchMode from "./components/SwitchMode.jsx";
 import ImageMode from "./components/ImageMode.jsx";
 import CanvasMode from "./components/CanvasMode.jsx";
-import QuestionIcon from "./assets/question.svg";
 import Examples from "./components/Examples.jsx";
 
 const INITIAL_STATE = {
@@ -94,7 +93,7 @@ function App() {
 
     return (
         <div className="flex flex-col min-h-full md:grid md:grid-cols-2 md:grid-rows-2 md:grid-rows-[auto_1fr] md:grid-cols-[auto_1fr]">
-            <Header />
+            <Header dispatch={dispatch}/>
             {state.switcherVisible && (
                 <SwitchMode dispatch={dispatch} screen={state.screen} />
             )}
@@ -105,12 +104,15 @@ function App() {
     );
 }
 
-const Header = () => {
+const Header = ({dispatch}) => {
+    const handleClick = () => {
+        dispatch({ type: "image_mode" });
+    }
+
     return (
-        <div className="w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3">
-            <h1 className="text-2xl lg:text-3xl text-center text-[#4682A9] font-bold">
-                {" "}
-                Traduciendo la SignoEscritura{" "}
+        <div onClick={handleClick} className="w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3 cursor-pointer">
+            <h1 className="text-2xl lg:text-3xl text-center text-[#4682A9] font-bold">       
+                Traduciendo la SignoEscritura
             </h1>
             <hr className="mx-2 mt-1 md:mx-2.5 md:mt-1.5 md:mb-1 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
         </div>
