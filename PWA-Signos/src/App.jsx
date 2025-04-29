@@ -111,7 +111,7 @@ const Header = ({dispatch, isLoading}) => {
     }
 
     return (
-        <div onClick={handleClick} className={`w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3 ${isLoading ? "" : "cursor-pointer"}`}>
+        <div onClick={handleClick} className={`w-screen mt-2 mb-2 md:mb-0 md:col-start-1 md:col-end-3 ${isLoading ? "cursor-default" : "cursor-pointer"}`}>
             <h1 className="text-2xl lg:text-3xl text-center text-[#4682A9] font-bold">       
                 Traduciendo la SignoEscritura
             </h1>
@@ -170,7 +170,7 @@ const HelpCard = ({ dispatch }) => {
                 <div className="relative rounded-xl flex flex-col gap-2 p-3 md:p-4 mx-3 md:mx-0 bg-[#c5dbe6] rounded-xl
                 transition-all duration-300 ease-in-out transform animate-scaleIn md:max-w-[600px] lg:max-w-[900px]">
                   <QuitButton dispatch={dispatch} />
-                  <div className="flex flex-col items-center gap-3 mx-2 md:mx-3">
+                  <div className="flex flex-col items-center gap-3 mx-2 md:mx-3 cursor-default">
                     <h1 className="text-center text-xl md:text-3xl text-center text-[#4682A9] font-bold">Traduciendo la Signoescritura</h1>
                     <p className="text-l md:text-xl text-[#4682A9] text-justify">{text}</p>      
                   </div>

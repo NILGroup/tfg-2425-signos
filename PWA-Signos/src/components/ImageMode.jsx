@@ -43,8 +43,12 @@ const ImageMode = ({isLoading, file, image, imageName, signotation, selectedSign
 const ExplText = () => {
   return (
   <>
-    <div className="flex flex-col gap-4 md:gap-10"> <h1 className="text-[#4682A9] font-bold text-lg md:text-xl lg:text-2xl md:expand-wide">Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación</h1>
-    <h2 className="text-[#4682A9] text-lg md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> </div>
+    <div className="flex flex-col gap-4 md:gap-10 cursor-default"> 
+      <h1 className="text-[#4682A9] font-bold text-lg md:text-xl lg:text-2xl md:expand-wide">
+      Selecciona una imagen de SignoEscritura para ver la representación del signo y su traducción a signotación
+      </h1>
+      <h2 className="text-[#4682A9] text-lg md:text-xl lg:text-2xl md:expand-wide pb-5">Cambiando de modo puedes dibujar el signo en Signoescritura para traducirlo.</h2> 
+    </div>
   </>
   )
 }
