@@ -100,8 +100,8 @@ export const SelectImageButton = ({dispatch}) => {
             />
             
             {/*Choose image buttton*/}
-            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar SignoEscritura">
-              <img src={uploadIcon} alt="Seleccionar SignoEscritura" className=" group-hover:brightness-0 group-hover:invert"/>
+            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar SignoEscritura del dispositivo">
+              <img src={uploadIcon} alt="Seleccionar SignoEscritura del dispositivo " className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
     );
