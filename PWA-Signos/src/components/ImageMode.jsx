@@ -63,7 +63,7 @@ const ExamplesButton = ({dispatch, fileSelected}) => {
     <>
     {!fileSelected && 
     <button onClick={handleClick} className="group border-[#4682A9] lg:mb-4 border-3 lg:border-4 hover:bg-[#4682A9] rounded-full w-58 h-12 lg:w-70 lg:h-15 cursor-pointer"
-                                              aria-label="Ver ejemplos de SignoEscritura">
+                                              aria-label="Ver ejemplos de SignoEscritura" title="Ejemplos de SignoEscritura">
       <p className="group-hover:brightness-0 group-hover:invert signotacion text-[#4682A9] font-bold text-lg lg:text-xl">Prueba con un ejemplo</p>
     </button>}
     </>
@@ -100,7 +100,7 @@ export const SelectImageButton = ({dispatch}) => {
             />
             
             {/*Choose image buttton*/}
-            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar SignoEscritura del dispositivo">
+            <button onClick={() => input.current.click()} className="group button cursor-pointer" aria-label="Seleccionar SignoEscritura del dispositivo" title="Seleccionar imagen">
               <img src={uploadIcon} alt="Seleccionar SignoEscritura del dispositivo " className=" group-hover:brightness-0 group-hover:invert"/>
             </button>
         </>
@@ -122,7 +122,7 @@ const UploadImageButton = ({dispatch, image, showButton}) => {
       {/*Check button*/}
       {showButton && <button onClick={handleFileUpload} disabled={!image} className={` border-[#4682A9] border-4 lg:border-6 rounded-full w-18 md:w-16 lg:w-20 h-18 md:h-16 lg:h-20
                                                                                      ${!image ? "" : "group hover:bg-[#4682A9]"} ${image ? "cursor-pointer" : "cursor-not-allowed"}`}
-                                                                                     aria-label="Enviar SignoEscritura">  
+                                                                                     aria-label="Enviar SignoEscritura" title="Enviar imagen">  
         <img src={checkIcon} alt="Enviar SignoEscritura" className={`${!image ? "" : "group-hover:brightness-0 group-hover:invert"}`}/>
       </button>}
     </>
@@ -139,7 +139,7 @@ export const MoreInfoButton = ({dispatch}) => {
   return (
     <>
     {/*More info buttton*/}
-    <button onClick={handleMoreInfoClick} className="group button cursor-pointer" aria-label="Más información">
+    <button onClick={handleMoreInfoClick} className="group button cursor-pointer" aria-label="Más información" title="Más información">
         <img src={QuestionIcon} alt="Más información" className=" group-hover:brightness-0 group-hover:invert"/>
      </button>
     </>  

@@ -14,7 +14,8 @@ const SwitchMode = ({ screen, dispatch }) => {
                 className={`border-3 lg:border-4 max-md:rounded-l-xl md:rounded-t-xl border-[#4682A9] border-solid px-1 py-1 lg:px-2 py-2 hover:cursor-pointer ${
                     screen === "image_screen" ? "bg-[#4682A9]" : "max-md:border-r-2 md:border-b-3"
                 }`}
-                aria-label="Cambiar modo para subir imagen">
+                aria-label="Cambiar modo para subir imagen"
+                title="Modo subir imagen">
                 <svg
                     className="h-[28px] w-[28px] md:h-[30px] md:w-[30px] lg:h-[36px] lg:w-[36px]"
                     
@@ -51,6 +52,7 @@ const SwitchMode = ({ screen, dispatch }) => {
                     screen === "canvas_screen" ? "bg-[#4682A9]" : "max-md:border-l-2 md:border-t-3"
                 }`}
                 aria-label="Cambiar modo para dibujar"
+                title="Modo canvas"
             >
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                    className="h-[28px] w-[28px] md:h-[30px] md:w-[30px] lg:h-[36px] lg:w-[36px] pl-0.5 md:pl-1">
