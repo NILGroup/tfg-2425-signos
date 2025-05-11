@@ -199,7 +199,8 @@ const ClearButton = () => {
         <button
         id="clear"
         className="button cursor-pointer"
-        aria-label="Limpiar canvas" >
+        aria-label="Limpiar canvas" 
+        title="Limpiar canvas">
             <img
                 src={clearIcon}
                 id="clear"
@@ -215,7 +216,8 @@ const UploadCanvasButton = () => {
         <button
         id="upload"
         className="button cursor-pointer"
-        aria-label="Enviar SignoEscritura">
+        aria-label="Enviar SignoEscritura"
+        title="Enviar imagen">
             <img
                 src={checkIcon}
                 id="upload"
@@ -235,7 +237,8 @@ const CanvasButton = ({dispatch}) => {
         <button
         onClick={handleClick}
         className="button cursor-pointer"
-        aria-label="Volver al modo dibujo" >
+        aria-label="Volver al modo dibujo" 
+        title="Modo dibujo">
             <img
                 src={drawIcon}
                 id="upload"
