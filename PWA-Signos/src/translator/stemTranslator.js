@@ -115,7 +115,10 @@ const stemToSignotation = (stem, arros) => {
             break;
     }
 
-    stem["signotation"] = dir === undefined ? undefined : '->:' + dir;
+    if(dir === undefined)
+        stem["signotation"] = undefined;
+    else
+        stem["signotation"] = dir === "" ? "->" : '->:' + dir;
     stem["extra"] = extra;
     stem["explanation"]["text"] += arroDescription + (extra === 'R' ? " y se repite" : "") + '.';
 };
