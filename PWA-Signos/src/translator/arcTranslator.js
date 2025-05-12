@@ -188,7 +188,7 @@ const fullArcs = (arc, arros) => {
     case "N":
     case "NE":
     case "NW":
-      arro = findClosest(cx, cy + h / 4, arros);
+      arro = findClosest(cx, cy + h / 3, arros);
       if (arro===undefined) break;
       if (arro[0]["ROT"] === "NW" || arro[0]["ROT"] === "W" || arro[0]["ROT"] === "SW")   // Arrow pointing to the left
         dir = "X";
@@ -198,7 +198,7 @@ const fullArcs = (arc, arros) => {
       break;
     case "E":
       if (arro===undefined) break;
-      arro = findClosest(cx - w / 4, cy, arros);
+      arro = findClosest(cx - w / 3, cy, arros);
       if (arro[0]["ROT"] === "NE" || arro[0]["ROT"] === "N" || arro[0]["ROT"] === "NW")   // Arrow pointing to the north
         dir = (shape === "s") ? "F" : "H";
       else if (arro[0]["ROT"] === "SE" || arro[0]["ROT"] === "S" || arro[0]["ROT"] === "SW")  // Arrow pointing to the south
@@ -208,7 +208,7 @@ const fullArcs = (arc, arros) => {
     case "S":
     case "SE":
     case "SW":
-      arro = findClosest(cx, cy - h / 4, arros);
+      arro = findClosest(cx, cy - h / 3, arros);
       if (arro===undefined) break;
       if (arro[0]["ROT"] === "NW" || arro[0]["ROT"] === "W" || arro[0]["ROT"] === "SW")   // Arrow pointing to the left
         dir = "X";
@@ -217,7 +217,7 @@ const fullArcs = (arc, arros) => {
       ini = (shape === "s") ? "F" : "H";
       break;
     case "W":
-      arro = findClosest(cx + w / 4, cy, arros);
+      arro = findClosest(cx + w / 3, cy, arros);
       if (arro===undefined) break;
       if (arro[0]["ROT"] === "NE" || arro[0]["ROT"] === "N" || arro[0]["ROT"] === "NW")   // Arrow pointing to the north
         dir = (shape === "s") ? "F" : "H";
