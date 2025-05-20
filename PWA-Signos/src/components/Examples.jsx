@@ -1,6 +1,6 @@
 import backIcon from '../assets/back.svg'
 import profesorSign from '../examples/profesor.png'
-import alicanteSign from '../examples/alicante.png'
+import puntoSign from '../examples/punto.png'
 import narizSign from '../examples/nariz.png'
 import hartoSign from '../examples/harto.png'
 import importaSign from '../examples/atiqueteimporta.png'
@@ -8,7 +8,7 @@ import importaSign from '../examples/atiqueteimporta.png'
 
 const Examples = ({dispatch}) => {
 
-    const examples = [[profesorSign, "Profesor"], [alicanteSign, "Alicante"], [narizSign, "Nariz"],
+    const examples = [[profesorSign, "Profesor"], [puntoSign, "Punto"], [narizSign, "Nariz"],
                         [hartoSign, "Harto"], [importaSign, "A ti qué te importa"]];
 
     return (
