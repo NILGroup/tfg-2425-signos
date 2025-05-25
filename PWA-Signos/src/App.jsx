@@ -189,7 +189,7 @@ const HelpCard = ({ dispatch }) => {
                 transition-all duration-300 ease-in-out transform animate-scaleIn md:max-w-[600px] lg:max-w-[900px]">
                   <QuitButton dispatch={dispatch} />
                   <div className="flex flex-col items-center gap-3 mx-2 md:mx-3 cursor-default">
-                    <h1 className="text-center text-xl md:text-3xl text-center text-[#4682A9] font-bold">Traduciendo la Signoescritura</h1>
+                    <h1 className="text-center text-xl md:text-3xl text-center text-[#4682A9] font-bold">TraduSE: Buscando signos con un lenguaje visual</h1>
                     <p className="text-l md:text-xl text-[#4682A9] text-justify">{text1}</p>
                     <p className="text-l md:text-xl text-[#4682A9] text-justify">{text2}</p> 
                   </div>
