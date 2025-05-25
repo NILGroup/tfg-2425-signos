@@ -175,10 +175,13 @@ const QuitButton = ({ dispatch }) => {
 
 const HelpCard = ({ dispatch }) => {
 
-    const text = "Traduciendo la SignoEscritura es una herramienta para facilitar la interpretación de \
-    la lengua de signos que permite al usuario obtener una representación visual de un signo \
-    partiendo de su representación en SignoEscritura, ya sea por medio de una imagen o un \
-    dibujo.";
+    const text1 = "TraduSE es una aplicación desarrollada para facilitar la \
+                interpretación y el aprendizaje de la lengua de signos mediante el uso de la SignoEscritura, permitiendo \
+                al usuario buscar la representación de un signo a partir de este lenguaje visual.";
+    const text2 = "Su uso está especialmente pensado como un recurso complementario para personas sordas en \
+                entornos académicos, así como para signantes, intérpretes y estudiantes de lengua de \
+                signos. TraduSE sirve de apoyo en el proceso de aprendizaje y favorece la accesibilidad \
+                lingüística dentro de la comunidad sorda y los profesionales vinculados a ella.";
 
     return (
         <div className="fixed inset-0 z-10 bg-black/30 flex justify-center items-center animate-fadeIn">
@@ -187,7 +190,8 @@ const HelpCard = ({ dispatch }) => {
                   <QuitButton dispatch={dispatch} />
                   <div className="flex flex-col items-center gap-3 mx-2 md:mx-3 cursor-default">
                     <h1 className="text-center text-xl md:text-3xl text-center text-[#4682A9] font-bold">Traduciendo la Signoescritura</h1>
-                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text}</p>      
+                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text1}</p>
+                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text2}</p> 
                   </div>
                 </div>
             </div>
