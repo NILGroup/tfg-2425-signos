@@ -48,6 +48,7 @@ npm install
 
 ## Ejecución
 Pasos para ejecutar la aplicación en modo desarrollo de forma local:
+
 Ejecutar la aplicación
 ```
 npm run dev
