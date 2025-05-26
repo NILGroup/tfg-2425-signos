@@ -4,12 +4,12 @@ import puntoSign from '../examples/punto.png'
 import narizSign from '../examples/nariz.png'
 import hartoSign from '../examples/harto.png'
 import importaSign from '../examples/atiqueteimporta.png'
-
+import logopediaSign from '../examples/logopedia.png'
 
 const Examples = ({dispatch}) => {
 
     const examples = [[profesorSign, "Profesor"], [puntoSign, "Punto"], [narizSign, "Nariz"],
-                        [hartoSign, "Harto"], [importaSign, "A ti qué te importa"]];
+                        [hartoSign, "Harto"], [importaSign, "A ti qué te importa"], [logopediaSign, "Logopedia"]];
 
     return (
         <div className="flex flex-col min-w-screen">
