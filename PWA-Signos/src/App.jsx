@@ -183,15 +183,24 @@ const HelpCard = ({ dispatch }) => {
                 signos. TraduSE sirve de apoyo en el proceso de aprendizaje y favorece la accesibilidad \
                 lingüística dentro de la comunidad sorda y los profesionales vinculados a ella.";
 
+    const text3 = "Selecciona una imagen de SignoEscritura o dibújala en el área de dibujo. \
+                    Para buscar un signo, pulsa sobre el botón con un check.";
+
+    const text4 = "TraduSE mostrará un conjunto de resultados con los signos más similares, junto con la signotación que ha generado durante el proceso. \
+                    Para conocer más información sobre los grafemas puedes pulsar sobre cada parte de la signotación y se mostrará la descripción correspondiente.";
+
     return (
-        <div className="fixed inset-0 z-10 bg-black/30 flex justify-center items-center animate-fadeIn">
-                <div className="relative rounded-xl flex flex-col gap-2 p-3 md:p-4 mx-3 md:mx-0 bg-[#c5dbe6] rounded-xl
+        <div className="fixed inset-0 z-10 bg-black/30 flex justify-center items-center animate-fadeIn ">
+                <div className="relative max-h-[80vh] overflow-auto ounded-xl flex flex-col gap-2 p-3 md:p-4 mx-3 md:mx-0 bg-[#c5dbe6] rounded-xl
                 transition-all duration-300 ease-in-out transform animate-scaleIn md:max-w-[600px] lg:max-w-[900px]">
                   <QuitButton dispatch={dispatch} />
                   <div className="flex flex-col items-center gap-3 mx-2 md:mx-3 cursor-default">
-                    <h1 className="text-center text-xl md:text-3xl text-center text-[#4682A9] font-bold">TraduSE: Buscando signos con un lenguaje visual</h1>
+                    <h1 className="text-center text-2xl md:text-3xl text-center text-[#4682A9] font-bold">TraduSE: Buscando signos con un lenguaje visual</h1>
                     <p className="text-l md:text-xl text-[#4682A9] text-justify">{text1}</p>
-                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text2}</p> 
+                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text2}</p>
+                    <h3 className="text-xl md:text-2xl text-[#4682A9] font-bold">¿Cómo funciona?</h3>
+                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text3}</p>
+                    <p className="text-l md:text-xl text-[#4682A9] text-justify">{text4}</p>
                   </div>
                 </div>
             </div>
