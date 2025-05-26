@@ -9,7 +9,7 @@ import logopediaSign from '../examples/logopedia.png'
 const Examples = ({dispatch}) => {
 
     const examples = [[profesorSign, "Profesor"], [puntoSign, "Punto"], [narizSign, "Nariz"],
-                        [hartoSign, "Harto"], [importaSign, "A ti qué te importa"], [logopediaSign, "Logopedia"]];
+                        [hartoSign, "Harto"], [logopediaSign, "Logopedia"], [importaSign, "A ti qué te importa"]];
 
     return (
         <div className="flex flex-col min-w-screen">
