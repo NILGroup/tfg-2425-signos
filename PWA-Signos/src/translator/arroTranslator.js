@@ -6,7 +6,7 @@ const findClosestArro = (x, y, arrows, margin) => {
   let closestArroIdx = -1;
 
   arrows.forEach((arro, index) => {
-    if (!arro["grapheme"]["paired"]) {
+    if (!arro["paired"]) {
       let [cx, cy, h, w] = [arro["explanation"]["left"] + arro["explanation"]["width"] / 2, arro["explanation"]["top"] + arro["explanation"]["height"] / 2,
                             arro["explanation"]["height"], arro["explanation"]["width"]];
       let dist = distanceTo(x, y, cx, cy);
