@@ -8,14 +8,14 @@ Trabajo de Fin de Grado (TFG) del Grado en Ingeniería Informática de la Univer
 
 ## Autores
 
-- Julia de la Calle Pérez
-- Sandra Conde González
-- Pablo Folgueira Galán
+- [Julia de la Calle Pérez](https://github.com/dlcalle)
+- [Sandra Conde González](https://github.com/sandra-conde-gonzalez)
+- [Pablo Folgueira Galán](https://github.com/P3IBOL711)
 
 ## Tutores
 
-- Alberto Díaz Esteban
-- Antonio F. G. Sevilla
+- [Alberto Díaz Esteban](https://www.ucm.es/directorio?id=20069)
+- [Antonio F. G. Sevilla](https://github.com/agarsev)
 
 ## Requisitos previos para la instalación
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
