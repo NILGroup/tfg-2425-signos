@@ -1,13 +1,23 @@
-# tfg-2425-signos
-TFG FdI UCM de Julia de la Calle, Sandra Conde y Pablo Folgueira
-
-## Descripción breve del proyecto
+# TraduSE: Buscando signos con un lenguaje visual
 
 TraduSE es una aplicación desarrollada para facilitar la interpretación y el aprendizaje de la lengua de signos mediante el uso de la SignoEscritura, permitiendo al usuario buscar la representación de un signo a partir de este lenguaje visual.
 
 Su uso está especialmente pensado como un recurso complementario para personas sordas en entornos académicos, así como para signantes, intérpretes y estudiantes de lengua de signos. TraduSE sirve de apoyo en el proceso de aprendizaje y favorece la accesibilidad lingüística dentro de la comunidad sorda y los profesionales vinculados a ella.
 
-## Requisitos
+Trabajo de Fin de Grado (TFG) del Grado en Ingeniería Informática de la Universidad Complutense de Madrid, curso 2024-2025.
+
+## Autores
+
+- Julia de la Calle Pérez
+- Sandra Conde González
+- Pablo Folgueira Galán
+
+## Tutores
+
+- Alberto Díaz Esteban
+- Antonio F. G. Sevilla
+
+## Requisitos previos para la instalación
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 - [Node.js](https://nodejs.org/en)
