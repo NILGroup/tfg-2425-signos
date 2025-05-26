@@ -2,7 +2,10 @@
 TFG FdI UCM de Julia de la Calle, Sandra Conde y Pablo Folgueira
 
 ## Descripción breve del proyecto
-todo
+
+TraduSE es una aplicación desarrollada para facilitar la interpretación y el aprendizaje de la lengua de signos mediante el uso de la SignoEscritura, permitiendo al usuario buscar la representación de un signo a partir de este lenguaje visual.
+
+Su uso está especialmente pensado como un recurso complementario para personas sordas en entornos académicos, así como para signantes, intérpretes y estudiantes de lengua de signos. TraduSE sirve de apoyo en el proceso de aprendizaje y favorece la accesibilidad lingüística dentro de la comunidad sorda y los profesionales vinculados a ella.
 
 ## Requisitos
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
@@ -45,5 +48,3 @@ Esto iniciará un servidor de desarrollo. Sigue las instrucciones en la terminal
 - [VisSE](https://www.ucm.es/visse)
 - [Signario LSE](https://www.ucm.es/signariolse)
 
-## Licencia
-todo
