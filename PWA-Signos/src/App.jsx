@@ -64,7 +64,7 @@ const reducer = (state, action) => {
     case 'signario_response':
       return { ...state, videos: action.videos}
     case 'error_response':
-      return { ...state, error: action.error}
+      return { ...state, error: action.error, signotation: null, selectedSignotation: null, videos: null }
     case 'show_examples':
       return { ...state, screen: 'examples_screen', switcherVisible: false }
     case 'example_selected':
