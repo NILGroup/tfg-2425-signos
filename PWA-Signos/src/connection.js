@@ -30,9 +30,9 @@ export const connection = async (dispatch, image) => {
         const videosData = await videosResponse.json();
         dispatch({ type: "signario_response", videos: videosData["signs"] });
     } catch (error) {
-        const message = error.message.includes("Failed to fetch")
-            ? "No se ha podido reconocer la imagen."
-            : error.message;
+        const message = (error.message.includes("Se ha identificado más de una mano en la imagen.") || error.message.includes("No se ha podido traducir la imagen."))
+            ? error.message
+            : "No se ha podido reconocer la imagen.";
 
         dispatch({ type: "error_response", error: message });
     } finally {
