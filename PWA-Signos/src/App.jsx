@@ -128,7 +128,7 @@ const Header = ({dispatch, isLoading}) => {
             <h1 className="text-2xl lg:text-4xl lg:mb-4 text-center text-[#4682A9] font-bold">       
                 TraduSE
             </h1>
-            <hr className="mx-2 mt-1 md:mx-2.5 md:mt-1.5 md:mb-1 h-0.5 bg-[#91C8E4] rounded-full border-none"></hr>
+            <hr className="mx-2 mt-1 md:mx-2.5 md:mt-1.5 md:mb-1 h-0.5 bg-[#4682A9B3] rounded-full border-none"></hr>
         </div>
     );
 };

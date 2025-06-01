@@ -1,11 +1,37 @@
 {
-    "name": "tfg-2425-signos",
-    "short_name": "tfg-signos",
-    "description": "A Progressive Web App for TFG Signos project.",
+    "name": "TraduSE: Buscando signos con un lenguaje visual",
+    "short_name": "TraduSE",
+    "description": "Aplicación para buscar signos a partir de una imagen de SignoEscritura",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#000000",
+    "background_color": "#4682A9",
+    "theme_color": "#4682A9",
     "icons": [
-    ]
+        {
+            "src": "/src/assets/logo-256-blanco.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/src/assets/logo-512-blanco.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+    {
+      "src": "/src/assets/mobile_screenshot.png",
+      "sizes": "365x797",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of TraduSE"
+    },
+    {
+      "src": "/src/assets/desktop_screenshot.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop view of TraduSE"
+    }
+  ]
 }
