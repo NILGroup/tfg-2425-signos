@@ -41,7 +41,7 @@ const Video = ({ index, lastIndex, info}) => {
                                                      ref={video} >   
                 <source src={info.video} type="video/mp4" />
             </video>
-            <div className='flex flex-col justify-center w-full cursor-default'>
+            <div className='flex flex-col justify-center w-full cursor-default lg:mx-2'>
                 <h1 className='text-[#4682A9] text-lg'>{info.gloss}</h1>
                 <p className='text-xl text-[#4682A9] font-bold text-base'>{info.notation}</p>
             </div>
