@@ -1,6 +1,6 @@
 # TraduSE: Buscando signos con un lenguaje visual
 
-TraduSE es una aplicación desarrollada para facilitar la interpretación y el aprendizaje de la lengua de signos mediante el uso de la SignoEscritura, permitiendo al usuario buscar la representación de un signo a partir de este lenguaje visual.
+[TraduSE](https://holstein.fdi.ucm.es/tfg/2425/traduse/) es una aplicación desarrollada para facilitar la interpretación y el aprendizaje de la lengua de signos mediante el uso de la SignoEscritura, permitiendo al usuario buscar la representación de un signo a partir de este lenguaje visual.
 
 Su uso está especialmente pensado como un recurso complementario para personas sordas en entornos académicos, así como para signantes, intérpretes y estudiantes de lengua de signos. TraduSE sirve de apoyo en el proceso de aprendizaje y favorece la accesibilidad lingüística dentro de la comunidad sorda y los profesionales vinculados a ella.
 
